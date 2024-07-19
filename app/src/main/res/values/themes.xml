@@ -2,4 +2,11 @@
 <resources>
 
     <style name="Theme.BCARevamp" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="AppTheme" parent="Theme.MaterialComponents">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/darkBlue</item>
+        <item name="colorAccent">@color/lightBlue</item>
+    </style>
 </resources>
