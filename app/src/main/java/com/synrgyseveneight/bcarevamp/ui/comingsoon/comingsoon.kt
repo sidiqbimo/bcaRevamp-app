@@ -1,4 +1,4 @@
-package com.synrgyseveneight.bcarevamp.ui.info
+package com.synrgyseveneight.bcarevamp.ui.comingsoon
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.synrgyseveneight.bcarevamp.R
 
-// TODO: Rename parameter arguments, choose names that match
+class ComingSoonFragment : Fragment() {
 
-
-class MutationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_mutation, container, false)
-
-        return view
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_comingsoon, container, false)
     }
+
+
 }

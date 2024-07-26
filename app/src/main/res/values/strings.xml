@@ -10,9 +10,11 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
-<!--    Navbar-->
+    <!--    Navbar-->
     <string name="title_home">Beranda</string>
     <string name="title_mutasi">Mutasi</string>
     <string name="title_notifikasi">Notifikasi</string>
     <string name="title_profil">Profil</string>
+
+    <string name="hello_blank_fragment">Halo</string>
 </resources>

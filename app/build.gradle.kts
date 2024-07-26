@@ -70,6 +70,8 @@ dependencies {
     implementation (libs.circleimageview)
     implementation(libs.material.v161)
     implementation ("com.google.android.material:material:1.4.0")
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

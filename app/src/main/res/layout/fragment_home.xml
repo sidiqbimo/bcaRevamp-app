@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFFFFFFF"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="true"
+    android:clipToPadding="true"
+    android:backgroundTint="#FBFDFF">
 
-    <!--            Header -->
+    <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -19,21 +18,19 @@
         android:paddingVertical="24dp"
         android:paddingLeft="19dp"
         android:paddingRight="22dp"
-        android:layout_marginBottom="36dp"
-        android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
         <ImageView
             android:id="@+id/logoApp"
             android:layout_width="137dp"
             android:layout_height="40dp"
             android:src="@drawable/logo_setara"
             android:scaleType="fitXY"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <ImageView
             android:id="@+id/logoutButton"
@@ -41,78 +38,633 @@
             android:layout_height="24dp"
             android:src="@drawable/button_signout"
             android:scaleType="fitXY"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--            Content -->
+    <!-- ScrollView for main content -->
     <ScrollView
         android:id="@+id/scrollArea"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:background="#FFFBFCFF"
-        android:clipChildren="false"
-        android:clipToPadding="false"
+        android:clipChildren="true"
+        android:clipToPadding="true"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         >
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contentArea"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="24dp"
+            android:paddingTop="24dp"
+            android:paddingRight="24dp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:paddingLeft="24dp"
-            android:paddingRight="2dp"
-            android:paddingTop="24dp"
-            >
+            android:paddingBottom="90dp">
 
-<!--            Greetings -->
+            <!-- Greetings -->
             <TextView
                 android:id="@+id/greetings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/nunitobold"
+                android:text="Halo, Andhika Putra!"
                 android:textColor="#115DA9"
                 android:textSize="18sp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginStart="26dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Halo, Andhika Putra!"
-                android:fontFamily="@font/nunitobold"
-                app:layout_constraintTop_toBottomOf="@id/contentArea"
-                app:layout_constraintLeft_toLeftOf="parent"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-<!--            Info Saldo -->
-
-            <LinearLayout
+            <!-- Info Saldo -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/backgroundInfoSaldo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="29dp"
                 android:background="@drawable/background_roundedrectangle"
+                android:elevation="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingHorizontal="26dp"
                 android:paddingVertical="17dp"
-                android:layout_marginBottom="29dp"
-                android:layout_marginHorizontal="24dp"
-                android:elevation="30dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="17dp"
-                app:layout_constraintTop_toBottomOf="@id/greetings"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/greetings">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/circularImageView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:padding="10dp"
-                    android:src="@drawable/avatar" />
+                    android:src="@drawable/avatar"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/infoSection"/>
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/infoSection"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/circularImageView">
+
+                    <TextView
+                        android:id="@+id/accountTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:fontFamily="@font/nunitomedium"
+                        android:text="No. Rekening"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="13dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/accountNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunitobold"
+                            android:text="2891 - 3764- 51"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/copyButton"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="3dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/accountNumber"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/icon_copy" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/saldoTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:fontFamily="@font/nunitomedium"
+                        android:text="Total Saldo"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="13dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/saldoAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunitobold"
+                            android:text="Rp 1.111.111"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/eyeButton"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="3dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/saldoAmount"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/icon_eyeopen" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Quick Menu -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/quickMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/whitebackground_roundedrectangle"
+                android:elevation="10dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/backgroundInfoSaldo">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/editMenuLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginRight="24dp"
+                    android:background="@drawable/curvy_rectangle"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="11dp"
+                    android:paddingVertical="4dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/editMenuButton"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="3dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/icon_pencil" />
+
+                    <TextView
+                        android:id="@+id/editMenuTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/nunitobold"
+                        android:text="Atur Menu"
+                        android:textColor="#0A3967"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/editMenuButton"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--                    Quick menu row 1-->
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menuRow1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editMenuLayout"
+                    app:layout_constraintBottom_toTopOf="@id/menuRow2"
+                    android:clipChildren="true"
+                    android:clipToPadding="true">
+
+                    <ImageView
+                        android:id="@+id/infoButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_menu_bright"
+                        android:paddingHorizontal="16.5dp"
+                        android:paddingVertical="14dp"
+                        android:src="@drawable/button_info"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/infoTitle"
+                        style="@style/quickMenuTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="Info"
+                        app:layout_constraintLeft_toLeftOf="@id/infoButton"
+                        app:layout_constraintRight_toRightOf="@id/infoButton"
+                        app:layout_constraintTop_toBottomOf="@id/infoButton" />
+
+                    <ImageView
+                        android:id="@+id/transferButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_menu_bright"
+                        android:paddingHorizontal="16.5dp"
+                        android:paddingVertical="14dp"
+                        android:src="@drawable/button_transfer"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/transferTitle"
+                        style="@style/quickMenuTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="Transfer"
+                        app:layout_constraintLeft_toLeftOf="@id/transferButton"
+                        app:layout_constraintRight_toRightOf="@id/transferButton"
+                        app:layout_constraintTop_toBottomOf="@id/transferButton" />
+
+                    <ImageView
+                        android:id="@+id/ewallletButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_menu_bright"
+                        android:paddingHorizontal="16.5dp"
+                        android:paddingVertical="14dp"
+                        android:src="@drawable/button_wallet"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/ewalletTitle"
+                        style="@style/quickMenuTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="E-Wallet"
+                        app:layout_constraintLeft_toLeftOf="@id/ewallletButton"
+                        app:layout_constraintRight_toRightOf="@id/ewallletButton"
+                        app:layout_constraintTop_toBottomOf="@id/ewallletButton" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="40dp"
+                    android:paddingBottom="24dp"
+                    android:id="@+id/menuRow2"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/menuRow1"
+                    android:clipChildren="true"
+                    android:clipToPadding="true">
+
+                    <ImageView
+                        android:id="@+id/buyButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_menu_bright"
+                        android:paddingHorizontal="16.5dp"
+                        android:paddingVertical="14dp"
+                        android:src="@drawable/button_shop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/buyTitle"
+                        style="@style/quickMenuTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="Pembelian"
+                        app:layout_constraintLeft_toLeftOf="@id/buyButton"
+                        app:layout_constraintRight_toRightOf="@id/buyButton"
+                        app:layout_constraintTop_toBottomOf="@id/buyButton" />
+
+                    <ImageView
+                        android:id="@+id/investButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_menu_bright"
+                        android:paddingHorizontal="16.5dp"
+                        android:paddingVertical="14dp"
+                        android:src="@drawable/button_pig"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/investTitle"
+                        style="@style/quickMenuTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="Investasi"
+                        app:layout_constraintLeft_toLeftOf="@id/investButton"
+                        app:layout_constraintRight_toRightOf="@id/investButton"
+                        app:layout_constraintTop_toBottomOf="@id/investButton" />
+
+                    <ImageView
+                        android:id="@+id/cardlessButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_menu_bright"
+                        android:paddingHorizontal="16.5dp"
+                        android:paddingVertical="14dp"
+                        android:src="@drawable/button_card"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/cardlessTitle"
+                        style="@style/quickMenuTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="Cardless"
+                        app:layout_constraintLeft_toLeftOf="@id/cardlessButton"
+                        app:layout_constraintRight_toRightOf="@id/cardlessButton"
+                        app:layout_constraintTop_toBottomOf="@id/cardlessButton" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--            Transaksi Favorit-->
+
+            <TextView
+                android:id="@+id/favTransactionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="29dp"
+                android:layout_marginBottom="12.5dp"
+                android:fontFamily="@font/nunitobold"
+                android:text="Transaksi Favorit"
+                android:textColor="#115DA9"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/quickMenu" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fav_transaction_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/favTransactionTitle"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"
+                android:layout_marginTop="12.5dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="29dp"/>
+
+
+<!--            Catatan keuangan-->
+
+            <TextView
+                android:id="@+id/catatan_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12.5dp"
+                android:fontFamily="@font/nunitobold"
+                android:text="Catatan Keuangan"
+                android:textColor="#115DA9"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fav_transaction_recyclerview" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/catatankeuanganSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/whitebackground_bottomnoround"
+                app:layout_constraintTop_toBottomOf="@id/catatan_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:paddingTop="17dp"
+                android:paddingBottom="10dp"
+                android:paddingHorizontal="23dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fav_month_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bluestroke_whitebackground_roundedrectangle"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:paddingHorizontal="7dp"
+                    android:paddingVertical="17dp">
+
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pilih Bulan"
+                        style="@style/regularBlackSmall"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:paddingLeft="19dp"/>
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/icon_dropdown"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:paddingRight="19dp"/>
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--             Income-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/fav_month_picker"
+                    app:layout_constraintStart_toStartOf="@id/fav_month_picker"
+                    >
+
+
+                    <ImageView
+                        android:id="@+id/icon_income"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:layout_constraintRight_toLeftOf="@id/title_income"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/icon_income"/>
+
+                    <TextView
+                        android:id="@+id/title_income"
+                        style="@style/regularBlackThin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pemasukan"
+                        app:layout_constraintBottom_toBottomOf="@id/icon_income"
+                        app:layout_constraintLeft_toRightOf="@id/icon_income"
+                        app:layout_constraintTop_toTopOf="@id/icon_income"
+                        android:layout_marginStart="7dp"/>
+
+                    <TextView
+                        android:id="@+id/amount_income"
+                        style="@style/moneyCatatan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp 1.301.500"
+                        app:layout_constraintTop_toBottomOf="@id/title_income"
+                        app:layout_constraintLeft_toLeftOf="@id/icon_income"
+                        app:layout_constraintRight_toRightOf="@id/title_income"
+                        android:layout_marginStart="7dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/separator_catatan"
+                    android:layout_height="50dp"
+                    android:layout_width="1dp"
+                    android:background="@color/Neutral50"
+                    app:layout_constraintTop_toBottomOf="@id/fav_month_picker"
+                    app:layout_constraintStart_toStartOf="@id/fav_month_picker"
+                    app:layout_constraintEnd_toEndOf="@id/fav_month_picker"
+                    android:layout_marginVertical="16dp"/>
+
+<!--                Outcome-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/outcome_section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/fav_month_picker"
+                    app:layout_constraintEnd_toEndOf="@id/fav_month_picker">
+
+
+                    <ImageView
+                        android:id="@+id/icon_outcome"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:layout_constraintRight_toLeftOf="@id/title_outcome"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/icon_outcome"/>
+
+                    <TextView
+                        android:id="@+id/title_outcome"
+                        style="@style/regularBlackThin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pengeluaran"
+                        app:layout_constraintBottom_toBottomOf="@id/icon_outcome"
+                        app:layout_constraintLeft_toRightOf="@id/icon_outcome"
+                        app:layout_constraintTop_toTopOf="@id/icon_outcome"
+                        android:layout_marginStart="7dp"/>
+
+                    <TextView
+                        android:id="@+id/amount_outcome"
+                        style="@style/moneyCatatan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp 1.301.500"
+                        app:layout_constraintTop_toBottomOf="@id/title_outcome"
+                        app:layout_constraintLeft_toLeftOf="@id/icon_outcome"
+                        app:layout_constraintRight_toRightOf="@id/title_outcome"
+                        android:layout_marginStart="7dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/catatankeuanganSection"
+                android:background="@drawable/brightbluebackground_topnoround"
+                android:paddingVertical="18dp"
+                >
+
+                <TextView
+                    android:id="@+id/title_gap"
+                    style="@style/regularBlackThin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pengeluaran"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="53dp" />
+
+                <TextView
+                    android:id="@+id/amount_selisih"
+                    style="@style/moneyCatatan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 1.301.500"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginEnd="53dp"
+                    android:textColor="@color/Error0"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
