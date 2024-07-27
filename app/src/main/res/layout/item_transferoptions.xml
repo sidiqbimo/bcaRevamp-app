@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/whitebackground_roundedrectangle"
+    android:elevation="5dp"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="20dp"
+    android:layout_marginBottom="16dp"
+    android:clipToPadding="false"
+    android:clipChildren="false">
+
+
+    <ImageView
+        android:id="@+id/tf_options_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/illust_tfantarbca"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tf_options_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sedang memuat opsi..."
+        app:layout_constraintStart_toEndOf="@id/tf_options_icon"
+        app:layout_constraintEnd_toStartOf="@id/carret_right"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tf_options_desc"
+        style="@style/tfoptions_item_title"
+        android:layout_marginLeft="12dp"/>
+
+    <TextView
+        android:id="@+id/tf_options_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sedang memuat deskripsi..."
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tf_options_title"
+        style="@style/tfoptions_item_desc"
+        app:layout_constraintStart_toEndOf="@id/tf_options_icon"
+        app:layout_constraintEnd_toStartOf="@id/carret_right"
+        android:layout_marginLeft="12dp"/>
+
+    <ImageView
+        android:id="@+id/carret_right"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:srcCompat="@drawable/button_carretright"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

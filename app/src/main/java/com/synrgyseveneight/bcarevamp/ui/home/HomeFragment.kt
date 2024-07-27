@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -43,6 +46,18 @@ class HomeFragment : Fragment() {
         val spaceDecoration = HorizontalSpaceItemDecoration(16)
         recyclerView.addItemDecoration(spaceDecoration)
 
+        // Navigasi Quick Menu
+        val transferButton = view.findViewById<ImageView>(R.id.transferButton)
+        val transferTitle = view.findViewById<TextView>(R.id.transferTitle)
+
+        val navController = findNavController()
+
+        val clickListener = View.OnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_transferOptionFragment)
+        }
+
+        transferButton.setOnClickListener(clickListener)
+        transferTitle.setOnClickListener(clickListener)
 
         return view
     }
