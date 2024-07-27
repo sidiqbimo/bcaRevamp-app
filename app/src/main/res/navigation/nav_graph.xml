@@ -9,17 +9,31 @@
         android:id="@+id/homeFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_transferOptionFragment"
+            app:destination="@id/transferOptionFragment"
+            app:exitAnim="@android:anim/slide_in_left" />
+    </fragment>
 
+<!--    Mutasi -->
     <fragment
         android:id="@+id/mutationFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.info.MutationFragment"
         android:label="MutationFragment"
         tools:layout="@layout/fragment_mutation"/>
 
+<!--    Coming Soon-->
     <fragment
         android:id="@+id/comingsonFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.comingsoon.ComingSoonFragment"
         android:label="ComingSoonFragment"
         tools:layout="@layout/fragment_comingsoon"/>
+
+<!--    Transfer-->
+    <fragment
+        android:id="@+id/transferOptionFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferOptionFragment"
+        android:label="fragment_transfer_option"
+        tools:layout="@layout/fragment_transfer_option" />
 </navigation>

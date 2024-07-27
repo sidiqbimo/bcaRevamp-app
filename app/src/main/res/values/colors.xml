@@ -16,4 +16,6 @@
     <color name="Neutral50">#EFEFEF</color>
     <color name="Error0">#D3455B</color>
     <color name="Neutral200">#CACACA</color>
+    <color name="Neutral0">#FFFFFF</color>
+    <color name="Neutral400">#1C1C1E</color>
 </resources>

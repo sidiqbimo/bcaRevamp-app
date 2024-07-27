@@ -1,6 +1,7 @@
 package com.synrgyseveneight.bcarevamp
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -16,14 +17,14 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomappbar.BottomAppBar
+//import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.synrgyseveneight.bcarevamp.ui.theme.BCARevampTheme
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var bottomAppBar: BottomAppBar
+//    private lateinit var bottomAppBar: BottomAppBar
     private lateinit var fab: FloatingActionButton
     private lateinit var bottomNavigationView: BottomNavigationView
 
@@ -38,12 +39,12 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.findNavController()
 
         // Navigation Bar Bottom
-        setupActionBarWithNavController(navController)
-        bottomAppBar = findViewById(R.id.bottomAppBar)
+//        setupActionBarWithNavController(navController)
+//        bottomAppBar = findViewById(R.id.bottomAppBar)
         fab = findViewById(R.id.fab)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
-        bottomNavigationView.setupWithNavController(navController)
+//        bottomNavigationView.setupWithNavController(navController)
 
 
         // Handle navigation item clicks
@@ -73,6 +74,22 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             navController.navigate(R.id.comingsonFragment)
             true
+        }
+
+        // Hide Bottom navigation in submenu
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.transferOptionFragment -> bottomNavigationView.visibility = View.GONE
+                else -> bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
+
+        // Hide FloatingActionButton in submenu
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.transferOptionFragment -> fab.visibility = View.GONE
+                else -> fab.visibility = View.VISIBLE
+            }
         }
     }
 

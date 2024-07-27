@@ -34,5 +34,23 @@
         <item name="android:fontFamily">@font/nunitobold</item>
     </style>
 
+    <style name="tabTitle">
+        <item name="android:textColor">@color/Neutral0</item>
+        <item name="android:fontFamily">@font/nunitobold</item>
+        <item name="lineHeight">25sp</item>
+    </style>
+
+    <style name="tfoptions_item_title">
+        <item name="android:textColor">@color/Primary100</item>
+        <item name="android:fontFamily">@font/nunitobold</item>
+        <item name="lineHeight">19sp</item>
+    </style>
+
+    <style name="tfoptions_item_desc">
+        <item name="android:textColor">@color/Neutral400</item>
+        <item name="android:fontFamily">@font/nunitoregular</item>
+        <item name="lineHeight">15sp</item>
+    </style>
+
 
 </resources>
