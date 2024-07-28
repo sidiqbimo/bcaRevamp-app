@@ -56,6 +56,7 @@
         android:clipToPadding="false"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/btnTopUp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
@@ -102,55 +103,16 @@
                     android:background="@drawable/rounded_button"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/secondLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/rounded_corner"
-                android:elevation="2dp"
+            <ImageView
+                android:id="@+id/ivSuccess"
+                android:layout_width="267dp"
+                android:layout_height="349dp"
+                android:layout_gravity="center"
+                android:contentDescription="Success"
+                android:src="@drawable/belum_ada_transaksi"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/firstLinearLayout">
-
-                <TextView
-                    android:id="@+id/tvFavorites"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Daftar Favorit"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#115DA9"/>
-
-                <ListView
-                    android:id="@+id/lvFavorites"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:divider="@android:color/darker_gray"
-                    android:dividerHeight="1dp" />
-
-                <TextView
-                    android:id="@+id/tvSaved"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Daftar Tersimpan"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#115DA9"/>
-
-                <ListView
-                    android:id="@+id/lvSaved"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:divider="@android:color/darker_gray"
-                    android:dividerHeight="1dp" />
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@id/firstLinearLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
