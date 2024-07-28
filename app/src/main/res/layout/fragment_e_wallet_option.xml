@@ -27,7 +27,7 @@
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_back1"
+            android:background="@drawable/button_back"
             android:contentDescription="Kembali"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -100,6 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="OVO"
+                        android:textColor="@color/black"
                         android:gravity="center"/>
                 </LinearLayout>
 
@@ -122,6 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ShopeePay"
+                        android:textColor="@color/black"
                         android:gravity="center"/>
                 </LinearLayout>
 
@@ -144,6 +146,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Gopay"
+                        android:textColor="@color/black"
                         android:gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
@@ -177,6 +180,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dana"
+                        android:textColor="@color/black"
                         android:gravity="center"/>
                 </LinearLayout>
 
@@ -199,6 +203,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LinkAja"
+                        android:textColor="@color/black"
                         android:gravity="center"/>
                 </LinearLayout>
 

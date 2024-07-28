@@ -27,7 +27,7 @@
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_back1"
+            android:background="@drawable/button_back"
             android:contentDescription="Kembali"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -216,6 +216,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nominal Top Up"
+                            android:textColor="#858585"
                             android:textSize="14sp"
                             android:layout_marginTop="16dp"
                             android:layout_marginLeft="10dp"/>
@@ -236,6 +237,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="#858585"
                             android:text="Biaya Admin"
                             android:textSize="14sp"
                             android:layout_marginTop="8dp"
@@ -257,6 +259,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="#858585"
                             android:text="Catatan"
                             android:textSize="14sp"
                             android:layout_marginTop="8dp"
