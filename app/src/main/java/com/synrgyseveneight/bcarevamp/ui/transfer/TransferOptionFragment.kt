@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
@@ -40,7 +41,11 @@ class TransferOptionFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.transferOptions_recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.VERTICAL,false)
-        transferOptionAdapter = TransferOptionAdapter(transferoptions)
+        transferOptionAdapter = TransferOptionAdapter(transferoptions)  { transferOption ->
+            when (transferOption.title) {
+                "Transfer Antar BCA" -> findNavController().navigate(R.id.action_transferOptionFragment_to_transferListFragment)
+                // Add other navigation actions based on the title
+            }}
         recyclerView.adapter = transferOptionAdapter
 
         // Back button
@@ -53,4 +58,4 @@ class TransferOptionFragment : Fragment() {
     }
 
 
-    }
+}

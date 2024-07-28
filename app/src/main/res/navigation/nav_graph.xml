@@ -35,5 +35,15 @@
         android:id="@+id/transferOptionFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferOptionFragment"
         android:label="fragment_transfer_option"
-        tools:layout="@layout/fragment_transfer_option" />
+        tools:layout="@layout/fragment_transfer_option" >
+        <action
+            android:id="@+id/action_transferOptionFragment_to_transferListFragment"
+            app:destination="@id/transferListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transferListFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferListFragment"
+        android:label="fragment_transfer_list"
+        tools:layout="@layout/fragment_transfer_list" />
 </navigation>
