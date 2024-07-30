@@ -40,6 +40,7 @@ class TransferOptionAdapter(private val transferoptions: List<TransferOptionAdap
 
     override fun getItemCount(): Int = transferoptions.size
 
+    // Adapter navigasi ke screen lain
     inner class TransferOptionViewHolder(private val binding: ItemTransferoptionsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -57,6 +58,7 @@ class TransferOptionAdapter(private val transferoptions: List<TransferOptionAdap
     }
 }
 
+// Adapter navigasi ke screen lain
 data class TransferOption(
     val title: String,
     val iconResId: Int

@@ -18,4 +18,6 @@
     <color name="Neutral200">#CACACA</color>
     <color name="Neutral0">#FFFFFF</color>
     <color name="Neutral400">#1C1C1E</color>
+    <color name="Success0" >#12D79C</color>
+    <color name="Neutral300">#B3B3B3</color>
 </resources>

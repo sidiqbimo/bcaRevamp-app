@@ -82,7 +82,27 @@
     <style name="contactlist_accountsubtitle">
         <item name="android:textColor">@color/Neutral400</item>
         <item name="android:fontFamily">@font/nunitoregular</item>
-        <item name="lineHeight">14sp</item>
+        <item name="lineHeight">10sp</item>
+    </style>
+    
+    <style name="edittext_small">
+        <item name="android:textColor">@color/Neutral400</item>
+        <item name="android:textColorHint">@color/Neutral200</item>
+        <item name="android:fontFamily">@font/nunitoregular</item>
+        <item name="lineHeight">10sp</item>
+        <item name="android:ems">10</item>
+    </style>
+
+    <style name="sucesss_text">
+        <item name="android:textColor">@color/Success0</item>
+        <item name="android:fontFamily">@font/nunitobold</item>
+        <item name="lineHeight">16sp</item>
+    </style>
+
+    <style name="tf_titlebig">
+        <item name="android:textColor">@color/Primary100</item>
+        <item name="android:fontFamily">@font/nunitobold</item>
+        <item name="lineHeight">22sp</item>
     </style>
 
 </resources>
