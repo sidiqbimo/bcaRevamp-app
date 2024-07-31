@@ -35,5 +35,25 @@
         android:id="@+id/transferOptionFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferOptionFragment"
         android:label="fragment_transfer_option"
-        tools:layout="@layout/fragment_transfer_option" />
+        tools:layout="@layout/fragment_transfer_option" >
+        <action
+            android:id="@+id/action_transferOptionFragment_to_transferListFragment"
+            app:destination="@id/transferListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transferListFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferListFragment"
+        android:label="fragment_transfer_list"
+        tools:layout="@layout/fragment_transfer_list" >
+        <action
+            android:id="@+id/action_transferListFragment_to_newAccountTransferInput"
+            app:destination="@id/newAccountTransferInput" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newAccountTransferInput"
+        android:name="com.synrgyseveneight.bcarevamp.ui.transfer.NewAccountTransferInput"
+        android:label="fragment_new_account_transfer_input"
+        tools:layout="@layout/fragment_new_account_transfer_input" />
 </navigation>

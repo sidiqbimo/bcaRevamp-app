@@ -52,5 +52,63 @@
         <item name="lineHeight">15sp</item>
     </style>
 
+    <style name="buttonblue_whitetext">
+        <item name="android:textColor">@color/Neutral0</item>
+        <item name="android:fontFamily">@font/nunitoregular</item>
+        <item name="lineHeight">19sp</item>
+        <item name="android:background">@drawable/background_roundedrectangle</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="edittext">
+        <item name="android:textColor">@color/Neutral400</item>
+        <item name="android:textColorHint">@color/Neutral200</item>
+        <item name="android:fontFamily">@font/nunitoregular</item>
+        <item name="lineHeight">19sp</item>
+    </style>
+
+    <style name="contactlist_title_nosaved">
+        <item name="android:textColor">@color/Primary100</item>
+        <item name="android:fontFamily">@font/nunitobold</item>
+        <item name="lineHeight">25sp</item>
+    </style>
+    
+    <style name="contactlist_accountnametitle">
+        <item name="android:textColor">@color/Primary100</item>
+        <item name="android:fontFamily">@font/nunitobold</item>
+        <item name="lineHeight">16sp</item>
+    </style>
+
+    <style name="contactlist_accountsubtitle">
+        <item name="android:textColor">@color/Neutral400</item>
+        <item name="android:fontFamily">@font/nunitoregular</item>
+        <item name="lineHeight">10sp</item>
+    </style>
+    
+    <style name="edittext_small">
+        <item name="android:textColor">@color/Neutral400</item>
+        <item name="android:textColorHint">@color/Neutral200</item>
+        <item name="android:fontFamily">@font/nunitoregular</item>
+        <item name="lineHeight">10sp</item>
+        <item name="android:ems">10</item>
+    </style>
+
+    <style name="sucesss_text">
+        <item name="android:textColor">@color/Success0</item>
+        <item name="android:fontFamily">@font/nunitobold</item>
+        <item name="lineHeight">16sp</item>
+    </style>
+
+    <style name="tf_titlebig">
+        <item name="android:textColor">@color/Primary100</item>
+        <item name="android:fontFamily">@font/nunitobold</item>
+        <item name="lineHeight">22sp</item>
+    </style>
+
+    <style name="errortext_tf">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/Error0</item>
+        <item name="android:fontFamily">@font/nunitoregular</item>
+    </style>
 
 </resources>

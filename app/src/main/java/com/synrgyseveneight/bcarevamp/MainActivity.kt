@@ -87,8 +87,14 @@ class MainActivity : AppCompatActivity() {
         // Hide FloatingActionButton in submenu
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.transferOptionFragment -> fab.visibility = View.GONE
-                else -> fab.visibility = View.VISIBLE
+                R.id.homeFragmentBottom, R.id.mutasiFragmentBottom -> {
+                    bottomNavigationView.visibility = View.VISIBLE
+                    fab.visibility = View.VISIBLE
+                }
+                else -> {
+                    bottomNavigationView.visibility = View.GONE
+                    fab.visibility = View.GONE
+                }
             }
         }
     }
