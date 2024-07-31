@@ -1,6 +1,7 @@
 package com.synrgyseveneight.bcarevamp.ui.home
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,8 @@ import com.synrgyseveneight.bcarevamp.R
 import com.synrgyseveneight.bcarevamp.ui.comingsoon.ComingSoonFragment
 import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.ui.info.MutationFragment
+import java.text.NumberFormat
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -28,6 +31,18 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val balanceCheckText = view.findViewById<TextView>(R.id.saldoAmount)
+        val accountNumberText = view.findViewById<TextView>(R.id.accountNumber)
+
+//        Add dots in balance rupiah
+        val cleanString = balanceCheckText.text.toString().replace(".", "")
+        // Parse it into a Double
+        val parsed = cleanString.toDouble()
+        // Format it using NumberFormat
+        val formatted = NumberFormat.getNumberInstance(Locale.GERMANY).format(parsed)
+        // Set the formatted number as the text of the TextView
+        balanceCheckText.text = Editable.Factory.getInstance().newEditable(formatted)
 
         // Sample data
         val transactions = listOf(
