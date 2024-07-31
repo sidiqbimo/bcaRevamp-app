@@ -78,6 +78,7 @@ class NewAccountTransferInput : Fragment() {
                     separatorTf.visibility = View.VISIBLE
                     separatorTftonominal.visibility = View.VISIBLE
                     transferNominalContainer.visibility = View.VISIBLE
+                    buttonStartTransfer.visibility = View.VISIBLE
 
                     // Enable Button when verified
                     buttonStartTransfer.isEnabled = true
@@ -89,8 +90,8 @@ class NewAccountTransferInput : Fragment() {
                     separatorTf.visibility = View.GONE
                     separatorTftonominal.visibility = View.GONE
                     transferNominalContainer.visibility = View.GONE
+                    buttonStartTransfer.visibility = View.GONE
 
-                    buttonStartTransfer.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_greyrectangle)
                 }
             }
         })
@@ -99,20 +100,18 @@ class NewAccountTransferInput : Fragment() {
         accountNumberInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 // If the enter key is pressed, perform the validation
-                if (accountNumberInput.text.toString() == "2233445566") {
+                if (accountNumberInput.text.toString() == accountNumberMock) {
                     successSeekForAccountContainer.visibility = View.VISIBLE
                     containerSumberRekening.visibility = View.VISIBLE
                     separatorTf.visibility = View.VISIBLE
                     separatorTftonominal.visibility = View.VISIBLE
                     transferNominalContainer.visibility = View.VISIBLE
-                    buttonStartTransfer.visibility = View.VISIBLE
                 } else {
                     successSeekForAccountContainer.visibility = View.GONE
                     containerSumberRekening.visibility = View.GONE
                     separatorTf.visibility = View.GONE
                     separatorTftonominal.visibility = View.GONE
                     transferNominalContainer.visibility = View.GONE
-                    buttonStartTransfer.visibility = View.GONE
                 }
 
                 // Hide the keyboard
@@ -202,7 +201,7 @@ class NewAccountTransferInput : Fragment() {
         transferNominalInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 // TODO: Kalau saldo kurang, nanti teks peringatan muncul dan background jadi merah
-                if (transferNominalInput.text.toString() == "2233445566") {
+                if (transferNominalInput.text.toString() == accountNumberMock) {
                     errortext.visibility = View.VISIBLE
                 } else {
                     errortext.visibility = View.GONE
