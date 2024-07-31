@@ -11,4 +11,7 @@
     <string name="login_failed">"Login failed"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="info_saldo">Info Saldo</string>
+    <string name="informasi_jumlah_saldo_dari_rekening">Informasi jumlah saldo dari rekening</string>
+    <string name="info">Info</string>
 </resources>

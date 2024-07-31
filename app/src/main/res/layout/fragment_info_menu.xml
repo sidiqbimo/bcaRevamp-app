@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#115DA9"
-        android:text="Info"
+        android:text="@string/info"
         android:fontFamily="@font/nunitobold"
         android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
@@ -64,11 +64,12 @@
         android:elevation="30dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:layout_constraintWidth="match_parent"
         app:strokeColor="@color/black"
-        app:strokeWidth="1dp"
-        tools:layout_editor_absoluteX="34dp">
+        app:strokeWidth="1dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunitobold"
-                android:text="Info Saldo"
+                android:text="@string/info_saldo"
                 android:textColor="#115DA9"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -93,7 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunitoregular"
-                android:text="Informasi jumlah saldo dari rekening"
+                android:text="@string/informasi_jumlah_saldo_dari_rekening"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
