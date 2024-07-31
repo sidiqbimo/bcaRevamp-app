@@ -2,4 +2,8 @@
 <resources>
 
     <style name="Theme.BCARevamp" parent="android:Theme.Material.Light.NoActionBar" />
+
+
+
+
 </resources>

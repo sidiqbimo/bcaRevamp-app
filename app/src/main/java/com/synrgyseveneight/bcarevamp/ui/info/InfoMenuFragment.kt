@@ -5,56 +5,111 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.compose.material3.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
+import androidx.appcompat.app.AlertDialog
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [InfoMenuFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InfoMenuFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var cardAdapter: CardAdapter
+    private lateinit var apiService: ApiService
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_info_menu, container, false)
+
+        //initialize recyclerview
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        //intialize retrofit
+        val retrofit = Retrofit.Builder()
+            .baseUrl("")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        apiService = retrofit.create(ApiService::class.java)
+
+        //Data Example
+        val cardList = listOf(
+            CardAdapter.CardInfo("Info Saldo", "Informasi terkait saldo rekening", R.drawable.arrow_right),
+            CardAdapter.CardInfo("Mutasi", "Informasi riwayat dan bukti transaksi rekening", R.drawable.arrow_right),
+            CardAdapter.CardInfo("Rekening Deposito", "Rekening dari deposito berjangka BCA", R.drawable.arrow_right),
+            CardAdapter.CardInfo("Info Reward BCA", "Informasi loyalty point BCA pengguna", R.drawable.arrow_right),
+            CardAdapter.CardInfo("Info Reksadana", "Informasi produk reksadana BCA pengguna", R.drawable.arrow_right),
+            CardAdapter.CardInfo("Info Kurs", "Informasi nilai kurs mata uang asing", R.drawable.arrow_right),
+            CardAdapter.CardInfo("Info RDN", "Informasi saldo dan mutasi RDN BCA pengguna", R.drawable.arrow_right),
+            CardAdapter.CardInfo("Info KPR", "Informasi ajuan KPR BCA pengguna", R.drawable.arrow_right),
+            CardAdapter.CardInfo("Info Kartu Kredit", "Informasi kartu kredit BCA pengguna", R.drawable.arrow_right)
+        )
+
+        //set up adapter
+        cardAdapter = CardAdapter(cardList) {cardInfo ->
+            if (cardInfo.title == "Info Saldo"){
+                //inflate from dialog info saldo
+                val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_info_saldo, null)
+
+                //create and show dialog
+                AlertDialog.Builder(requireContext())
+                    .setView(dialogView)
+                    .setPositiveButton("OK") {dialog, _ -> dialog.dismiss()}
+                    .show()
+            }else{
+                Toast.makeText(context, "Feature Disabled", Toast.LENGTH_SHORT).show()
+            }
+        }
+        recyclerView.adapter = cardAdapter
+
+        fetchBalance()
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InfoMenuFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InfoMenuFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun fetchBalance() {
+        apiService.getBalance().enqueue(object : Callback<BalanceResponse>{
+            var saldo: TextView? = view!!?.findViewById(R.id.infoSaldoContent)
+            var time: TextView? = view!!?.findViewById(R.id.checkTime)
+
+            override fun onResponse(call: Call<BalanceResponse>, response: Response<BalanceResponse>) {
+                if (response.isSuccessful){
+                    response.body()?.let { balanceResponse ->
+
+
+                        if (balanceResponse.status){
+                            val checkTime = balanceResponse.data.checkTime
+                            val balance = balanceResponse.data.balance
+                            if (saldo != null) {
+                                saldo!!.text= "Rp$balance"
+                            }else{
+                                saldo!!.text= "Saldo Anda Tidak Ada"
+                            }
+
+
+
+                        }
+                        else{
+                            saldo!!.text = "Failed get Balance"
+                        }
+                    }
                 }
             }
+
+            override fun onFailure(call: Call<BalanceResponse>, t: Throwable) {
+                saldo!!.text = "Error: ${t.message}"
+            }
+        })
     }
 }

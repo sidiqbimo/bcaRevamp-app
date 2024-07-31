@@ -1,6 +1,6 @@
 package com.synrgyseveneight.bcarevamp.ui.info
 
-data class InfoSaldo(
+data class BalanceResponse(
     var code: Int,
     var `data`: Data,
     var message: String,
