@@ -105,4 +105,10 @@
         <item name="lineHeight">22sp</item>
     </style>
 
+    <style name="errortext_tf">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/Error0</item>
+        <item name="android:fontFamily">@font/nunitoregular</item>
+    </style>
+
 </resources>
