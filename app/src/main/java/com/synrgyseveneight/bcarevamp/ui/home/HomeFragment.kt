@@ -49,8 +49,7 @@ class HomeFragment : Fragment() {
 
         val eyeToggle = view.findViewById<ImageView>(R.id.eyeButton)
 
-        val myaccountNumber = viewModelAuth.userAccountNumber.value
-        val mycleanaccountNumber = myaccountNumber?.replace("-", "")
+
 
 //        val balanceLeft = viewModelAuth.userBalance.value
 
@@ -59,7 +58,10 @@ class HomeFragment : Fragment() {
 
         //        Copy rekening
             copyAccountNumberButton.setOnClickListener {
+                val myaccountNumber = viewModelAuth.userAccountNumber.value
+                val mycleanaccountNumber = myaccountNumber?.replace("-", "")
                 Log.d("HomeFragment", "Account Number: $mycleanaccountNumber")
+
                 val clip = android.content.ClipData.newPlainText("Rekening", mycleanaccountNumber)
                 clipboardManager.setPrimaryClip(clip)
                 Toast.makeText(context,"Nomor rekening berhasil disalin", Toast.LENGTH_SHORT).show()
