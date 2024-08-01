@@ -41,8 +41,16 @@ class SplashFragment : Fragment() {
                     // Jika token ada, navigasi ke HomeFragment
                     findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                 } else {
-                    // Jika token tidak ada, navigasi ke LoginFragment
-                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                    viewModel.userSignature.observe(viewLifecycleOwner) { signature ->
+                        if (signature != null) {
+                            // Jika signature ada, navigasi ke LoginSecondedFragment
+                            findNavController().navigate(R.id.action_splashFragment_to_loginSecondFragment)
+                        }else{
+                            // Jika token tidak ada, navigasi ke LoginFragment
+                            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                        }
+                    }
+
                 }
             }
         }, 3000) // Menunggu 3 detik

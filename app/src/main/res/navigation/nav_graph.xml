@@ -22,6 +22,11 @@
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"
             />
+        <action
+            android:id="@+id/action_splashFragment_to_loginSecondFragment"
+            app:destination="@id/loginSecondFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <!--    Login Screen -->
@@ -44,14 +49,14 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true"/>
-        <action
             android:id="@+id/action_homeFragment_to_transferOptionFragment"
             app:destination="@id/transferOptionFragment"
             app:exitAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginSecondFragment"
+            app:destination="@id/loginSecondFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <!--    Mutasi -->
@@ -94,4 +99,16 @@
         android:name="com.synrgyseveneight.bcarevamp.ui.transfer.NewAccountTransferInput"
         android:label="fragment_new_account_transfer_input"
         tools:layout="@layout/fragment_new_account_transfer_input" />
+
+    <fragment
+        android:id="@+id/loginSecondFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.auth.LoginSecondFragment"
+        android:label="LoginSecondFragment"
+        tools:layout="@layout/fragment_login_second">
+        <action
+            android:id="@+id/action_loginSecondFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginSecondFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

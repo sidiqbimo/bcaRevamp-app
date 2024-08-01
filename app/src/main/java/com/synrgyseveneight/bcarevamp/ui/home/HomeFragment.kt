@@ -122,7 +122,7 @@ class HomeFragment : Fragment() {
         logoutButton.setOnClickListener{
             viewModelAuth.clearToken {
                 // Navigasi kembali ke LoginFragment
-                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
             }
             Toast.makeText(this.context, "Berhasil Logout", Toast.LENGTH_SHORT).show()
         }
