@@ -52,6 +52,8 @@ class HomeFragment : Fragment() {
         val myaccountNumber = viewModelAuth.userAccountNumber.value
         val mycleanaccountNumber = myaccountNumber?.replace("-", "")
 
+//        val balanceLeft = viewModelAuth.userBalance.value
+
         val copyAccountNumberButton = view.findViewById<ImageView>(R.id.copyButton)
         val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
