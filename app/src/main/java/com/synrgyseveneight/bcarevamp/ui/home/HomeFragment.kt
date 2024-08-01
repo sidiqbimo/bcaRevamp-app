@@ -1,6 +1,9 @@
 package com.synrgyseveneight.bcarevamp.ui.home
 
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +27,8 @@ import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.ui.info.MutationFragment
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
+import java.text.NumberFormat
+import java.util.Locale
 
 class HomeFragment : Fragment() {
     private val viewModelAuth: AuthViewModel by viewModels {
@@ -37,6 +42,42 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val balanceCheckText = view.findViewById<TextView>(R.id.saldoAmount)
+//        Buttons
+        val censoredSaldo = view.findViewById<TextView>(R.id.censoredSaldo)
+
+        val eyeToggle = view.findViewById<ImageView>(R.id.eyeButton)
+
+        val myaccountNumber = viewModelAuth.userAccountNumber.value
+        val mycleanaccountNumber = myaccountNumber?.replace("-", "")
+
+        val copyAccountNumberButton = view.findViewById<ImageView>(R.id.copyButton)
+        val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+        //        Copy rekening
+            copyAccountNumberButton.setOnClickListener {
+                Log.d("HomeFragment", "Account Number: $mycleanaccountNumber")
+                val clip = android.content.ClipData.newPlainText("Rekening", mycleanaccountNumber)
+                clipboardManager.setPrimaryClip(clip)
+                Toast.makeText(context,"Nomor rekening berhasil disalin", Toast.LENGTH_SHORT).show()
+            }
+        // Hide the balance first
+        censoredSaldo.visibility = View.VISIBLE
+        balanceCheckText.visibility = View.GONE
+
+//        Eye Toggle to show or hide balance
+        eyeToggle.setOnClickListener {
+            if (censoredSaldo.visibility == View.VISIBLE) {
+                censoredSaldo.visibility = View.GONE
+                balanceCheckText.visibility = View.VISIBLE
+                eyeToggle.setImageResource(R.drawable.icon_eyeopen)
+            } else {
+                censoredSaldo.visibility = View.VISIBLE
+                balanceCheckText.visibility = View.GONE
+                eyeToggle.setImageResource(R.drawable.icon_eyeclose)
+            }
+        }
 
         // Sample data
         val transactions = listOf(
@@ -62,12 +103,13 @@ class HomeFragment : Fragment() {
         val transferButton = view.findViewById<ImageView>(R.id.transferButton)
         val transferTitle = view.findViewById<TextView>(R.id.transferTitle)
         val logoutButton = view.findViewById<ImageView>(R.id.logoutButton)
+        val accountNumber = view.findViewById<TextView>(R.id.accountNumber)
+
 
         val navController = findNavController()
         viewModelAuth.userName.observe(viewLifecycleOwner) { name ->
-            nameTv.text = "Halo, "+name
+            nameTv.text = "Halo, "+name+"!"
         }
-
 
         val clickListener = View.OnClickListener {
             navController.navigate(R.id.action_homeFragment_to_transferOptionFragment)
@@ -84,6 +126,53 @@ class HomeFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+        super.onViewCreated(view, savedInstanceState)
+
+        // API implement
+        val accountNumberText = view.findViewById<TextView>(R.id.accountNumber)
+        val greetingsName = view.findViewById<TextView>(R.id.greetings)
+        val profilePict = view.findViewById<ImageView>(R.id.circularImageView)
+
+        viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
+
+
+            if (token != null) {
+                viewModelAuth.fetchBalance(token)
+            }
+        }
+
+        viewModelAuth.userBalance.observe(viewLifecycleOwner) {
+            Log.d("HomeFragment", "Balance updated: $it")
+            val saldoAmount = view.findViewById<TextView>(R.id.saldoAmount)
+            saldoAmount.text = "Rp ${it}"
+        }
+
+        viewModelAuth.userAccountNumber.observe(viewLifecycleOwner) {
+
+
+            Log.d("HomeFragment", "Account updated: $it")
+            accountNumberText.text = formattedAccountNumber(it?: "Gagal memuat")
+
+
+        }
+    }
+
+//    Dipindah ke AuthViewModel.kt
+    private fun formatBalance(balance: Double): String {
+        val formatter = NumberFormat.getNumberInstance(Locale.GERMANY)
+        return formatter.format(balance)
+    }
+
+    private fun formattedAccountNumber (accountNumber: String): String {
+        val cleanStringNomorRekening = accountNumber.replace("-", "")
+        val parsedNoRek = cleanStringNomorRekening.toString()
+        val formattedNoRek = parsedNoRek.replace(Regex("(\\d{4})"), "$1-")
+        return if (formattedNoRek.endsWith("-")) {
+            formattedNoRek.dropLast(1)
+        } else {formattedNoRek}
     }
 
 }

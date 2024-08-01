@@ -1,6 +1,7 @@
 package com.synrgyseveneight.bcarevamp.data.datastore
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -28,6 +29,8 @@ class AuthDataStore private constructor(private val context: Context) {
         val USER_AVATAR_PATH_KEY = stringPreferencesKey("user_avatar_path")
         val USER_BANK_NAME_KEY = stringPreferencesKey("user_bank_name")
         val USER_TOKEN_KEY = stringPreferencesKey("user_token")
+
+        val USER_BALANCE_KEY = stringPreferencesKey("user_balance")
     }
 
     // Mendapatkan tanda tangan pengguna
@@ -66,6 +69,12 @@ class AuthDataStore private constructor(private val context: Context) {
             preferences[USER_TOKEN_KEY]
         }
 
+    // Mendapatkan saldo
+    val userBalance: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[USER_BALANCE_KEY]
+        }
+
     // Menyimpan data pengguna
     suspend fun saveUserData(signature: String, name: String, accountNumber: String, avatarPath: String, bankName: String, token: String) {
         context.dataStore.edit { preferences ->
@@ -75,6 +84,13 @@ class AuthDataStore private constructor(private val context: Context) {
             preferences[USER_AVATAR_PATH_KEY] = avatarPath
             preferences[USER_BANK_NAME_KEY] = bankName
             preferences[USER_TOKEN_KEY] = token
+        }
+    }
+
+    // Simpan keterangan saldo
+    suspend fun saveBalance(balance: String) {
+        context.dataStore.edit { preferences ->
+            preferences[USER_BALANCE_KEY] = balance
         }
     }
 

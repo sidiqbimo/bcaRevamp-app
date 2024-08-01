@@ -1,13 +1,17 @@
 package com.synrgyseveneight.bcarevamp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.*
 import com.synrgyseveneight.bcarevamp.data.model.AuthRequest
 import com.synrgyseveneight.bcarevamp.data.model.AuthResponse
+import com.synrgyseveneight.bcarevamp.data.network.ApiService
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
+import java.util.Locale
 
 class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
     // LiveData untuk tanda tangan pengguna
@@ -27,6 +31,9 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
 
     // LiveData untuk token otentikasi
     val userToken: LiveData<String?> = repository.getUserToken().asLiveData()
+
+    // LiveData untuk saldo
+    val userBalance = MutableLiveData<String>()
 
     // Fungsi untuk melakukan sign-in
     fun signIn(signature: String, password: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
@@ -57,6 +64,17 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
         })
     }
 
+    fun fetchBalance(token: String) {
+        viewModelScope.launch {
+            val balanceResponse = repository.getBalance(token)
+            userBalance.value = balanceResponse?.data?.balance?.let { formatBalance(it) }
+        }
+    }
+
+    private fun formatBalance(balance: Double): String {
+        val formatter = NumberFormat.getNumberInstance(Locale.GERMANY)
+        return formatter.format(balance)
+    }
 
     // Fungsi untuk menghapus token
     fun clearToken(onSuccess: () -> Unit) {
@@ -65,4 +83,6 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
             onSuccess()
         }
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.bcarevamp.data
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -23,6 +24,7 @@ class DataStoreManager(context: Context) {
     }
 
     suspend fun saveToken(token: String) {
+
         dataStore.edit { preferences ->
             preferences[TOKEN_KEY] = token
         }
