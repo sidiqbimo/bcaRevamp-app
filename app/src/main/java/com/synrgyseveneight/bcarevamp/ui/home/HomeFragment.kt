@@ -24,7 +24,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.synrgyseveneight.bcarevamp.R
-import com.synrgyseveneight.bcarevamp.data.model.Account
+import com.synrgyseveneight.bcarevamp.data.model.User
 import com.synrgyseveneight.bcarevamp.ui.comingsoon.ComingSoonFragment
 import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.ui.info.MutationFragment

@@ -86,14 +86,4 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("de.hdodenhof:circleimageview:3.1.0")
-
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
-    implementation(libs.gson)
-    implementation(libs.datastore)
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.android)
-    implementation(libs.lifecycle.runtime)
-    implementation(libs.lifecycle.viewmodel)
-    implementation(libs.lifecycle.livedata)
 }
