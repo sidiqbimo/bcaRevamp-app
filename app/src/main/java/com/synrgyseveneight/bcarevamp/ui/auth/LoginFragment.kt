@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -28,6 +29,7 @@ import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
+    private lateinit var progressBar: ProgressBar
     private val viewModel: AuthViewModel by viewModels {
         AuthViewModelFactory(AuthRepository(RetrofitClient.instance, AuthDataStore.getInstance(requireContext())))
     }
@@ -39,9 +41,10 @@ class LoginFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        progressBar = view.findViewById(R.id.progressBar)
         val etSignature: EditText = view.findViewById(R.id.inputIdField)
         val etPassword: EditText = view.findViewById(R.id.inputPasswordField)
         val btnLogin: Button = view.findViewById(R.id.buttonLogin)
@@ -51,18 +54,19 @@ class LoginFragment : Fragment() {
         val linePw: MaterialDivider = view.findViewById(R.id.garis2)
         val tilPassword: TextInputLayout = view.findViewById(R.id.inputPassword)
 
-        viewModel.userSignature.observe(viewLifecycleOwner) { signature ->
-            lifecycleScope.launch {
-                if (signature != null) {
-                    etSignature.setText(signature)
-                    etSignature.isEnabled = false
-                } else {
-                    etSignature.isEnabled = true
-                }
-            }
-        }
+//        viewModel.userSignature.observe(viewLifecycleOwner) { signature ->
+//            lifecycleScope.launch {
+//                if (signature != null) {
+//                    etSignature.setText(signature)
+//                    etSignature.isEnabled = false
+//                } else {
+//                    etSignature.isEnabled = true
+//                }
+//            }
+//        }
 
         btnLogin.setOnClickListener {
+
             val signature = etSignature.text.toString()
             val password = etPassword.text.toString()
 
@@ -76,10 +80,14 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            showLoading(true) // Tampilkan loading
             viewModel.signIn(signature, password, {
+                showLoading(false) // Sembunyikan loading jika berhasil
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }, { error ->
+                showLoading(false) // Sembunyikan loading jika gagal
                 Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+                progressBar = view.findViewById(R.id.progressBar)
                 tilPassword.setEndIconTintList(ContextCompat.getColorStateList(requireContext(), android.R.color.holo_red_dark))
                 lineId.setDividerColor(ContextCompat.getColor(requireContext(), android.R.color.holo_red_dark))
                 linePw.setDividerColor(ContextCompat.getColor(requireContext(), android.R.color.holo_red_dark))
@@ -104,8 +112,10 @@ class LoginFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {}
         }
-
         etSignature.addTextChangedListener(textWatcher)
         etPassword.addTextChangedListener(textWatcher)
+    }
+    private fun showLoading(isLoading: Boolean) {
+        progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
