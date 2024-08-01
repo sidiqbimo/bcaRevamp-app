@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/nunitobold"
-                android:text="Halo, Andhika Putra!"
+                android:text="Halo, ___!"
                 android:textColor="#115DA9"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +140,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunitobold"
-                            android:text="2891 - 3764- 51"
+                            android:text="2233445566"
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -176,15 +176,40 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/rupiahSignSaldoAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunitobold"
+                            android:text="Rp "
+                            android:textColor="@color/white"
+                            android:lineHeight="25sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
                             android:id="@+id/saldoAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunitobold"
-                            android:text="Rp 500000"
+                            android:text="123456789"
+                            android:textColor="@color/white"
+                            android:lineHeight="25sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/rupiahSignSaldoAmount"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/censoredSaldoAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunitobold"
+                            android:text="---"
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/saldoAmount"
+                            app:layout_constraintEnd_toStartOf="@id/eyeButton"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
@@ -193,9 +218,9 @@
                             android:layout_height="16dp"
                             android:layout_marginStart="3dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/saldoAmount"
+                            app:layout_constraintStart_toEndOf="@id/censoredSaldoAmount"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/icon_eyeopen" />
+                            app:srcCompat="@drawable/icon_eyeclose" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
