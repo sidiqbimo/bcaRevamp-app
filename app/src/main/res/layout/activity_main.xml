@@ -59,7 +59,7 @@
         android:src="@drawable/navicon_qris"
         app:layout_anchor="@id/bottomNavigationView"
         app:layout_anchorGravity="center"
-        android:contentDescription="QRIS Button"
+        android:contentDescription="Tombol transaksi QRIS"
         android:layout_marginBottom="40dp"
         android:backgroundTint="@color/Primary100"
         app:tint="@color/white"
