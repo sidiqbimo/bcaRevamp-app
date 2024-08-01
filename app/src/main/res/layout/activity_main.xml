@@ -17,40 +17,57 @@
 
 
     <!-- BottomNavigationView -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:itemIconSize="32dp"
-        app:menu="@menu/bottom_navigation_menu"
-        app:labelVisibilityMode="labeled"
-        app:itemTextColor="@color/bottom_navigation_colors"
-        app:itemIconTint="@color/bottom_navigation_colors"
-        android:paddingVertical="8dp"
+        android:backgroundTint="@color/white"
         android:background="@color/white"
-        app:fabAlignmentMode="center"
-        app:hideOnScroll="true"
-        app:animationMode="slide"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="50dp"
-        app:fabCradleVerticalOffset="10dp"
-        />
+        android:paddingVertical="4dp"
+        app:elevation="16dp"
+        app:fabCradleMargin="0dp"
+        app:fabCradleRoundedCornerRadius="0dp"
+        app:fabCradleVerticalOffset="0dp"
+        >
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:itemIconSize="32dp"
+            app:menu="@menu/bottom_navigation_menu"
+            app:labelVisibilityMode="labeled"
+            app:itemTextColor="@color/bottom_navigation_colors"
+            app:itemIconTint="@color/bottom_navigation_colors"
+            android:paddingVertical="8dp"
+            android:background="@color/Transparent"
+            app:hideOnScroll="true"
+            app:animationMode="slide"
+            app:elevation="0dp"
+            android:layout_marginEnd="16dp"
+
+            app:itemPaddingBottom="8dp"
+            />
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
     <!-- FloatingActionButton -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:src="@drawable/navicon_qris"
         app:layout_anchor="@id/bottomNavigationView"
         app:layout_anchorGravity="center"
         android:contentDescription="QRIS Button"
         android:layout_marginBottom="40dp"
         android:backgroundTint="@color/Primary100"
-        android:tintMode="add"
-        android:tint="@color/white"
+        app:tint="@color/white"
         app:borderWidth="6dp"
-        android:elevation="20dp"/>
+        app:fabCustomSize="64dp"
+        app:backgroundTint="#E4EDFF"
+/>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

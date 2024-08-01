@@ -91,4 +91,6 @@ dependencies {
     implementation(libs.lifecycle.runtime)
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 }

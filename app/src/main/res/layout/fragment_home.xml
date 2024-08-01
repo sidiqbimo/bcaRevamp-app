@@ -24,6 +24,7 @@
 
         <ImageView
             android:id="@+id/logoApp"
+            android:contentDescription="Logo Aplikasi Setara"
             android:layout_width="137dp"
             android:layout_height="40dp"
             android:src="@drawable/logo_setara"
@@ -33,6 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <ImageView
+            android:contentDescription="Tombol keluar"
             android:id="@+id/logoutButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -101,6 +103,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/circularImageView"
+                    android:contentDescription="Foto Profil Anda"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:padding="10dp"
@@ -120,6 +123,7 @@
                     app:layout_constraintLeft_toRightOf="@id/circularImageView">
 
                     <TextView
+                        android:contentDescription="Teks Judul Nomor Rekening"
                         android:id="@+id/accountTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -148,6 +152,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
+                            android:contentDescription="Tombol salin rekening"
                             android:id="@+id/copyButton"
                             android:layout_width="16dp"
                             android:layout_height="16dp"
@@ -160,6 +165,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
+                        android:contentDescription="Teks Judul Total Saldo"
                         android:id="@+id/saldoTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -188,6 +194,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:contentDescription="Saldo disembunyikan"
                             android:id="@+id/censoredSaldo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -200,6 +207,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
+                            android:contentDescription="Tombol tampilkan saldo"
                             android:id="@+id/eyeButton"
                             android:layout_width="16dp"
                             android:layout_height="16dp"
@@ -250,9 +258,11 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/icon_pencil" />
+                        app:srcCompat="@drawable/icon_pencil"
+                        android:contentDescription="Tombol atur menu beranda"/>
 
                     <TextView
+                        android:contentDescription="Atur Menu Beranda"
                         android:id="@+id/editMenuTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -292,7 +302,8 @@
                         android:src="@drawable/button_info"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="Tombol info"/>
 
                     <TextView
                         android:id="@+id/infoTitle"
@@ -317,7 +328,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="Tombol menu transfer"/>
 
                     <TextView
                         android:id="@+id/transferTitle"
@@ -341,7 +353,8 @@
                         android:src="@drawable/button_wallet"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="Tombol menu e-wallet"/>
 
                     <TextView
                         android:id="@+id/ewalletTitle"
@@ -379,7 +392,8 @@
                         android:src="@drawable/button_shop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="Tombol menu pembelian"/>
 
                     <TextView
                         android:id="@+id/buyTitle"
@@ -404,7 +418,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="Tombol menu investasi"/>
 
                     <TextView
                         android:id="@+id/investTitle"
@@ -428,7 +443,8 @@
                         android:src="@drawable/button_card"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="Tombol menu cashless"/>
 
                     <TextView
                         android:id="@+id/cardlessTitle"
@@ -462,6 +478,7 @@
                 app:layout_constraintTop_toBottomOf="@id/quickMenu" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:contentDescription="Daftar Transaksi Favorit"
                 android:id="@+id/fav_transaction_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -557,7 +574,8 @@
                         android:layout_height="20dp"
                         app:layout_constraintRight_toLeftOf="@id/title_income"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/icon_income"/>
+                        app:srcCompat="@drawable/icon_income"
+                        android:contentDescription="Ikon pemasukan"/>
 
                     <TextView
                         android:id="@+id/title_income"
@@ -616,7 +634,8 @@
                         android:layout_height="20dp"
                         app:layout_constraintRight_toLeftOf="@id/title_outcome"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/icon_outcome"/>
+                        app:srcCompat="@drawable/icon_outcome"
+                        android:contentDescription="Ikon pengeluaran"/>
 
                     <TextView
                         android:id="@+id/title_outcome"
