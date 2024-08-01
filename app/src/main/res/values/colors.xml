@@ -11,7 +11,7 @@
     <color name="lightBlue">#E4EDFF</color>
     <color name="blue">#115DA9</color>
     <color name="darkBlue">#0A3967</color>
-    
+    <color name="bgBluSk">#657F9A</color>
     <color name="Primary100">#115DA9</color>
     <color name="Neutral50">#EFEFEF</color>
     <color name="Error0">#D3455B</color>
