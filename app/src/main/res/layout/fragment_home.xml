@@ -140,7 +140,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunitobold"
-                            android:text="2891 - 3764- 51"
+                            android:text="000000000"
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -180,11 +180,23 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunitobold"
-                            android:text="Rp 1.111.111"
+                            android:text="Rp ..."
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/censoredSaldo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunitobold"
+                            android:text="Rp ---"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/saldoAmount"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
@@ -193,7 +205,7 @@
                             android:layout_height="16dp"
                             android:layout_marginStart="3dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/saldoAmount"
+                            app:layout_constraintStart_toEndOf="@id/censoredSaldo"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/icon_eyeopen" />
 

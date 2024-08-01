@@ -1,8 +1,10 @@
 package com.synrgyseveneight.bcarevamp.data.repository
 
+import android.util.Log
 import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
 import com.synrgyseveneight.bcarevamp.data.model.AuthRequest
 import com.synrgyseveneight.bcarevamp.data.model.AuthResponse
+import com.synrgyseveneight.bcarevamp.data.model.BalanceResponse
 import com.synrgyseveneight.bcarevamp.data.network.ApiService
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
@@ -17,6 +19,11 @@ class AuthRepository (private val apiService: ApiService, private val dataStore:
     // Fungsi untuk menyimpan data pengguna
     suspend fun saveUserData(signature: String, name: String, accountNumber: String, avatarPath: String, bankName: String, token: String) {
         dataStore.saveUserData(signature, name, accountNumber, avatarPath, bankName, token)
+    }
+
+    suspend fun getBalance(token: String): BalanceResponse? {
+    val response = apiService.getBalance("Bearer $token")
+    return if (response.isSuccessful) response.body() else null
     }
 
     // Fungsi untuk menghapus token
@@ -53,4 +60,10 @@ class AuthRepository (private val apiService: ApiService, private val dataStore:
     fun getUserToken(): Flow<String?> {
         return dataStore.userToken
     }
+
+    // Dapatkan saldo
+    fun getUserBalance(): Flow<String?> {
+        return dataStore.userBalance
+    }
+
 }
