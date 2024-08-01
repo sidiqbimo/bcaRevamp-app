@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,12 +16,19 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.synrgyseveneight.bcarevamp.R
+import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
+import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
+import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import com.synrgyseveneight.bcarevamp.ui.comingsoon.ComingSoonFragment
 import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.ui.info.MutationFragment
+import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
+import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
 
 class HomeFragment : Fragment() {
-
+    private val viewModelAuth: AuthViewModel by viewModels {
+        AuthViewModelFactory(AuthRepository(RetrofitClient.instance, AuthDataStore.getInstance(requireContext())))
+    }
     private lateinit var favoriteTransactionAdapter: FavoriteTransactionAdapter
 
 
@@ -36,6 +45,8 @@ class HomeFragment : Fragment() {
             FavoriteTransactionAdapter.Transaction(R.drawable.icon_wallet, "Top Up", "Top Up ShopeePay", "Dwi Kurniawan")
         )
 
+
+
         // Initialize RecyclerView
         val recyclerView = view.findViewById<RecyclerView>(R.id.fav_transaction_recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
@@ -47,17 +58,30 @@ class HomeFragment : Fragment() {
         recyclerView.addItemDecoration(spaceDecoration)
 
         // Navigasi Quick Menu
+        val nameTv = view.findViewById<TextView>(R.id.greetings)
         val transferButton = view.findViewById<ImageView>(R.id.transferButton)
         val transferTitle = view.findViewById<TextView>(R.id.transferTitle)
+        val logoutButton = view.findViewById<ImageView>(R.id.logoutButton)
 
         val navController = findNavController()
+        viewModelAuth.userName.observe(viewLifecycleOwner) { name ->
+            nameTv.text = "Halo, "+name
+        }
+
 
         val clickListener = View.OnClickListener {
             navController.navigate(R.id.action_homeFragment_to_transferOptionFragment)
         }
-
         transferButton.setOnClickListener(clickListener)
         transferTitle.setOnClickListener(clickListener)
+
+        logoutButton.setOnClickListener{
+            viewModelAuth.clearToken {
+                // Navigasi kembali ke LoginFragment
+                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+            }
+            Toast.makeText(this.context, "Berhasil Logout", Toast.LENGTH_SHORT).show()
+        }
 
         return view
     }
