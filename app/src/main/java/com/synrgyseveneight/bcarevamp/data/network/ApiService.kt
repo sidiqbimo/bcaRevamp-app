@@ -9,6 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
     // Endpoint untuk sign-in
@@ -18,4 +19,8 @@ interface ApiService {
     //    Info Saldo
     @GET("api/v1/user/getBalance")
     suspend fun getBalance(@Header("Authorization") token: String): Response<BalanceResponse>
+
+    // TODO:Validasi rekening
+//    @GET ("api/v1/user/search-no-rek/{targetAccountTransfer}")
+//    suspend fun searchAccount(@Path("targetAccountTransfer") targetAccountTransfer: String): Response<AccountResponse>
 }

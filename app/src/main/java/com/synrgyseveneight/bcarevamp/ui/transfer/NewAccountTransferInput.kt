@@ -36,7 +36,6 @@ class NewAccountTransferInput : Fragment() {
     }
 
     private var balance: Double = 0.0
-    private var balanceWithRupiah : String = "Sedang mengambil data saldo..."
     private var retryCountForSaldo = 0
 
     private var accountNumber: String = ""
@@ -299,7 +298,13 @@ class NewAccountTransferInput : Fragment() {
                 saldoAmount.text = "Rp ${it}"
                 val cleanstring = it.toString().replace(".", "")
                 balance = cleanstring.toDouble()
-                saldoTFNew.contentDescription = "Saldo saat ini adalah ${balanceWithRupiah}"
+
+                val balanceWithRupiah : String = it.toString().let {
+                    val localID = Locale("id", "ID")
+                    val numberFormat = NumberFormat.getCurrencyInstance(localID)
+                    numberFormat.format(balance.toDouble())
+                }
+                saldoTFNew.contentDescription = "Saldo saat ini adalah ${balance} rupiah"
             }
         }
 
