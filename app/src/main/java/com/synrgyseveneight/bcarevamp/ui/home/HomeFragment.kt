@@ -65,7 +65,6 @@ class HomeFragment : Fragment() {
                 val myaccountNumber = viewModelAuth.userAccountNumber.value
                 val mycleanaccountNumber = myaccountNumber?.replace("-", "")
                 Log.d("HomeFragment", "Account Number: $mycleanaccountNumber")
-                Log.d("HomeFragment", "Avatar path: $avatarPath")
 
                 val clip = android.content.ClipData.newPlainText("Rekening", mycleanaccountNumber)
                 clipboardManager.setPrimaryClip(clip)
@@ -155,8 +154,6 @@ class HomeFragment : Fragment() {
         val profilePict = view.findViewById<ImageView>(R.id.circularImageView)
 
         viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
-
-
             if (token != null) {
                 viewModelAuth.fetchBalance(token)
             }
@@ -171,6 +168,15 @@ class HomeFragment : Fragment() {
         viewModelAuth.userAccountNumber.observe(viewLifecycleOwner) {
             Log.d("HomeFragment", "Account updated: $it")
             accountNumberText.text = formattedAccountNumber(it?: "Gagal memuat")
+        }
+
+        viewModelAuth.userAvatarPath.observe(viewLifecycleOwner) {
+            Log.d("HomeFragment", "Avatar updated: $it")
+            Glide.with(this)
+                .load(it)
+                .circleCrop()
+                .error(R.drawable.icon_person)
+                .into(profilePict)
         }
 
 
