@@ -121,6 +121,11 @@ class HomeFragment : Fragment() {
         transferButton.setOnClickListener(clickListener)
         transferTitle.setOnClickListener(clickListener)
 
+        val eWalletLogo = view.findViewById<ImageView>(R.id.ewallletButton)
+        eWalletLogo.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_eWalletOptionFragment)
+        }
+
         logoutButton.setOnClickListener{
             viewModelAuth.clearToken {
                 // Navigasi kembali ke LoginFragment

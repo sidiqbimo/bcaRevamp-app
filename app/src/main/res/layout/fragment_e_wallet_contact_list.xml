@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.ewallet.EWalletContactListFragment"
     android:background="#FBFDFF">
-
     <!--    Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_tflist"
@@ -241,8 +240,6 @@
 
 
     </ScrollView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
