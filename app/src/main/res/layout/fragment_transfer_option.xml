@@ -23,6 +23,7 @@
 
 
         <ImageView
+            android:contentDescription="Tombol kembali"
             android:id="@+id/backButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -33,6 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
+            android:contentDescription="Judul halaman. Halaman Transfer"
             android:id="@+id/title_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

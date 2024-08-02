@@ -17,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomappbar.BottomAppBar
 //import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 //    private lateinit var bottomAppBar: BottomAppBar
     private lateinit var fab: FloatingActionButton
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var bottomAppBar: BottomAppBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 //        bottomAppBar = findViewById(R.id.bottomAppBar)
         fab = findViewById(R.id.fab)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        bottomAppBar = findViewById(R.id.bottomAppBar)
 
 //        bottomNavigationView.setupWithNavController(navController)
 
@@ -77,26 +80,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Hide Bottom navigation in submenu
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.transferOptionFragment -> bottomNavigationView.visibility = View.GONE
-                else -> bottomNavigationView.visibility = View.VISIBLE
-            }
-        }
+        val navigasiBarBottom = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        navigasiBarBottom.setupWithNavController(navController)
 
-        // Hide FloatingActionButton in submenu
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragmentBottom, R.id.mutasiFragmentBottom -> {
+                R.id.homeFragment -> {
                     bottomNavigationView.visibility = View.VISIBLE
                     fab.visibility = View.VISIBLE
-                }
+                    bottomAppBar.visibility = View.VISIBLE}
+
                 else -> {
                     bottomNavigationView.visibility = View.GONE
                     fab.visibility = View.GONE
-                }
+                    bottomAppBar.visibility = View.GONE
+                    }
             }
         }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

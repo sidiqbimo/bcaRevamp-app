@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -56,6 +57,9 @@ class HomeFragment : Fragment() {
         val copyAccountNumberButton = view.findViewById<ImageView>(R.id.copyButton)
         val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
+        // TODO: Masih null
+        val avatarPath = viewModelAuth.userAvatarPath.value
+
         //        Copy rekening
             copyAccountNumberButton.setOnClickListener {
                 val myaccountNumber = viewModelAuth.userAccountNumber.value
@@ -76,10 +80,14 @@ class HomeFragment : Fragment() {
                 censoredSaldo.visibility = View.GONE
                 balanceCheckText.visibility = View.VISIBLE
                 eyeToggle.setImageResource(R.drawable.icon_eyeopen)
+                eyeToggle.contentDescription = "Saldo saat ini adalah ${balanceCheckText.text}. Klik dua kali untuk menyembunyikan saldo"
+                it.announceForAccessibility("Saldo ditampilkan. Saldo saat ini adalah ${balanceCheckText.text}. Klik dua kali untuk menyembunyikan saldo")
             } else {
                 censoredSaldo.visibility = View.VISIBLE
                 balanceCheckText.visibility = View.GONE
                 eyeToggle.setImageResource(R.drawable.icon_eyeclose)
+                eyeToggle.contentDescription = "Saldo disembunyikan. Klik dua kali untuk menampilkan saldo"
+                it.announceForAccessibility("Saldo disembunyikan. Klik dua kali untuk menampilkan saldo")
             }
         }
 
@@ -90,7 +98,12 @@ class HomeFragment : Fragment() {
             FavoriteTransactionAdapter.Transaction(R.drawable.icon_wallet, "Top Up", "Top Up ShopeePay", "Dwi Kurniawan")
         )
 
-
+        // Dapatkan gambar PP
+        Glide.with(this)
+            .load(avatarPath)
+            .circleCrop()
+            .error(R.drawable.icon_person)
+            .into(view.findViewById<ImageView>(R.id.circularImageView))
 
         // Initialize RecyclerView
         val recyclerView = view.findViewById<RecyclerView>(R.id.fav_transaction_recyclerview)
@@ -141,8 +154,6 @@ class HomeFragment : Fragment() {
         val profilePict = view.findViewById<ImageView>(R.id.circularImageView)
 
         viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
-
-
             if (token != null) {
                 viewModelAuth.fetchBalance(token)
             }
@@ -155,13 +166,20 @@ class HomeFragment : Fragment() {
         }
 
         viewModelAuth.userAccountNumber.observe(viewLifecycleOwner) {
-
-
             Log.d("HomeFragment", "Account updated: $it")
             accountNumberText.text = formattedAccountNumber(it?: "Gagal memuat")
-
-
         }
+
+        viewModelAuth.userAvatarPath.observe(viewLifecycleOwner) {
+            Log.d("HomeFragment", "Avatar updated: $it")
+            Glide.with(this)
+                .load(it)
+                .circleCrop()
+                .error(R.drawable.icon_person)
+                .into(profilePict)
+        }
+
+
     }
 
 //    Dipindah ke AuthViewModel.kt
