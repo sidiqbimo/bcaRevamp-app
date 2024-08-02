@@ -23,6 +23,7 @@
 
 
         <ImageView
+            android:contentDescription="Tombol kembali"
             android:id="@+id/backButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -33,6 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
+            android:contentDescription="Judul Halaman - Transfer antar rekening BCA dengan tujuan baru"
             android:id="@+id/title_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,6 +92,7 @@
                 android:paddingRight="24dp"
                 >
                 <EditText
+                    android:contentDescription="Kolom input nomor rekening tujuan transfer"
                     android:id="@+id/accountNumberInput"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
@@ -121,6 +124,7 @@
                     app:layout_constraintVertical_bias="0.517">
 
                     <ImageView
+                        android:contentDescription="tanda centang. Nomor rekening yang dimasukkan terverifikasi"
                         android:id="@+id/ic_success"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -132,6 +136,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:contentDescription="Terverifikasi"
                         android:id="@+id/title_verified"
                         style="@style/sucesss_text"
                         android:layout_width="wrap_content"
@@ -153,6 +158,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <CheckBox
+            android:contentDescription="Kotak centang untuk menyimpan nomor rekening tujuan transfer ke daftar tersimpan"
             android:id="@+id/title_saveascontact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -180,6 +186,8 @@
 
 
             <EditText
+                android:contentDescription="Kolom input untuk memasukkan nama panggilan agar dimasukkan ke daftar tersimpan"
+
                 android:id="@+id/saveas_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -284,6 +292,7 @@
                         android:textColor="#115DA9"/>
 
                     <TextView
+                        android:importantForAccessibility="no"
                         android:id="@+id/separator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -332,10 +341,11 @@
 
 
                     <TextView
-                        android:id="@+id/rupiah_sign_balance"
+                        android:contentDescription="Saldo disembunyikan"
+                        android:id="@+id/censoredSaldoCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp "
+                        android:text="******"
                         android:ellipsize="end"
                         android:maxLines="1"
                         app:layout_constraintStart_toEndOf="@id/toggleView"
@@ -350,27 +360,30 @@
                         />
 
                     <TextView
-                        android:id="@+id/balance_number"
+                        android:id="@+id/saldotf_BCA_tersisa"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="500000"
+                        android:text="000000"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        app:layout_constraintStart_toEndOf="@id/rupiah_sign_balance"
+                        app:layout_constraintStart_toEndOf="@id/censoredSaldoCheck"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:textAllCaps="false"
                         android:fontFamily="@font/nunitobold"
                         android:textSize="14sp"
                         android:textColor="#115DA9"
+
+                        android:layout_marginLeft="8dp"
                         />
 
                     <ImageView
+                        android:contentDescription="Tombol toggle, klik untuk menyembunyikan saldo"
                         android:id="@+id/toggleView"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/rupiah_sign_balance"
-                        app:layout_constraintTop_toTopOf="@id/balance_number"
-                        app:layout_constraintBottom_toBottomOf="@id/balance_number"
+                        app:layout_constraintEnd_toStartOf="@id/censoredSaldoCheck"
+                        app:layout_constraintTop_toTopOf="@id/saldotf_BCA_tersisa"
+                        app:layout_constraintBottom_toBottomOf="@id/saldotf_BCA_tersisa"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/icon_blueeye_open" />
@@ -379,6 +392,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
+                    android:importantForAccessibility="no"
                     android:id="@+id/ic_dropdown"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -458,6 +472,7 @@
                     >
 
                     <TextView
+                        android:contentDescription="Simbol rupiah"
                         android:id="@+id/rupiah_sign"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -473,6 +488,7 @@
                         />
 
                     <EditText
+                        android:contentDescription="Kolom input nominal transfer"
                         android:id="@+id/tf_inputtext_nominal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -529,6 +545,7 @@
                 >
 
                 <EditText
+                    android:contentDescription="Kolom input catatan transfer"
                     android:id="@+id/tf_inputtext_notes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -556,6 +573,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:contentDescription="Tombol Lanjutkan proses transfer"
             android:id="@+id/button_start_tf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

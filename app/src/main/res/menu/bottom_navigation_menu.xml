@@ -10,6 +10,12 @@
         android:enabled="true"
         android:icon="@drawable/navicon_reciept_off"
         android:title="@string/title_mutasi"/>
+<!--    Placeholder FAB-->
+    <item
+        android:id="@+id/navigation_fab_placeholder"
+        android:enabled="false"
+        android:icon="@android:color/transparent"
+        android:title="" />
     <item
         android:id="@+id/notifikasiFragmentBottom"
         android:enabled="true"

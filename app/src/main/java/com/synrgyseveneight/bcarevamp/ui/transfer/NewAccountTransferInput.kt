@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +16,31 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.synrgyseveneight.bcarevamp.R
+import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
+import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
+import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
+import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
+import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
 import java.text.NumberFormat
 import java.util.Locale
 
 class NewAccountTransferInput : Fragment() {
+    private val viewModelAuth: AuthViewModel by viewModels {
+        AuthViewModelFactory(AuthRepository(RetrofitClient.instance, AuthDataStore.getInstance(requireContext())))
+    }
+
+    private var balance: Double = 0.0
+    private var balanceWithRupiah : String = "Sedang mengambil data saldo..."
+    private var retryCountForSaldo = 0
+
+    private var accountNumber: String = ""
+    private var bankNameType: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +61,37 @@ class NewAccountTransferInput : Fragment() {
         val errortext = view.findViewById<TextView>(R.id.error_message_tf)
 
         val transferNominalInput = view.findViewById<EditText>(R.id.tf_inputtext_nominal)
-        val balanceNumberInfoTextView = view.findViewById<TextView>(R.id.balance_number)
 
         val edittextContainerNominalInput = view.findViewById<View>(R.id.tf_inputnominal_container)
         val buttonStartTransfer = view.findViewById<Button>(R.id.button_start_tf)
 
-//        Account Number Destination - UNTUK VERIFY
-        val accountNumberMock = "2233445566"
+        val eyeToggleTFNew = view.findViewById<ImageView>(R.id.toggleView)
+        val censoredSaldoTFNew = view.findViewById<TextView>(R.id.censoredSaldoCheck)
+        val saldoTFNew = view.findViewById<TextView>(R.id.saldotf_BCA_tersisa)
+        val myaccountNumberText = view.findViewById<TextView>(R.id.accountnumbersubtitle)
+
+        val accountNumberMock = "3344556677"
+
+        // Show the balance first
+        censoredSaldoTFNew.visibility = View.GONE
+        saldoTFNew.visibility = View.VISIBLE
+
+        // Eye Toggle Hide View
+        eyeToggleTFNew.setOnClickListener {
+            if (censoredSaldoTFNew.visibility == View.VISIBLE) {
+                censoredSaldoTFNew.visibility = View.GONE
+                saldoTFNew.visibility = View.VISIBLE
+                eyeToggleTFNew.setImageResource(R.drawable.icon_blueeye_open)
+                eyeToggleTFNew.contentDescription = "Saldo saat ini adalah ${saldoTFNew.text}. Klik dua kali untuk menyembunyikan saldo"
+                it.announceForAccessibility("Saldo ditampilkan. Saldo saat ini adalah ${saldoTFNew.text}. Klik dua kali untuk menyembunyikan saldo")
+            } else {
+                censoredSaldoTFNew.visibility = View.VISIBLE
+                saldoTFNew.visibility = View.GONE
+                eyeToggleTFNew.setImageResource(R.drawable.icon_blueeyeclose)
+                eyeToggleTFNew.contentDescription = "Saldo disembunyikan. Klik dua kali untuk menampilkan saldo"
+                it.announceForAccessibility("Saldo disembunyikan. Klik dua kali untuk menampilkan saldo")
+            }
+        }
 
         // Initially hide the containers
         successSeekForAccountContainer.visibility = View.GONE
@@ -153,7 +196,6 @@ class NewAccountTransferInput : Fragment() {
 
             override fun afterTextChanged(s: Editable) {
                 val inputtedValue = s.toString().replace(".", "").toDoubleOrNull() ?: 0.0
-                val balance = balanceNumberInfoTextView.text.toString().replace(".", "").toDoubleOrNull() ?: 0.0
 
                 if (s.toString() != current) {
                     transferNominalInput.removeTextChangedListener(this)
@@ -191,8 +233,6 @@ class NewAccountTransferInput : Fragment() {
                         edittextContainerNominalInput.setBackgroundResource(R.drawable.whitebackground_bottomnoround)
                         errortext.visibility = View.GONE
                     }
-
-
                 }
             }
         })
@@ -217,19 +257,6 @@ class NewAccountTransferInput : Fragment() {
             }
         }
 
-//        TAMBAHKAN TITIK DI INFO SALDO
-        // Get the text from the TextView and remove any existing dots
-        val cleanString = balanceNumberInfoTextView.text.toString().replace(".", "")
-
-    // Parse it into a Double
-        val parsed = cleanString.toDouble()
-
-    // Format it using NumberFormat
-        val formatted = NumberFormat.getNumberInstance(Locale.GERMANY).format(parsed)
-
-    // Set the formatted number as the text of the TextView
-        balanceNumberInfoTextView.text = Editable.Factory.getInstance().newEditable(formatted)
-
         // Back button
         val backButton = view.findViewById<ImageView>(R.id.backButton)
         backButton.setOnClickListener {
@@ -237,6 +264,76 @@ class NewAccountTransferInput : Fragment() {
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val saldoTFNew = view.findViewById<TextView>(R.id.saldotf_BCA_tersisa)
+        val myaccountNumberText = view.findViewById<TextView>(R.id.accountnumbersubtitle)
+
+        viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
+            if (token != null) {
+                viewModelAuth.fetchBalance(token)
+            }
+        }
+
+        viewModelAuth.userBalance.observe(viewLifecycleOwner) {
+            Log.d("NewTransferNominalInput", "Balance updated: $it")
+            val saldoAmount = view.findViewById<TextView>(R.id.saldotf_BCA_tersisa)
+
+            if (it==null){
+                retryCountForSaldo++
+                saldoTFNew.contentDescription = "Saldo sedang dimuat, mohon tunggu"
+                if (retryCountForSaldo <= 3) {
+                    viewModelAuth.fetchBalance(viewModelAuth.userToken.value?:"")
+                } else {
+                    // Kalau udah tiga kali masih null, balik ke Beranda
+                    Toast.makeText(context, "Gagal memuat saldo. Silakan coba lagi", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_newAccountTransferInput_to_homeFragment)
+
+
+                }
+            } else {
+                retryCountForSaldo = 0
+                saldoAmount.text = "Rp ${it}"
+                val cleanstring = it.toString().replace(".", "")
+                balance = cleanstring.toDouble()
+                saldoTFNew.contentDescription = "Saldo saat ini adalah ${balanceWithRupiah}"
+            }
+        }
+
+        val accountNumberText = view.findViewById<TextView>(R.id.accountnumbersubtitle)
+        viewModelAuth.userAccountNumber.observe(viewLifecycleOwner) {
+            Log.d("NewTransferNominalInput", "Account updated: $it")
+
+            val accountNumberWithDash = formattedAccountNumber(it?: "Gagal memuat")
+            accountNumberText.text = accountNumberWithDash
+
+            accountNumber = it.toString()
+
+            if (accountNumber == null){
+                myaccountNumberText.contentDescription = "Nomor rekening sumber dana transfer gagal ditampilkan, sedang mencoba kembali"
+            } else {
+                myaccountNumberText.contentDescription = "Nomor rekening sumber dana transfer adalah ${accountNumberWithDash}"
+            }
+        }
+
+        viewModelAuth.userBankName.observe(viewLifecycleOwner) {
+            val bankName = view.findViewById<TextView>(R.id.accounttype)
+            bankName.text = it
+
+            bankNameType = it.toString()
+        }
+    }
+
+    private fun formattedAccountNumber (accountNumber: String): String {
+        val cleanStringNomorRekening = accountNumber.replace("-", "")
+        val parsedNoRek = cleanStringNomorRekening.toString()
+        val formattedNoRek = parsedNoRek.replace(Regex("(\\d{4})"), "$1-")
+        return if (formattedNoRek.endsWith("-")) {
+            formattedNoRek.dropLast(1)
+        } else {formattedNoRek}
     }
 
 }

@@ -3,6 +3,16 @@
 
     <style name="Theme.BCARevamp" parent="android:Theme.Material.Light.NoActionBar" />
 
+<!--    bottom app bar -->
+    <!-- No Elevation Styles -->
+    <style name="NoElevationBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="NoElevationBottomAppBar" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="elevation">0dp</item>
+    </style>
+
     <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/blue</item>
