@@ -7,22 +7,28 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
-
-class TransferListAdapter(private val transferList: List<TransferList>) :
-    RecyclerView.Adapter<TransferListAdapter.ViewHolder>() {
+class TransferListAdapter(
+    private val transferList: List<TransferList>,
+    private val itemClickListener: (TransferList) -> Unit
+) : RecyclerView.Adapter<TransferListAdapter.ViewHolder>() {
 
     data class TransferList(val iconResId: Int, val accountName: String, val accountTypeTahapan: String, val accountNumber: String)
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val accountphoto: ImageView = itemView.findViewById(R.id.account_photo)
         val accountName: TextView = itemView.findViewById(R.id.accountholdername_title)
         val accountTypeTahapan: TextView = itemView.findViewById(R.id.accounttype)
         val accountNumber: TextView = itemView.findViewById(R.id.accountnumbersubtitle)
+
+        init {
+            itemView.setOnClickListener {
+                itemClickListener(transferList[adapterPosition])
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_transfercontact, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_transfercontact, parent, false)
         return ViewHolder(view)
     }
 
