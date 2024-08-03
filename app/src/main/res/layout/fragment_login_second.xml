@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:contentDescription="@string/des_logo_setara"
         android:id="@+id/logo"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -120,6 +120,7 @@
                 android:textColorHint="#C4C4C4"
                 android:inputType="textPassword"
                 android:paddingStart="0dp"
+                android:paddingEnd="0dp"
                 android:paddingBottom="5dp"
                 android:textColor="#115DA9" />
 
@@ -144,7 +145,7 @@
                 android:id="@+id/errorPwInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Password yang dimasukkan salah"
+                android:text="@string/password_hint"
                 android:textColor="@android:color/holo_red_dark"
                 android:visibility="gone"
                 android:paddingTop="8dp"
@@ -201,13 +202,13 @@
             android:id="@+id/buttonTentangBca"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="52dp"
             android:text="@string/about_bca"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            app:cornerRadius="20dp"
             android:textSize="10sp"
             app:backgroundTint="#FF657F9A"
+            app:cornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textGanti" />
@@ -217,7 +218,7 @@
         android:id="@+id/menuLain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/main2">
 
@@ -228,6 +229,7 @@
             android:background="@color/white">
 
             <ImageView
+                android:contentDescription="@string/des_btn_pengajuan"
                 android:layout_width="28dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="5dp"
@@ -242,7 +244,7 @@
                 android:layout_marginEnd="5dp"
                 android:text="@string/credit_card_application"
                 android:textSize="10sp"
-                android:textColor="#115DA9"
+                android:textColor="@color/Primary100"
                 android:fontFamily="@font/nunitoregular"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -258,6 +260,7 @@
             android:background="@color/white">
 
             <ImageView
+                android:contentDescription="@string/des_btn_halobca"
                 android:layout_width="28dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="5dp"
@@ -271,9 +274,9 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="5dp"
                 android:text="@string/call_bca"
-                android:textColor="#115DA9"
                 android:textSize="10sp"
                 android:fontFamily="@font/nunitoregular"
+                android:textColor="@color/Primary100"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -288,6 +291,7 @@
             android:background="@color/white">
 
             <ImageView
+                android:contentDescription="@string/des_btn_wabca"
                 android:layout_width="28dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="5dp"
@@ -302,7 +306,7 @@
                 android:layout_marginEnd="5dp"
                 android:fontFamily="@font/nunitoregular"
                 android:text="@string/whatsapp_bca"
-                android:textColor="#115DA9"
+                android:textColor="@color/Primary100"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
