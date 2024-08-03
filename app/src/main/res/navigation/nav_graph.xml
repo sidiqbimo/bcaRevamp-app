@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/mutationFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.info.MutationFragment"
+        android:label="MutationFragment"
+        tools:layout="@layout/fragment_mutation"/>
+
+    <fragment
+        android:id="@+id/comingsonFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.comingsoon.ComingSoonFragment"
+        android:label="ComingSoonFragment"
+        tools:layout="@layout/fragment_comingsoon"/>
+
+    <fragment
+        android:id="@id/info_menuFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.info.InfoMenuFragment"
+        android:label="ComingSoonFragment"
+        tools:layout="@layout/fragment_comingsoon" />
+</navigation>
+
+<action
+    android:id="@+id/action_homeFragment_to_info_menuFragment"
+    app:destination="@id/info_menuFragment"/>

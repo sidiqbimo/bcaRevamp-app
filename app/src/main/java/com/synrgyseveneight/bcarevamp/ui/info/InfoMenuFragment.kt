@@ -1,5 +1,6 @@
 package com.synrgyseveneight.bcarevamp.ui.info
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,14 +12,17 @@ import android.widget.Toast
 import androidx.compose.material3.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.synrgyseveneight.bcarevamp.R
+
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.ui.input.key.Key.Companion.R
+import androidx.core.content.getSystemService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.R
 
 
 class InfoMenuFragment : Fragment() {
@@ -37,9 +41,11 @@ class InfoMenuFragment : Fragment() {
 
         //intialize retrofit
         val retrofit = Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://setara.com/api/v1/user/getBalance")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+
 
         apiService = retrofit.create(ApiService::class.java)
 
@@ -63,12 +69,19 @@ class InfoMenuFragment : Fragment() {
                 val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_info_saldo, null)
 
                 //create and show dialog
-                AlertDialog.Builder(requireContext())
+                val show = AlertDialog.Builder(requireContext())
                     .setView(dialogView)
-                    .setPositiveButton("OK") {dialog, _ -> dialog.dismiss()}
+                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                     .show()
             }else{
-                Toast.makeText(context, "Feature Disabled", Toast.LENGTH_SHORT).show()
+                //initialize toast
+                val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                val layout = inflater.inflate(R.layout.custom_toast, null)
+
+                val toast = Toast(context)
+                toast.duration = Toast.LENGTH_SHORT
+                toast.view = layout
+                toast.show()
             }
         }
         recyclerView.adapter = cardAdapter

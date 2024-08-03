@@ -3,11 +3,9 @@ package com.synrgyseveneight.bcarevamp.ui.info
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.synrgyseveneight.bcarevamp.R
 
 class CardAdapter(
     private val cardList: List<CardInfo>,

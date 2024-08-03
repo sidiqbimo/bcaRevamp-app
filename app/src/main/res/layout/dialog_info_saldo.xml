@@ -59,6 +59,7 @@
 
             <TextView
                 android:id="@+id/infoSaldoContent"
+                android:contentDescription="@string/info_saldo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -69,6 +70,8 @@
                 android:textColor="#0A3967"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
+
 
 
         </LinearLayout>
@@ -85,6 +88,7 @@
         android:fontFamily="@font/nunitoregular"
         android:padding="12dp"
         android:text="Kembali ke Menu"
+        android:contentDescription="kembali ke menu"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textStyle="bold"
