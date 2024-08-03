@@ -31,6 +31,7 @@ class AuthDataStore private constructor(private val context: Context) {
         val USER_TOKEN_KEY = stringPreferencesKey("user_token")
 
         val USER_BALANCE_KEY = stringPreferencesKey("user_balance")
+        val USER_BALANCE_RETRIEVETIME_KEY = stringPreferencesKey("user_balance_retrievetime")
     }
 
     // Mendapatkan tanda tangan pengguna
@@ -91,6 +92,13 @@ class AuthDataStore private constructor(private val context: Context) {
     suspend fun saveBalance(balance: String) {
         context.dataStore.edit { preferences ->
             preferences[USER_BALANCE_KEY] = balance
+        }
+    }
+
+    // Simpan waktu get saldo
+    suspend fun saveBalanceRetrieveTime(time: String) {
+        context.dataStore.edit { preferences ->
+            preferences[USER_BALANCE_RETRIEVETIME_KEY] = time
         }
     }
 

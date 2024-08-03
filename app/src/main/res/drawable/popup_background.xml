@@ -8,5 +8,4 @@
         android:top="16dp"
         android:right="16dp"
         android:bottom="16dp" />
-    <shadow android:color="#80000000" android:radius="4dp" android:dx="0dp" android:dy="4dp"/>
 </shape>

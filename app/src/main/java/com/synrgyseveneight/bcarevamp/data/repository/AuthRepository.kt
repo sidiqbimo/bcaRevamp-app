@@ -21,10 +21,12 @@ class AuthRepository (private val apiService: ApiService, private val dataStore:
         dataStore.saveUserData(signature, name, accountNumber, avatarPath, bankName, token)
     }
 
+    // Mendapatkan saldo
     suspend fun getBalance(token: String): BalanceResponse? {
     val response = apiService.getBalance("Bearer $token")
     return if (response.isSuccessful) response.body() else null
     }
+
 
     // Fungsi untuk menghapus token
     suspend fun clearToken() {

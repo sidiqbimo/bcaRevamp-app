@@ -35,6 +35,9 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
     // LiveData untuk saldo
     val userBalance = MutableLiveData<String>()
 
+    // LiveData untuk waktu cek saldo
+    val balanceCheckTime = MutableLiveData<String>()
+
     // Fungsi untuk melakukan sign-in
     fun signIn(signature: String, password: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
         val request = AuthRequest(signature, password)
@@ -68,6 +71,8 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
         viewModelScope.launch {
             val balanceResponse = repository.getBalance(token)
             userBalance.value = balanceResponse?.data?.balance?.let { formatBalance(it) }
+            balanceCheckTime.value = balanceResponse?.data?.check_time
+            // check_time or balance adalah nama variabel yang digunakan pada response body API, mereka ngelink juga ke BalanceData
         }
     }
 
