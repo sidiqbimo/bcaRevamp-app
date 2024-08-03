@@ -1,5 +1,8 @@
 [versions]
-agp = "8.4.1"
+agp = "8.3.0"
+circleimageview = "3.1.0"
+glide = "4.12.0"
+googleMaterial = "1.6.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -15,14 +18,21 @@ constraintlayout = "2.1.4"
 lifecycleLivedataKtx = "2.8.3"
 lifecycleViewmodelKtx = "2.8.3"
 materialVersion = "1.4.0"
-gson = "2.11.0"
+navigationFragmentKtx = "2.7.7"
+navigationUiKtx = "2.7.7"
 retrofit = "2.11.0"
-converterGson = "2.11.0"
-loggingInterceptor = "5.0.0-alpha.14"
-runner = "1.6.1"
+gson = "2.10.1"
+datastore = "1.0.0"
+coroutinesCore = "1.7.2"
+coroutinesAndroid = "1.7.2"
+lifecycle ="2.6.2"
+lifecycleld = "2.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -43,11 +53,20 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 material-v140 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+material-v161 = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+
+
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converterGson" }
-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor" }
-androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesCore" }
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesAndroid" }
+lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle"}
+lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleld"}
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleld"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

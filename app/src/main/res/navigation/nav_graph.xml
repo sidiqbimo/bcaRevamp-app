@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <!--    Splash Screen -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.auth.SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            />
+        <action
+            android:id="@+id/action_splashFragment_to_loginSecondFragment"
+            app:destination="@id/loginSecondFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <!--    Login Screen -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.auth.LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+
+    <!--    Home Screen -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_transferOptionFragment"
+            app:destination="@id/transferOptionFragment"
+            app:exitAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginSecondFragment"
+            app:destination="@id/loginSecondFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <!--    Mutasi -->
+    <fragment
+        android:id="@+id/mutationFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.info.MutationFragment"
+        android:label="MutationFragment"
+        tools:layout="@layout/fragment_mutation"/>
+
+    <!--    Coming Soon-->
+    <fragment
+        android:id="@+id/comingsonFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.comingsoon.ComingSoonFragment"
+        android:label="ComingSoonFragment"
+        tools:layout="@layout/fragment_comingsoon"/>
+
+    <!--    Transfer-->
+    <fragment
+        android:id="@+id/transferOptionFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferOptionFragment"
+        android:label="fragment_transfer_option"
+        tools:layout="@layout/fragment_transfer_option" >
+        <action
+            android:id="@+id/action_transferOptionFragment_to_transferListFragment"
+            app:destination="@id/transferListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transferListFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferListFragment"
+        android:label="fragment_transfer_list"
+        tools:layout="@layout/fragment_transfer_list" >
+        <action
+            android:id="@+id/action_transferListFragment_to_newAccountTransferInput"
+            app:destination="@id/newAccountTransferInput" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newAccountTransferInput"
+        android:name="com.synrgyseveneight.bcarevamp.ui.transfer.NewAccountTransferInput"
+        android:label="fragment_new_account_transfer_input"
+        tools:layout="@layout/fragment_new_account_transfer_input" >
+        <action
+            android:id="@+id/action_newAccountTransferInput_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginSecondFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.auth.LoginSecondFragment"
+        android:label="LoginSecondFragment"
+        tools:layout="@layout/fragment_login_second">
+        <action
+            android:id="@+id/action_loginSecondFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginSecondFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

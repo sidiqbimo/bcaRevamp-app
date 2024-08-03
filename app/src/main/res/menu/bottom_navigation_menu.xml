@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragmentBottom"
+        android:enabled="true"
+        android:icon="@drawable/navicon_home_off"
+        android:title="@string/title_home"/>
+    <item
+        android:id="@+id/mutasiFragmentBottom"
+        android:enabled="true"
+        android:icon="@drawable/navicon_reciept_off"
+        android:title="@string/title_mutasi"/>
+<!--    Placeholder FAB-->
+    <item
+        android:id="@+id/navigation_fab_placeholder"
+        android:enabled="false"
+        android:icon="@android:color/transparent"
+        android:title="" />
+    <item
+        android:id="@+id/notifikasiFragmentBottom"
+        android:enabled="true"
+        android:icon="@drawable/navicon_bell_off"
+        android:title="@string/title_notifikasi"/>
+    <item
+        android:id="@+id/profileFragmentBottom"
+        android:enabled="true"
+        android:icon="@drawable/navicon_user_off"
+        android:title="@string/title_profil"/>
+</menu>
