@@ -122,12 +122,24 @@ class HomeFragment : Fragment() {
         val logoutButton = view.findViewById<ImageView>(R.id.logoutButton)
         val accountNumber = view.findViewById<TextView>(R.id.accountNumber)
 
+        val saldoButtonImage = view.findViewById<ImageView>(R.id.infoButton)
+        val saldoButtonText = view.findViewById<TextView>(R.id.infoTitle)
+
 
         val navController = findNavController()
         viewModelAuth.userName.observe(viewLifecycleOwner) { name ->
             nameTv.text = "Halo, "+name+"!"
         }
 
+        // NAVIGATION
+        val clickListenerToInfoMenu = View.OnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_infoMenuFragment)
+        }
+        saldoButtonImage.setOnClickListener(clickListenerToInfoMenu)
+        saldoButtonText.setOnClickListener(clickListenerToInfoMenu)
+
+
+        // ke Transfer antar BCA
         val clickListener = View.OnClickListener {
             navController.navigate(R.id.action_homeFragment_to_transferOptionFragment)
         }

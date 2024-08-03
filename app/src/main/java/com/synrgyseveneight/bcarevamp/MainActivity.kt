@@ -100,6 +100,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun setupActionBarWithNavController(navController: Any) {
+        TODO("Not yet implemented")
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
