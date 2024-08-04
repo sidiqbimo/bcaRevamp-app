@@ -146,6 +146,35 @@
     <fragment
         android:id="@+id/eWalletInputFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletInputFragment"
-        android:label="E-Wallet Input"/>
+        android:label="E-Wallet Input">
+        <action
+            android:id="@+id/action_eWalletInputFragment_to_eWalletConfirmationFragment"
+            app:destination="@id/eWalletConfirmationFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/eWalletConfirmationFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletConfirmationFragment"
+        android:label="E-Wallet Konfirmasi">
+        <action
+            android:id="@+id/action_eWalletConfirmationFragment_to_eWalletSuccessFragment"
+            app:destination="@id/eWalletSuccessFragment" />
+        <action
+            android:id="@+id/action_eWalletConfirmationFragment_to_eWalletFailedFragment"
+            app:destination="@id/eWalletFailedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eWalletSuccessFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletSuccessFragment"
+        android:label="E-Wallet Success">
+        <action
+            android:id="@+id/action_eWalletSuccessFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eWalletFailedFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletFailedFragment"
+        android:label="E-Wallet Failed"/>
 </navigation>

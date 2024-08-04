@@ -6,6 +6,7 @@
     android:background="#FFFFFFFF"
     android:clipChildren="false"
     android:clipToPadding="false"
+    tools:context=".ui.ewallet.EWalletSuccessFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -295,10 +296,10 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/button_start_tf"
+        android:id="@+id/button_share"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lanjutkan"
+        android:text="Bagikan Bukti Transaksi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
