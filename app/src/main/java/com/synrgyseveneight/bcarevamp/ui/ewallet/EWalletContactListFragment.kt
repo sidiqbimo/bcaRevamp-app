@@ -1,32 +1,40 @@
 package com.synrgyseveneight.bcarevamp.ui.ewallet
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EWalletContactListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EWalletContactListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var favouriteContactAdapter: ContactListAdapter
+    private lateinit var normalContactAdapter: ContactListAdapter
+
+    private val favouriteContacts = listOf(
+        ContactListAdapter.Contact(R.drawable.icon_person, "Fav Budi Arto", "Tahapan BCA", "1234567890"),
+        ContactListAdapter.Contact(R.drawable.icon_person, "Fav Andi Yassar", "Tahapan BCA", "1234567890")
+    )
+
+    private val normalContacts = listOf(
+        ContactListAdapter.Contact(R.drawable.icon_person, "Budi Arto", "Tahapan BCA", "1234567890"),
+        ContactListAdapter.Contact(R.drawable.icon_person, "Andi Yassar", "Tahapan BCA", "1234567890"),
+        ContactListAdapter.Contact(R.drawable.icon_person, "Caca Gempita", "Tahapan BCA", "1234567890"),
+        ContactListAdapter.Contact(R.drawable.icon_person, "Dedi Kurniawan", "Tahapan", "1234567890")
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            // Handle arguments if any
         }
     }
 
@@ -34,27 +42,45 @@ class EWalletContactListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_e_wallet_contact_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_e_wallet_contact_list, container, false)
+
+        // Initialize RecyclerView for favourite contacts
+        val favouriteRecyclerView = view.findViewById<RecyclerView>(R.id.favouritecontact_recyclerview_tf)
+        favouriteRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        favouriteContactAdapter = ContactListAdapter(favouriteContacts)
+        favouriteRecyclerView.adapter = favouriteContactAdapter
+
+        // Initialize RecyclerView for normal contacts
+        val normalRecyclerView = view.findViewById<RecyclerView>(R.id.normalcontact_recyclerview_tf)
+        normalRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        normalContactAdapter = ContactListAdapter(normalContacts)
+        normalRecyclerView.adapter = normalContactAdapter
+
+        // Back button
+        val backButton = view.findViewById<ImageView>(R.id.backButton)
+        backButton.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
+        // Transfer to new account button
+        val buttonNewAccount = view.findViewById<Button>(R.id.button_newaccount)
+        buttonNewAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_eWalletContactListFragment_to_eWalletNewInputFragment)
+        }
+
+        // Search functionality (simplified)
+        val searchEditText = view.findViewById<EditText>(R.id.tf_inputtext_listsearch)
+        searchEditText.addTextChangedListener {
+            val query = it.toString()
+            filterContacts(query)
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EWalletContactListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EWalletContactListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun filterContacts(query: String) {
+        // Implement search filtering for both adapters
+        favouriteContactAdapter.filter(query)
+        normalContactAdapter.filter(query)
     }
 }

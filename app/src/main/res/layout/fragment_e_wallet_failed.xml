@@ -98,15 +98,14 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnTopUp"
-        android:layout_width="300dp"
+        android:id="@+id/button_start_tf"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/rounded_button"
         android:text="Ulangi"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/buttonblue_whitetext"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

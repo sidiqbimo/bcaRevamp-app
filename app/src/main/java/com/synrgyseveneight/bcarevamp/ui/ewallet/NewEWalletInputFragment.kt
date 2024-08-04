@@ -36,7 +36,7 @@ class NewEWalletInputFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(
-            R.layout.fragment_new_e_wallet_input,
+            R.layout.fragment_e_wallet_new_input,
             container,
             false
         )
