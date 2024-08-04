@@ -32,11 +32,16 @@
 
     <string name="hello_blank_fragment">Halo</string>
 
+    <!-- Strings for Toast info -->
+    <string name="toast_info">Mohon maaf, layanan belum tersedia.</string>
+
 
     <!--  contentDescription -->
     <string name="des_logo_setara">Logo Aplikasi Setara</string>
     <string name="des_btn_pengajuan">Tombol Pengajuan Kartu</string>
     <string name="des_btn_halobca">Tombol Halo BCA</string>
     <string name="des_btn_wabca">Tombol Whatsapp BCA</string>
+    <string name="des_toast_icon">Icon Info</string>
+    <string name="des_toast_info">Mohon maaf, layanan belum tersedia</string>
 
 </resources>
