@@ -19,7 +19,10 @@ lifecycleLivedataKtx = "2.8.3"
 lifecycleViewmodelKtx = "2.8.3"
 materialVersion = "1.4.0"
 navigationFragmentKtx = "2.7.7"
+navigationFragmentKtxVersion = "1.0.0"
+navigationSafeArgsGradlePlugin = "2.7.7"
 navigationUiKtx = "2.7.7"
+navigationUiKtxVersion = "1.0.0"
 retrofit = "2.11.0"
 gson = "2.10.1"
 datastore = "1.0.0"
@@ -30,6 +33,7 @@ lifecycleld = "2.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
@@ -58,6 +62,8 @@ androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navi
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 
 
+navigation-fragment-ktx = { module = "android.arch.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtxVersion" }
+navigation-ui-ktx = { module = "android.arch.navigation:navigation-ui-ktx", version.ref = "navigationUiKtxVersion" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }

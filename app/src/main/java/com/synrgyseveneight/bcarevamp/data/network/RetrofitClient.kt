@@ -15,4 +15,15 @@ object RetrofitClient {
 
         retrofit.create(ApiService::class.java)
     }
+
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    fun getInstance(): Retrofit {
+        return retrofit
+    }
 }

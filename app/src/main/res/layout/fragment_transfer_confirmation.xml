@@ -103,7 +103,7 @@
                         android:id="@+id/circularImageViewSender"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/avatar"
+                        android:src="@drawable/icon_person"
                         android:layout_gravity="center_vertical"/>
 
                     <LinearLayout
@@ -111,24 +111,42 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:layout_marginStart="16dp"
+                        android:layout_gravity="center_vertical">
 
                         <TextView
                             android:id="@+id/tvUserAccountDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Jhon Doe"
+                            android:text=""
                             android:textColor="#115DA9"
                             android:textSize="16sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:textAllCaps="true"/>
 
-                        <TextView
-                            android:id="@+id/tvSourceAccountDetails"
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TAHAPAN BCA - 1234567890"
-                            android:textColor="#115DA9"
-                            android:textSize="12sp" />
+                            android:layout_weight="0"
+                            android:orientation="horizontal"
+                            android:layout_gravity="left">
+                            <TextView
+                                android:id="@+id/bankTypeSource"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="TAHAPAN BCA"
+                                android:textColor="#115DA9"
+                                android:textSize="12sp"
+                                android:textAllCaps="true"/>
+                            <TextView
+                                android:id="@+id/tvSourceAccountDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text=" - 000000000"
+                                android:textColor="#115DA9"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -153,7 +171,7 @@
                         android:id="@+id/circularImageViewReceiver"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/avatar"
+                        android:src="@drawable/icon_person"
                         android:layout_gravity="center_vertical"/>
 
                     <LinearLayout
@@ -161,24 +179,41 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:layout_marginStart="16dp"
+                        android:layout_gravity="center_vertical">
 
                         <TextView
                             android:id="@+id/tvReceiverName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Anonim"
+                            android:text=""
                             android:textColor="#115DA9"
                             android:textSize="16sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/tvEWalletDestinationDetails"
-                            android:layout_width="match_parent"
+                            android:textStyle="bold"
+                            android:textAllCaps="true"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TAHAPAN BCA - 0987654321"
-                            android:textColor="#115DA9"
-                            android:textSize="12sp" />
+                            android:layout_weight="0"
+                            android:orientation="horizontal"
+                            android:layout_gravity="left">
+                            <TextView
+                                android:id="@+id/bankTypeTarget"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="TAHAPAN BCA"
+                                android:textColor="#115DA9"
+                                android:textSize="12sp"
+                                android:textAllCaps="true"/>
+                            <TextView
+                                android:id="@+id/transferDestinationDetail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text=" - 000000000"
+                                android:textColor="#115DA9"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -203,7 +238,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Details"
+                        android:text="Detail"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginTop="16dp"
