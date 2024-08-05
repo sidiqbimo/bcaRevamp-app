@@ -22,6 +22,8 @@
     <string name="password">Password</string>
     <string name="reset_password">Reset Password</string>
 
+
+
     <!--    Navbar-->
     <string name="title_home">Beranda</string>
     <string name="title_mutasi">Mutasi</string>
@@ -29,4 +31,12 @@
     <string name="title_profil">Profil</string>
 
     <string name="hello_blank_fragment">Halo</string>
+
+
+    <!--  contentDescription -->
+    <string name="des_logo_setara">Logo Aplikasi Setara</string>
+    <string name="des_btn_pengajuan">Tombol Pengajuan Kartu</string>
+    <string name="des_btn_halobca">Tombol Halo BCA</string>
+    <string name="des_btn_wabca">Tombol Whatsapp BCA</string>
+
 </resources>

@@ -35,7 +35,11 @@ class NewEWalletInputFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_e_wallet_input, container, false)
+        return inflater.inflate(
+            R.layout.fragment_e_wallet_new_input,
+            container,
+            false
+        )
     }
 
     companion object {

@@ -57,6 +57,13 @@
             app:destination="@id/loginSecondFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_infoMenuFragment"
+            app:destination="@id/infoMenuFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_eWalletOptionFragment"
+            app:destination="@id/eWalletOptionFragment"
+            app:exitAnim="@android:anim/slide_in_left" />
     </fragment>
 
     <!--    Mutasi -->
@@ -116,4 +123,77 @@
             app:popUpTo="@id/loginSecondFragment"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/infoMenuFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.info.InfoMenuFragment"
+        android:label="fragment_info_menu"
+        tools:layout="@layout/fragment_info_menu" >
+        <action
+            android:id="@+id/action_infoMenuFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <!--    E-Wallet-->
+    <fragment
+        android:id="@+id/eWalletOptionFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletOptionFragment"
+        android:label="E-Wallet Option">
+        <action
+            android:id="@+id/action_eWalletOptionFragment_to_eWalletContactListFragment"
+            app:destination="@id/eWalletContactListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eWalletContactListFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletContactListFragment"
+        android:label="E-Wallet Contact List">
+        <action
+            android:id="@+id/action_eWalletContactListFragment_to_eWalletNewInputFragment"
+            app:destination="@id/eWalletNewInputFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eWalletNewInputFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletNewInputFragment"
+        android:label="E-Wallet Contact List">
+        <action
+            android:id="@+id/action_eWalletNewInputFragment_to_eWalletInputFragment"
+            app:destination="@id/eWalletInputFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eWalletInputFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletInputFragment"
+        android:label="E-Wallet Input">
+        <action
+            android:id="@+id/action_eWalletInputFragment_to_eWalletConfirmationFragment"
+            app:destination="@id/eWalletConfirmationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eWalletConfirmationFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletConfirmationFragment"
+        android:label="E-Wallet Konfirmasi">
+        <action
+            android:id="@+id/action_eWalletConfirmationFragment_to_eWalletSuccessFragment"
+            app:destination="@id/eWalletSuccessFragment" />
+        <action
+            android:id="@+id/action_eWalletConfirmationFragment_to_eWalletFailedFragment"
+            app:destination="@id/eWalletFailedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eWalletSuccessFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletSuccessFragment"
+        android:label="E-Wallet Success">
+        <action
+            android:id="@+id/action_eWalletSuccessFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eWalletFailedFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletFailedFragment"
+        android:label="E-Wallet Failed"/>
 </navigation>
