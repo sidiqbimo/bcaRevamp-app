@@ -60,9 +60,7 @@ class HomeFragment : Fragment() {
         val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
         // TODO: Masih null
-        val avatarPath = viewModelAuth.userAvatarPath.value
-        Log.d("HomeFragment", "Avatar Path: $avatarPath")
-
+        val imagePath = viewModelAuth.userImagePath.value
 
         //        Copy rekening
             copyAccountNumberButton.setOnClickListener {
@@ -104,7 +102,7 @@ class HomeFragment : Fragment() {
 
         // Dapatkan gambar PP
         Glide.with(this)
-            .load(avatarPath)
+            .load(imagePath)
             .circleCrop()
             .error(R.drawable.icon_person)
             .into(view.findViewById<ImageView>(R.id.circularImageView))
@@ -204,7 +202,7 @@ class HomeFragment : Fragment() {
             accountNumberText.text = formattedAccountNumber(it?: "Gagal memuat")
         }
 
-        viewModelAuth.userAvatarPath.observe(viewLifecycleOwner) {
+        viewModelAuth.userImagePath.observe(viewLifecycleOwner) {
             Log.d("HomeFragment", "Avatar updated: $it")
             Glide.with(this)
                 .load(it)
