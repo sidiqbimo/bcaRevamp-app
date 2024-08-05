@@ -59,6 +59,8 @@ class HomeFragment : Fragment() {
 
         // TODO: Masih null
         val avatarPath = viewModelAuth.userAvatarPath.value
+        Log.d("HomeFragment", "Avatar Path: $avatarPath")
+
 
         //        Copy rekening
             copyAccountNumberButton.setOnClickListener {

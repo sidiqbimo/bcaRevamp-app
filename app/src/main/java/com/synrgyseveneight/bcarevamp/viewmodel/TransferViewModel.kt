@@ -18,11 +18,14 @@ import retrofit2.create
 class TransferViewModel : ViewModel() {
     private val apiService: ApiService = RetrofitClient.getInstance().create(ApiService::class.java)
     val accountData = MutableLiveData<AccountData>()
+    val senderAccountData = MutableLiveData<AccountData>()
     val error = MutableLiveData<String>()
 
+    //destination account
     fun searchAccount(token: String,accountNumber: String) {
         viewModelScope.launch {
             val response = apiService.searchAccount("Bearer $token", accountNumber)
+            Log.d("TransferViewModel", "Token for SEARCHACCOUNT : $token with accountNumber : $accountNumber")
             if (response.isSuccessful && response.body()?.status == true) {
                 Log.d("TransferViewModel", "Response Body: ${response.body()}")
                 accountData.value = response.body()?.data
@@ -30,35 +33,22 @@ class TransferViewModel : ViewModel() {
                 error.value = response.body()?.message ?: "Terjadi kesalahan. Mohon coba kembali"
                 Log.d("TransferViewModel", "Error Body: ${response.errorBody()?.string()}")
             }
-            /*
-            try {
-                val response = apiService.searchAccount("mytoken", accountNumber)
-                if (response.isSuccessful && response.body()?.status == true) {
-                    Log.d("TransferViewModel", "Response Body: ${response.body()}")
-                    accountData.value = response.body()?.data
-                } else {
-                    error.value = response.body()?.message ?: "Terjadi kesalahan. Mohon coba kembali"
-                    Log.d("TransferViewModel", "Error Body: ${response.errorBody()?.string()}")
-                }
-            } catch (e: Exception) {
-                error.value = e.message
-            } */
         }
+    }
 
-        /*
-        apiService.searchAccount(accountNumber).enqueue(object : Callback<SearchAccountResponse> {
-            override fun onResponse(call: Call<SearchAccountResponse>, response: Response<SearchAccountResponse>) {
-                if (response.isSuccessful && response.body()?.status == true) {
-                    accountData.value = response.body()?.data
-                } else {
-                    error.value = response.body()?.message ?: "Unknown error"
-                }
+    //sender account
+    fun searchSenderAccount(token: String, accountNumber: String) {
+        viewModelScope.launch {
+            val response = apiService.searchAccount("Bearer $token", accountNumber)
+            Log.d("TransferViewModel", "Token for SEARCHACCOUNT SENDER : $token with accountNumber : $accountNumber")
+            if (response.isSuccessful && response.body()?.status == true) {
+                Log.d("TransferViewModel", "Response Body for SENDER: ${response.body()}")
+                senderAccountData.value = response.body()?.data
+            } else {
+                error.value = response.body()?.message ?: "Terjadi kesalahan. Mohon coba kembali"
+                Log.d("TransferViewModel", "Error Body: ${response.errorBody()?.string()}")
             }
-
-            override fun onFailure(call: Call<SearchAccountResponse>, t: Throwable) {
-                error.value = t.message
-            }
-        }) */
+        }
     }
 
 }

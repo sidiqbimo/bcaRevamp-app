@@ -116,6 +116,21 @@
         <action
             android:id="@+id/action_newAccountTransferInput_to_transferConfirmationFragment"
             app:destination="@id/transferConfirmationFragment" />
+        <argument
+            android:name="accountNumberTargetTransfer"
+            app:argType="string" />
+        <argument
+            android:name="amountTransfer"
+            app:argType="string" />
+        <argument
+            android:name="noteTransfer"
+            app:argType="string" />
+        <argument
+            android:name="accountNumberSenderTransfer"
+            app:argType="string" />
+        <argument
+            android:name="mytokenTransfer"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -209,6 +224,7 @@
         android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletFailedFragment"
         android:label="E-Wallet Failed"
         tools:layout="@layout/fragment_e_wallet_failed"/>
+
     <fragment
         android:id="@+id/transferConfirmationFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferConfirmationFragment"
@@ -220,6 +236,25 @@
         <action
             android:id="@+id/action_transferConfirmationFragment_to_transferSuccessFragment"
             app:destination="@id/transferSuccessFragment" />
+        <argument
+            android:name="accountNumberTargetTransfer"
+            app:argType="string" />
+        <argument
+            android:name="amountTransfer"
+            app:argType="string" />
+        <argument
+            android:name="noteTransfer"
+            app:argType="string" />
+        <argument
+            android:name="accountNumberSenderTransfer"
+            app:argType="string" />
+        <argument
+            android:name="mytokenTransfer"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_transferConfirmationFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment

@@ -32,6 +32,8 @@ import com.synrgyseveneight.bcarevamp.viewmodel.TransferViewModel
 import java.text.NumberFormat
 import java.util.Locale
 import androidx.lifecycle.ViewModelProvider
+import com.synrgyseveneight.bcarevamp.ui.home.HomeFragment
+import kotlinx.coroutines.launch
 
 class NewAccountTransferInput : Fragment() {
     private val viewModelAuth: AuthViewModel by viewModels {
@@ -132,25 +134,9 @@ class NewAccountTransferInput : Fragment() {
         // Set an OnEditorActionListener on the EditText
         accountNumberInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                // If the enter key is pressed, perform the validation
-                if (accountNumberInput.text.toString() == accountNumberMock) {
-                    successSeekForAccountContainer.visibility = View.VISIBLE
-                    containerSumberRekening.visibility = View.VISIBLE
-                    separatorTf.visibility = View.VISIBLE
-                    separatorTftonominal.visibility = View.VISIBLE
-                    transferNominalContainer.visibility = View.VISIBLE
-                } else {
-                    successSeekForAccountContainer.visibility = View.GONE
-                    containerSumberRekening.visibility = View.GONE
-                    separatorTf.visibility = View.GONE
-                    separatorTftonominal.visibility = View.GONE
-                    transferNominalContainer.visibility = View.GONE
-                }
-
                 // Hide the keyboard
                 val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
-
                 true
             } else {
                 false
@@ -210,6 +196,7 @@ class NewAccountTransferInput : Fragment() {
                         edittextContainerNominalInput.setBackgroundResource(R.drawable.whitebackground_bottomnoround_redstroke)
                         Log.d("NewAccountTransferInput", "uang ga cukup${inputtedValue}")
                         errortext.text = "Saldo Anda tidak mencukupi, mohon isikan kembali"
+                        transferNominalInput.announceForAccessibility("Saldo Anda tidak mencukupi, mohon isikan kembali")
                         errortext.visibility = View.VISIBLE
                         buttonStartTransfer?.isEnabled = false
                         buttonStartTransfer?.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_greyrectangle)
@@ -220,6 +207,7 @@ class NewAccountTransferInput : Fragment() {
                         errortext.visibility = View.GONE
                         buttonStartTransfer?.isEnabled = true
                         buttonStartTransfer?.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_roundedrectangle)
+                        buttonStartTransfer?.visibility = View.VISIBLE
                     } else if (inputtedValue != null && inputtedValue == 0.0){
                         // If the inputted value is empty, revert the background and hide the error message
                         Log.d("NewAccountTransferInput", "input nol, ${inputtedValue}")
@@ -228,6 +216,7 @@ class NewAccountTransferInput : Fragment() {
                         errortext.visibility = View.VISIBLE
                         buttonStartTransfer?.isEnabled = false
                         buttonStartTransfer?.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_greyrectangle)
+                        transferNominalInput.announceForAccessibility("Minimum transfer adalah Rp 1, mohon isikan kembali")
                     }  else if (inputtedValue == null) {
                         Log.d("NewAccountTransferInput", "gajadi masuk ${inputtedValue}")
                         edittextContainerNominalInput.setBackgroundResource(R.drawable.whitebackground_bottomnoround)
@@ -278,12 +267,17 @@ class NewAccountTransferInput : Fragment() {
         val saldoTFNew = view.findViewById<TextView>(R.id.saldotf_BCA_tersisa)
         val myaccountNumberText = view.findViewById<TextView>(R.id.accountnumbersubtitle)
 
+        var mytoken = ""
+
         // Check validate account target
         accountNumberInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // Call API to verify account number
                 if (s != null && s.length == 10) { // Assuming account number is 10 digits
                     viewModelTransfer.searchAccount(viewModelAuth.userToken.value?:"",s.toString())
+
+                    // TOKEN TRANSFER IS HERE
+                    mytoken = viewModelAuth.userToken.value?:""
                 }
             }
 
@@ -291,10 +285,12 @@ class NewAccountTransferInput : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+        // Tampilkan inputtan tf kalau account number sudah verified
         viewModelTransfer.accountData.observe(viewLifecycleOwner, Observer { accountData ->
             if (accountData != null) {
                 visibleWhenVerfiied()
                 saveAsEditText.setText(accountData.name)
+                accountNumberInput.announceForAccessibility("Nomor rekening terverifikasi atas nama ${accountData.name}")
             }
         })
 
@@ -306,21 +302,32 @@ class NewAccountTransferInput : Fragment() {
         })
 
         //TODO : Implementasi button start transfer
-//        val nextButton = view.findViewById<Button>(R.id.button_start_tf)
-//        nextButton.setOnClickListener {
-//            val action = NewAccountTransferInputDirections.actionNewAccountTransferInputToTransferConfirmationFragment(
-//                accountName = saveAsEditText.text.toString(),
-//                accountNumber = accountNumberInput.text.toString(),
-//                amount = view.findViewById<EditText>(R.id.tf_inputtext_nominal).text.toString(),
-//                notes = view.findViewById<EditText>(R.id.tf_inputtext_notes).text.toString()
-//            )
-//            findNavController().navigate(action)
-//        }
+        val nextButton = view.findViewById<Button>(R.id.button_start_tf)
+
+        nextButton.setOnClickListener {
+            val accountNumberTargetTransfer = view.findViewById<EditText>(R.id.accountNumberInput)
+            val accountNumberSenderTransfer = view.findViewById<TextView>(R.id.accountnumbersubtitle)
+            val amountTransfer = view.findViewById<EditText>(R.id.tf_inputtext_nominal).text.toString()
+            val noteTransfer = view.findViewById<EditText>(R.id.tf_inputtext_notes).text.toString()
+            val mytokenTransfer = mytoken
+
+            // TODO : Save to daftar tersimpan
+
+            // Navigate to next screen tp bawa value
+            val action = NewAccountTransferInputDirections.actionNewAccountTransferInputToTransferConfirmationFragment(
+                accountNumberTargetTransfer.text.toString(),
+                amountTransfer,
+                noteTransfer,
+                accountNumberSenderTransfer.text.toString(),
+                mytokenTransfer
+            )
+            findNavController().navigate(action)
+        }
 
         viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
             if (token != null) {
                 viewModelAuth.fetchBalance(token)
-            }
+        }
         }
 
         viewModelAuth.userBalance.observe(viewLifecycleOwner) {
@@ -400,9 +407,6 @@ class NewAccountTransferInput : Fragment() {
         separatorTf?.visibility = View.VISIBLE
         separatorTftonominal?.visibility = View.VISIBLE
         transferNominalContainer?.visibility = View.VISIBLE
-
-        // Enable Button when verified
-        buttonStartTransfer?.visibility = View.VISIBLE
     }
 
     private fun goneWhenNotVerified (){
@@ -411,12 +415,16 @@ class NewAccountTransferInput : Fragment() {
         val separatorTf = view?.findViewById<View>(R.id.separator_tf)
         val separatorTftonominal = view?.findViewById<View>(R.id.separator_tftonominal)
         val transferNominalContainer = view?.findViewById<View>(R.id.transfernominal_container)
+        val buttonStartTransfer = view?.findViewById<Button>(R.id.button_start_tf)
 
         successSeekForAccountContainer?.visibility = View.GONE
         containerSumberRekening?.visibility = View.GONE
         separatorTf?.visibility = View.GONE
         separatorTftonominal?.visibility = View.GONE
         transferNominalContainer?.visibility = View.GONE
+
+        // Disable Button when verified
+        buttonStartTransfer?.visibility = View.GONE
     }
 
 }
