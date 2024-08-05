@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,7 @@ import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.ui.info.MutationFragment
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -176,10 +178,23 @@ class HomeFragment : Fragment() {
             }
         }
 
-        viewModelAuth.userBalance.observe(viewLifecycleOwner) {
-            Log.d("HomeFragment", "Balance updated: $it")
-            val saldoAmount = view.findViewById<TextView>(R.id.saldoAmount)
-            saldoAmount.text = "Rp ${it}"
+
+        // mengecek balance null
+        viewModelAuth.userBalance.observe(viewLifecycleOwner) { balance ->
+            //jika balance tidak null
+            if (balance != null) {
+                Log.d("HomeFragment", "Balance updated: $balance")
+                val saldoAmount = view.findViewById<TextView>(R.id.saldoAmount)
+                saldoAmount.text = "Rp $balance"
+            } else {
+                // jika balance null maka otomatis token expired
+                viewLifecycleOwner.lifecycleScope.launch {
+                    Toast.makeText(requireContext(), "Token Expired, Silahkan Login Kembali", Toast.LENGTH_SHORT).show()
+                }
+                viewModelAuth.clearToken {
+                    findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
+                }
+            }
         }
 
         viewModelAuth.userAccountNumber.observe(viewLifecycleOwner) {
