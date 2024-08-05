@@ -19,8 +19,8 @@ class AuthRepository (private val apiService: ApiService, private val dataStore:
     }
 
     // Fungsi untuk menyimpan data pengguna
-    suspend fun saveUserData(signature: String, name: String, accountNumber: String, avatarPath: String, bankName: String, token: String) {
-        dataStore.saveUserData(signature, name, accountNumber, avatarPath, bankName, token)
+    suspend fun saveUserData(signature: String, name: String, accountNumber: String, imagePath: String, bankName: String, token: String) {
+        dataStore.saveUserData(signature, name, accountNumber, imagePath, bankName, token)
     }
 
     // Mendapatkan saldo
@@ -56,8 +56,8 @@ class AuthRepository (private val apiService: ApiService, private val dataStore:
     }
 
     // Mendapatkan jalur gambar avatar pengguna
-    fun getUserAvatarPath(): Flow<String?> {
-        return dataStore.userAvatarPath
+    fun getUserImagePath(): Flow<String?> {
+        return dataStore.userImagePath
     }
 
     // Mendapatkan nama bank pengguna

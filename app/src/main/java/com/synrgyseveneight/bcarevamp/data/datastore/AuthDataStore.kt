@@ -26,10 +26,9 @@ class AuthDataStore private constructor(private val context: Context) {
         val USER_SIGNATURE_KEY = stringPreferencesKey("user_signature")
         val USER_NAME_KEY = stringPreferencesKey("user_name")
         val USER_ACCOUNT_NUMBER_KEY = stringPreferencesKey("user_account_number")
-        val USER_AVATAR_PATH_KEY = stringPreferencesKey("user_avatar_path")
+        val USER_IMAGE_PATH_KEY = stringPreferencesKey("user_image_path")
         val USER_BANK_NAME_KEY = stringPreferencesKey("user_bank_name")
         val USER_TOKEN_KEY = stringPreferencesKey("user_token")
-
         val USER_BALANCE_KEY = stringPreferencesKey("user_balance")
         val USER_BALANCE_RETRIEVETIME_KEY = stringPreferencesKey("user_balance_retrievetime")
     }
@@ -53,9 +52,9 @@ class AuthDataStore private constructor(private val context: Context) {
         }
 
     // Mendapatkan jalur gambar avatar pengguna
-    val userAvatarPath: Flow<String?> = context.dataStore.data
+    val userImagePath: Flow<String?> = context.dataStore.data
         .map { preferences ->
-            preferences[USER_AVATAR_PATH_KEY]
+            preferences[USER_IMAGE_PATH_KEY]
         }
 
     // Mendapatkan nama bank pengguna
@@ -77,12 +76,12 @@ class AuthDataStore private constructor(private val context: Context) {
         }
 
     // Menyimpan data pengguna
-    suspend fun saveUserData(signature: String, name: String, accountNumber: String, avatarPath: String, bankName: String, token: String) {
+    suspend fun saveUserData(signature: String, name: String, accountNumber: String, imagePath: String, bankName: String, token: String) {
         context.dataStore.edit { preferences ->
             preferences[USER_SIGNATURE_KEY] = signature
             preferences[USER_NAME_KEY] = name
             preferences[USER_ACCOUNT_NUMBER_KEY] = accountNumber
-            preferences[USER_AVATAR_PATH_KEY] = avatarPath
+            preferences[USER_IMAGE_PATH_KEY] = imagePath
             preferences[USER_BANK_NAME_KEY] = bankName
             preferences[USER_TOKEN_KEY] = token
         }
