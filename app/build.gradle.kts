@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -92,5 +93,10 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
     implementation(libs.glide)
+
+    // safeargs
+//    implementation(libs.navigation.fragment.ktx)
+//    implementation(libs.navigation.ui.ktx)
+
     annotationProcessor(libs.compiler)
 }
