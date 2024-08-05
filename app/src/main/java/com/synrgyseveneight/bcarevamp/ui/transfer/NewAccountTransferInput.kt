@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +16,11 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.synrgyseveneight.bcarevamp.R
 import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
@@ -31,9 +31,6 @@ import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
 import com.synrgyseveneight.bcarevamp.viewmodel.TransferViewModel
 import java.text.NumberFormat
 import java.util.Locale
-import androidx.lifecycle.ViewModelProvider
-import com.synrgyseveneight.bcarevamp.ui.home.HomeFragment
-import kotlinx.coroutines.launch
 
 class NewAccountTransferInput : Fragment() {
     private val viewModelAuth: AuthViewModel by viewModels {
@@ -301,7 +298,7 @@ class NewAccountTransferInput : Fragment() {
             }
         })
 
-        //TODO : Implementasi button start transfer
+        // Start Transfer to be confirmed
         val nextButton = view.findViewById<Button>(R.id.button_start_tf)
 
         nextButton.setOnClickListener {
@@ -319,7 +316,11 @@ class NewAccountTransferInput : Fragment() {
                 amountTransfer,
                 noteTransfer,
                 accountNumberSenderTransfer.text.toString(),
-                mytokenTransfer
+                mytokenTransfer,
+                avatarSenderPath = "",
+                avatarTargetPath = "",
+                bankReceiver = "",
+                bankSender = "",
             )
             findNavController().navigate(action)
         }
@@ -407,6 +408,12 @@ class NewAccountTransferInput : Fragment() {
         separatorTf?.visibility = View.VISIBLE
         separatorTftonominal?.visibility = View.VISIBLE
         transferNominalContainer?.visibility = View.VISIBLE
+
+        if (buttonStartTransfer != null) {
+            buttonStartTransfer.visibility = View.VISIBLE
+        }
+
+
     }
 
     private fun goneWhenNotVerified (){

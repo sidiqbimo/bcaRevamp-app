@@ -26,7 +26,7 @@
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_exit"
+            android:background="@drawable/icon_x"
             android:contentDescription="Kembali"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -74,6 +74,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                style="@style/regularBlackSmall"
                 android:text="Transaksi Berhasil!"
                 android:textColor="#115DA9"
                 android:textSize="20sp"
@@ -120,7 +121,7 @@
                                 android:id="@+id/circularImageViewSender"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@drawable/avatar"
+                                android:src="@drawable/icon_person"
                                 android:layout_gravity="center_vertical"/>
 
                             <LinearLayout
@@ -134,18 +135,35 @@
                                     android:id="@+id/tvUserAccountDetails"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Jhon Doe"
+                                    android:text=""
                                     android:textColor="#115DA9"
                                     android:textSize="16sp"
-                                    android:textStyle="bold"/>
+                                    android:textStyle="bold"
+                                    android:textAllCaps="true"/>
 
-                                <TextView
-                                    android:id="@+id/tvSourceAccountDetails"
-                                    android:layout_width="match_parent"
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="TAHAPAN BCA - 1234567890"
-                                    android:textColor="#115DA9"
-                                    android:textSize="12sp" />
+                                    android:layout_weight="0"
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="left">
+                                    <TextView
+                                        android:id="@+id/bankTypeSource"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="TAHAPAN BCA"
+                                        android:textColor="#115DA9"
+                                        android:textSize="12sp"
+                                        android:textAllCaps="true"/>
+                                    <TextView
+                                        android:id="@+id/tvSourceAccountDetails"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text=" - 000000000"
+                                        android:textColor="#115DA9"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
                             </LinearLayout>
                         </LinearLayout>
                     </TableRow>
@@ -173,7 +191,7 @@
                                 android:id="@+id/circularImageViewReceiver"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@drawable/avatar"
+                                android:src="@drawable/icon_person"
                                 android:layout_gravity="center_vertical"/>
 
                             <LinearLayout
@@ -187,18 +205,34 @@
                                     android:id="@+id/tvReceiverName"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Anonim"
+                                    android:text=""
                                     android:textColor="#115DA9"
                                     android:textSize="16sp"
-                                    android:textStyle="bold"/>
+                                    android:textStyle="bold"
+                                    android:textAllCaps="true"/>
 
-                                <TextView
-                                    android:id="@+id/tvEWalletDestinationDetails"
-                                    android:layout_width="match_parent"
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="TAHAPAN BCA - 0987654321"
-                                    android:textColor="#115DA9"
-                                    android:textSize="12sp" />
+                                    android:layout_weight="0"
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="left">
+                                    <TextView
+                                        android:id="@+id/bankTypeTarget"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="TAHAPAN BCA"
+                                        android:textColor="#115DA9"
+                                        android:textSize="12sp"
+                                        android:textAllCaps="true"/>
+                                    <TextView
+                                        android:id="@+id/transferDestinationDetail"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text=" - 000000000"
+                                        android:textColor="#115DA9"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
                     </TableRow>
@@ -297,14 +331,17 @@
 
     <Button
         android:id="@+id/btnTopUp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="48dp"
         android:background="@drawable/rounded_button"
-        android:text="bagikan Bukti Transaksi"
+        android:text="Bagikan Bukti Transaksi"
+        style="@style/buttonblue_whitetext"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:layout_marginHorizontal="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

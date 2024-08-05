@@ -93,10 +93,8 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
     implementation(libs.glide)
-
-    // safeargs
-//    implementation(libs.navigation.fragment.ktx)
-//    implementation(libs.navigation.ui.ktx)
+    implementation(libs.logging.interceptor)
+    implementation(libs.okhttp)
 
     annotationProcessor(libs.compiler)
 }
