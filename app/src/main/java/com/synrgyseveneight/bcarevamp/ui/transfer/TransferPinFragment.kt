@@ -22,6 +22,7 @@ class TransferPINFragment : Fragment() {
 
     private val args: TransferPINFragmentArgs by navArgs()
     private val viewModel: TransferViewModel by viewModels()
+    private var attemptCount = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -130,6 +131,8 @@ class TransferPINFragment : Fragment() {
                 }
             }
         }
+
     }
+
 
 }

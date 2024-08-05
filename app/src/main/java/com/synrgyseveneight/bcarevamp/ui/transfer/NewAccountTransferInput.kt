@@ -187,6 +187,12 @@ class NewAccountTransferInput : Fragment() {
 
                     transferNominalInput.addTextChangedListener(this)
 
+
+                    if (s.isNullOrEmpty()==true) {
+                        buttonStartTransfer.visibility = View.GONE
+                        buttonStartTransfer.isEnabled = false
+                    }
+
                     // Compare the inputted value with the balance
                     if (inputtedValue != null && inputtedValue > balance) {
                         // If the inputted value is greater, change the background and show the error message
@@ -409,9 +415,9 @@ class NewAccountTransferInput : Fragment() {
         separatorTftonominal?.visibility = View.VISIBLE
         transferNominalContainer?.visibility = View.VISIBLE
 
-        if (buttonStartTransfer != null) {
-            buttonStartTransfer.visibility = View.VISIBLE
-        }
+//        if (buttonStartTransfer != null) {
+//            buttonStartTransfer.visibility = View.VISIBLE
+//        }
 
 
     }

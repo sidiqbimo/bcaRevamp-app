@@ -305,11 +305,13 @@
         <action
             android:id="@+id/action_transferFailedFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/homeFragment"/>
         <action
             android:id="@+id/action_transferFailedFragment_to_transferListFragment"
             app:destination="@id/transferListFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/transferListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/transferSuccessFragment"
@@ -319,6 +321,7 @@
         <action
             android:id="@+id/action_transferSuccessFragment_to_homeFragment"
             app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
         <argument
             android:name="accountNumberTargetTransfer"
@@ -363,6 +366,7 @@
         <action
             android:id="@+id/action_transferPINFragment_to_transferSuccessFragment"
             app:destination="@id/transferSuccessFragment"
+            app:popUpTo="@id/transferSuccessFragment"
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_transferPINFragment_to_transferFailedFragment"
@@ -402,6 +406,8 @@
             app:argType="string" />
         <action
             android:id="@+id/action_transferPINFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.synrgyseveneight.bcarevamp.R
+import java.text.NumberFormat
+import java.util.Locale
 
 /**
  * A simple [Fragment] subclass.
@@ -74,8 +76,14 @@ class TransferSuccessFragment : Fragment() {
         receiverAccountDetails.text = " - $accountNumberTarget"
         senderAccountName.text = senderName
         receiverAccountName.text = receiverName
-        transferAmountText.text = "Rp $transferAmount"
-        totalTransferFee.text = "Rp $transferAmount"
+
+        val amountTFInt  = transferAmount.replace(".","").toInt()
+        val formattedTFAmount = NumberFormat.getNumberInstance(Locale.GERMANY).format(amountTFInt)
+        transferAmountText.text = "Rp $formattedTFAmount"
+
+        // Total Fee
+        totalTransferFee.text = "Rp $formattedTFAmount"
+
         if (transferNote.isEmpty()) {
             transferNotes.text = "-"
         } else {
