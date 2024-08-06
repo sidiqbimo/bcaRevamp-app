@@ -94,13 +94,15 @@ class TransferSuccessFragment : Fragment() {
 
         // Photo change
         Glide.with(this)
-            .load(senderAccountPhotoPath)
+            .load(senderAvatarPath)
             .circleCrop()
+            .placeholder(R.drawable.icon_person)
             .error(R.drawable.icon_person)
             .into(senderAccountPhotoPath)
         Glide.with(this)
             .load(receiverAvatarPath)
             .circleCrop()
+            .placeholder(R.drawable.icon_person)
             .error(R.drawable.icon_person)
             .into(receiverAccountPhotoPath)
     }
