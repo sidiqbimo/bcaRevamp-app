@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.synrgyseveneight.bcarevamp.R
+import com.synrgyseveneight.bcarevamp.R.id.action_transferSuccessFragment_to_homeFragment
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -37,7 +39,7 @@ class TransferSuccessFragment : Fragment() {
 
         val exitButton = view.findViewById<ImageView>(R.id.btnBack)
         exitButton.setOnClickListener {
-            findNavController().navigate(R.id.action_transferSuccessFragment_to_homeFragment)
+            findNavController().navigate(action_transferSuccessFragment_to_homeFragment)
         }
 
         return view
@@ -105,6 +107,11 @@ class TransferSuccessFragment : Fragment() {
             .placeholder(R.drawable.icon_person)
             .error(R.drawable.icon_person)
             .into(receiverAccountPhotoPath)
+
+        // Back will go home
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(action_transferSuccessFragment_to_homeFragment)
+        }
     }
 
 }

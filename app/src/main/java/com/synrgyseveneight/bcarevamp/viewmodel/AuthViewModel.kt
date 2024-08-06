@@ -8,6 +8,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.synrgyseveneight.bcarevamp.data.model.AuthRequest
 import com.synrgyseveneight.bcarevamp.data.model.AuthResponse
+import com.synrgyseveneight.bcarevamp.data.model.SingleLiveEvent
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import kotlinx.coroutines.launch
 import java.net.SocketException
@@ -71,6 +72,9 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
 
+    private val _logoutEvent = SingleLiveEvent<Unit>()
+    val logoutEvent: LiveData<Unit> get() = _logoutEvent
+
     fun fetchBalance(token: String) {
         viewModelScope.launch {
             try {
@@ -81,9 +85,11 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
                 _errorMessage.postValue("Silakan login kembali")
                 Log.d("AuthViewModel", "Network error: ${e.message}")
                 repository.clearToken()
+                _logoutEvent.postValue(Unit)
             } catch (e: Exception) {
-                _errorMessage.postValue("Pstikan Anda tersambung ke jaringan dan silakan log in kembali")
+                _errorMessage.postValue("Pastikan Anda tersambung ke jaringan dan silakan log in kembali")
                 repository.clearToken()
+                _logoutEvent.postValue(Unit)
             }
 
             // check_time or balance adalah nama variabel yang digunakan pada response body API, mereka ngelink juga ke BalanceData

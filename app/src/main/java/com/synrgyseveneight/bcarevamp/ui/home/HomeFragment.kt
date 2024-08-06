@@ -198,7 +198,11 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
 
-
+        // Error handling to go to log in
+        viewModelAuth.logoutEvent.observe(viewLifecycleOwner) {
+            // Navigate to the login screen
+            findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
+        }
 
     }
 

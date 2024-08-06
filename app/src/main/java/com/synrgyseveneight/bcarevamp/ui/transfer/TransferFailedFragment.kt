@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.synrgyseveneight.bcarevamp.R
@@ -20,10 +21,18 @@ class TransferFailedFragment : Fragment() {
 
         val exitButton = view.findViewById<ImageView>(R.id.btnBack)
         exitButton.setOnClickListener {
-            findNavController().navigate(R.id.action_transferSuccessFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_transferFailedFragment_to_transferListFragment)
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_transferFailedFragment_to_transferListFragment)
+        }
     }
 
 }
