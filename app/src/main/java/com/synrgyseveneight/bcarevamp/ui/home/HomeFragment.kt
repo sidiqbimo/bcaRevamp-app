@@ -4,29 +4,24 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.synrgyseveneight.bcarevamp.R
 import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
 import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
-import com.synrgyseveneight.bcarevamp.ui.comingsoon.ComingSoonFragment
 import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
-import com.synrgyseveneight.bcarevamp.ui.info.MutationFragment
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
 import kotlinx.coroutines.launch
@@ -211,6 +206,16 @@ class HomeFragment : Fragment() {
                 .into(profilePict)
         }
 
+        // Error handling
+        viewModelAuth.errorMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+
+        // Error handling to go to log in
+        viewModelAuth.logoutEvent.observe(viewLifecycleOwner) {
+            // Navigate to the login screen
+            findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
+        }
 
     }
 
