@@ -77,20 +77,30 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
 
     fun fetchBalance(token: String) {
         viewModelScope.launch {
+            var retries = 0
+            var success = false
+            while (retries < 3 && !success){
             try {
                 val balanceResponse = repository.getBalance(token)
                 userBalance.value = balanceResponse?.data?.balance?.let { formatBalance(it) }
                 balanceCheckTime.value = balanceResponse?.data?.check_time
+                success = true
             } catch (e: SocketException) {
-                _errorMessage.postValue("Silakan login kembali")
-                Log.d("AuthViewModel", "Network error: ${e.message}")
-                repository.clearToken()
-                _logoutEvent.postValue(Unit)
+                retries++
+                if (retries == 3) {
+                    _errorMessage.postValue("Silakan log in kembali")
+                    Log.d("AuthViewModel", "Network error: ${e.message}")
+                    repository.clearToken()
+                    _logoutEvent.postValue(Unit)
+                }
             } catch (e: Exception) {
-                _errorMessage.postValue("Pastikan Anda tersambung ke jaringan dan silakan log in kembali")
+                _errorMessage.postValue("Periksa koneksi dan mohon log in kembali")
                 repository.clearToken()
                 _logoutEvent.postValue(Unit)
+                success = true
             }
+        }
+
 
             // check_time or balance adalah nama variabel yang digunakan pada response body API, mereka ngelink juga ke BalanceData
         }
