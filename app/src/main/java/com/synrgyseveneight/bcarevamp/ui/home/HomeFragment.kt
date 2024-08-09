@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,7 @@ import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -53,9 +55,7 @@ class HomeFragment : Fragment() {
         val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
         // TODO: Masih null
-        val avatarPath = viewModelAuth.userAvatarPath.value
-        Log.d("HomeFragment", "Avatar Path: $avatarPath")
-
+        val imagePath = viewModelAuth.userImagePath.value
 
         //        Copy rekening
             copyAccountNumberButton.setOnClickListener {
@@ -97,7 +97,7 @@ class HomeFragment : Fragment() {
 
         // Dapatkan gambar PP
         Glide.with(this)
-            .load(avatarPath)
+            .load(imagePath)
             .circleCrop()
             .error(R.drawable.icon_person)
             .into(view.findViewById<ImageView>(R.id.circularImageView))
@@ -173,10 +173,23 @@ class HomeFragment : Fragment() {
             }
         }
 
-        viewModelAuth.userBalance.observe(viewLifecycleOwner) {
-            Log.d("HomeFragment", "Balance updated: $it")
-            val saldoAmount = view.findViewById<TextView>(R.id.saldoAmount)
-            saldoAmount.text = "Rp ${it}"
+
+        // mengecek balance null
+        viewModelAuth.userBalance.observe(viewLifecycleOwner) { balance ->
+            //jika balance tidak null
+            if (balance != null) {
+                Log.d("HomeFragment", "Balance updated: $balance")
+                val saldoAmount = view.findViewById<TextView>(R.id.saldoAmount)
+                saldoAmount.text = "Rp $balance"
+            } else {
+                // jika balance null maka otomatis token expired
+                viewLifecycleOwner.lifecycleScope.launch {
+                    Toast.makeText(requireContext(), "Token Expired, Silahkan Login Kembali", Toast.LENGTH_SHORT).show()
+                }
+                viewModelAuth.clearToken {
+                    findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
+                }
+            }
         }
 
         viewModelAuth.userAccountNumber.observe(viewLifecycleOwner) {
@@ -184,7 +197,7 @@ class HomeFragment : Fragment() {
             accountNumberText.text = formattedAccountNumber(it?: "Gagal memuat")
         }
 
-        viewModelAuth.userAvatarPath.observe(viewLifecycleOwner) {
+        viewModelAuth.userImagePath.observe(viewLifecycleOwner) {
             Log.d("HomeFragment", "Avatar updated: $it")
             Glide.with(this)
                 .load(it)

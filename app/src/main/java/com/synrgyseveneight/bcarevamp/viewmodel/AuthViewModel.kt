@@ -26,7 +26,7 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
     val userAccountNumber: LiveData<String?> = repository.getUserAccountNumber().asLiveData()
 
     // LiveData untuk  gambar avatar
-    val userAvatarPath: LiveData<String?> = repository.getUserAvatarPath().asLiveData()
+    val userImagePath: LiveData<String?> = repository.getUserImagePath().asLiveData()
 
     // LiveData untuk nama bank pengguna
     val userBankName: LiveData<String?> = repository.getUserBankName().asLiveData()
@@ -49,7 +49,7 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
                     val authData = response.body()?.data
                     viewModelScope.launch {
                         authData?.let {
-                            repository.saveUserData(it.user.signature, it.user.name, it.user.account_number, it.user.avatar_path, it.user.bank_name, it.token)
+                            repository.saveUserData(it.user.signature, it.user.name, it.user.account_number, it.user.image_path, it.user.bank_name, it.token)
                         }
                         onSuccess()
                     }
