@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,20 +19,28 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.synrgyseveneight.bcarevamp.R
 import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
 import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
+import com.synrgyseveneight.bcarevamp.data.repository.MonthlyReportRepository
 import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
+import com.synrgyseveneight.bcarevamp.viewmodel.MonthlyReportViewModel
+import com.synrgyseveneight.bcarevamp.viewmodel.MonthlyReportViewModelFactory
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
+import java.util.Calendar
 import java.util.Locale
 
 class HomeFragment : Fragment() {
     private val viewModelAuth: AuthViewModel by viewModels {
         AuthViewModelFactory(AuthRepository(RetrofitClient.instance, AuthDataStore.getInstance(requireContext())))
+    }
+    private val reportViewModel: MonthlyReportViewModel by viewModels {
+        MonthlyReportViewModelFactory(MonthlyReportRepository(RetrofitClient.instance))
     }
     private lateinit var favoriteTransactionAdapter: FavoriteTransactionAdapter
 
@@ -113,20 +123,13 @@ class HomeFragment : Fragment() {
         recyclerView.addItemDecoration(spaceDecoration)
 
         // Navigasi Quick Menu
-        val nameTv = view.findViewById<TextView>(R.id.greetings)
         val transferButton = view.findViewById<ImageView>(R.id.transferButton)
         val transferTitle = view.findViewById<TextView>(R.id.transferTitle)
-        val logoutButton = view.findViewById<ImageView>(R.id.logoutButton)
         val accountNumber = view.findViewById<TextView>(R.id.accountNumber)
-
         val saldoButtonImage = view.findViewById<ImageView>(R.id.infoButton)
         val saldoButtonText = view.findViewById<TextView>(R.id.infoTitle)
-
-
         val navController = findNavController()
-        viewModelAuth.userName.observe(viewLifecycleOwner) { name ->
-            nameTv.text = "Halo, "+name+"!"
-        }
+
 
         // NAVIGATION
         val clickListenerToInfoMenu = View.OnClickListener {
@@ -147,15 +150,6 @@ class HomeFragment : Fragment() {
         eWalletLogo.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_eWalletOptionFragment)
         }
-
-        logoutButton.setOnClickListener{
-            viewModelAuth.clearToken {
-                // Navigasi kembali ke LoginFragment
-                findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
-            }
-            Toast.makeText(this.context, "Berhasil Logout", Toast.LENGTH_SHORT).show()
-        }
-
         return view
     }
 
@@ -166,6 +160,13 @@ class HomeFragment : Fragment() {
         val accountNumberText = view.findViewById<TextView>(R.id.accountNumber)
         val greetingsName = view.findViewById<TextView>(R.id.greetings)
         val profilePict = view.findViewById<ImageView>(R.id.circularImageView)
+        val logoutButton = view.findViewById<ImageView>(R.id.logoutButton)
+        val favmonthpicker = view.findViewById<ConstraintLayout>(R.id.fav_month_picker)
+        val textMonthPicker = view.findViewById<TextView>(R.id.date_picker_title)
+        val amountIncome = view.findViewById<TextView>(R.id.amount_income)
+        val amountOutcome = view.findViewById<TextView>(R.id.amount_outcome)
+        val amountSelisih = view.findViewById<TextView>(R.id.amount_selisih)
+
 
         viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
             if (token != null) {
@@ -217,13 +218,61 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
         }
 
+        viewModelAuth.userName.observe(viewLifecycleOwner) { name ->
+            greetingsName.text = "Halo, "+name+"!"
+        }
+
+        viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
+            // Request laporan awal dengan bulan dan tahun saat ini
+            reportViewModel.getMonthlyReport(
+                selectedMonth.toString(),
+                selectedYear.toString(),
+                token ?: ""
+            )
+        }
+
+        favmonthpicker.setOnClickListener {
+            MonthPickerDialog(requireContext()) { formattedDate, selectedMonth, selectedYear ->
+                // Set textMonthPicker dengan tanggal yang dipilih
+                textMonthPicker.text = formattedDate
+
+                // Mengambil token dan memanggil API
+                viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
+                    reportViewModel.getMonthlyReport(
+                        selectedMonth.toString(),
+                        selectedYear.toString(),
+                        token ?: ""
+                    )
+                }
+            }.show()
+        }
+
+        logoutButton.setOnClickListener{
+            viewModelAuth.clearToken {
+                // Navigasi kembali ke LoginFragment
+                findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
+            }
+            Toast.makeText(this.context, "Berhasil Logout", Toast.LENGTH_SHORT).show()
+        }
+
+        reportViewModel.income.observe(viewLifecycleOwner) { income ->
+            amountIncome.text = formatBalance(income.toDouble())
+        }
+
+        reportViewModel.expense.observe(viewLifecycleOwner) { expense ->
+            amountOutcome.text = formatBalance(expense.toDouble())
+        }
+
+        reportViewModel.total.observe(viewLifecycleOwner) { total ->
+            amountSelisih.text = formatBalance(total.toDouble())
+        }
+
     }
 
-//    Dipindah ke AuthViewModel.kt
     private fun formatBalance(balance: Double): String {
         val formatter = NumberFormat.getNumberInstance(Locale.GERMANY)
-        return formatter.format(balance)
-    }
+        return "Rp " + formatter.format(balance)
+}
 
     private fun formattedAccountNumber (accountNumber: String): String {
         val cleanStringNomorRekening = accountNumber.replace("-", "")
@@ -233,5 +282,9 @@ class HomeFragment : Fragment() {
             formattedNoRek.dropLast(1)
         } else {formattedNoRek}
     }
+
+    // Variabel untuk menyimpan pilihan dari NumberPicker
+    private var selectedMonth: Int = Calendar.getInstance().get(Calendar.MONTH) + 1
+    private var selectedYear: Int = Calendar.getInstance().get(Calendar.YEAR)
 
 }
