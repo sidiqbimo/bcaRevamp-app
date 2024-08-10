@@ -56,7 +56,6 @@
         android:clipToPadding="false"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toTopOf="@id/btnTopUp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
@@ -345,15 +344,16 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnTopUp"
-        android:layout_width="300dp"
+        android:id="@+id/btnStartTransferConfirmation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/rounded_button"
-        android:text="Top Up"
-        android:textColor="@android:color/white"
+        android:text="Transfer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/buttonblue_whitetext"
+        android:contentDescription="Tombol Transfer"
+
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

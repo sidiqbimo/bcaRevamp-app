@@ -24,9 +24,9 @@
 
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_exit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/icon_x"
             android:contentDescription="Kembali"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -75,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Transaksi Gagal :("
+                style="@style/regularBlackSmall"
                 android:textColor="#115DA9"
                 android:textSize="20sp"
                 android:layout_marginTop="20dp"
@@ -87,8 +88,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:text="Transaksi ana gagal kami proses karena
-                beberapa masalah teknis. Mohon coba kembali dalam beberapa saat"
+                android:text="Transaksi Anda gagal kami proses karena beberapa masalah teknis. Mohon coba kembali dalam beberapa saat"
+                style="@style/regularBlackThin"
                 android:textSize="16sp"
                 android:layout_marginTop="20dp"
                 app:layout_constraintTop_toBottomOf="@id/tvTitle"
@@ -99,11 +100,12 @@
 
     <Button
         android:id="@+id/btnTopUp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="48dp"
-        android:background="@drawable/rounded_button"
+        android:layout_marginHorizontal="16dp"
+        style="@style/buttonblue_whitetext"
         android:text="Ulangi"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"

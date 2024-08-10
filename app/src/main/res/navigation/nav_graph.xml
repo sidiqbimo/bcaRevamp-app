@@ -112,10 +112,14 @@
         <action
             android:id="@+id/action_newAccountTransferInput_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"
+            />
         <action
             android:id="@+id/action_newAccountTransferInput_to_transferConfirmationFragment"
-            app:destination="@id/transferConfirmationFragment" />
+            app:destination="@id/transferConfirmationFragment"
+            app:popUpTo="@id/transferConfirmationFragment"
+            app:popUpToInclusive="true"/>
         <argument
             android:name="accountNumberTargetTransfer"
             app:argType="string" />
@@ -130,6 +134,24 @@
             app:argType="string" />
         <argument
             android:name="mytokenTransfer"
+            app:argType="string" />
+        <argument
+            android:name="avatarSenderPath"
+            app:argType="string" />
+        <argument
+            android:name="avatarTargetPath"
+            app:argType="string" />
+        <argument
+            android:name="senderName"
+            app:argType="string" />
+        <argument
+            android:name="receiverName"
+            app:argType="string" />
+        <argument
+            android:name="bankSender"
+            app:argType="string" />
+        <argument
+            android:name="bankReceiver"
             app:argType="string" />
     </fragment>
 
@@ -152,6 +174,7 @@
         <action
             android:id="@+id/action_infoMenuFragment_to_homeFragment"
             app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
     </fragment>
 
@@ -230,12 +253,6 @@
         android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferConfirmationFragment"
         android:label="TransferConfirmationFragment"
         tools:layout="@layout/fragment_transfer_confirmation">
-        <action
-            android:id="@+id/action_transferConfirmationFragment_to_transferFailedFragment"
-            app:destination="@id/transferFailedFragment" />
-        <action
-            android:id="@+id/action_transferConfirmationFragment_to_transferSuccessFragment"
-            app:destination="@id/transferSuccessFragment" />
         <argument
             android:name="accountNumberTargetTransfer"
             app:argType="string" />
@@ -251,10 +268,26 @@
         <argument
             android:name="mytokenTransfer"
             app:argType="string" />
+        <argument
+            android:name="avatarSenderPath"
+            app:argType="string" />
+        <argument
+            android:name="avatarTargetPath"
+            app:argType="string" />
+        <argument
+            android:name="bankSender"
+            app:argType="string" />
+        <argument
+            android:name="bankReceiver"
+            app:argType="string" />
         <action
             android:id="@+id/action_transferConfirmationFragment_to_homeFragment"
             app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_transferConfirmationFragment_to_transferPINFragment"
+            app:destination="@id/transferPINFragment" />
     </fragment>
 
     <fragment
@@ -277,7 +310,14 @@
         tools:layout="@layout/fragment_transfer_failed">
         <action
             android:id="@+id/action_transferFailedFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/homeFragment"/>
+        <action
+            android:id="@+id/action_transferFailedFragment_to_transferListFragment"
+            app:destination="@id/transferListFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/transferListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/transferSuccessFragment"
@@ -286,6 +326,96 @@
         tools:layout="@layout/fragment_transfer_success">
         <action
             android:id="@+id/action_transferSuccessFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="accountNumberTargetTransfer"
+            app:argType="string" />
+        <argument
+            android:name="amountTransfer"
+            app:argType="string" />
+        <argument
+            android:name="noteTransfer"
+            app:argType="string" />
+        <argument
+            android:name="accountNumberSenderTransfer"
+            app:argType="string" />
+        <argument
+            android:name="mytokenTransfer"
+            app:argType="string" />
+        <argument
+            android:name="avatarSenderPath"
+            app:argType="string" />
+        <argument
+            android:name="avatarTargetPath"
+            app:argType="string" />
+        <argument
+            android:name="senderName"
+            app:argType="string" />
+        <argument
+            android:name="receiverName"
+            app:argType="string" />
+        <argument
+            android:name="bankSender"
+            app:argType="string" />
+        <argument
+            android:name="bankReceiver"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transferPINFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.transfer.TransferPINFragment"
+        tools:layout="@layout/fragment_transfer_pin"
+        android:label="TransferPINFragment" >
+        <action
+            android:id="@+id/action_transferPINFragment_to_transferSuccessFragment"
+            app:destination="@id/transferSuccessFragment"
+            app:popUpTo="@id/transferSuccessFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_transferPINFragment_to_transferFailedFragment"
+            app:destination="@id/transferFailedFragment"
+            app:popUpTo="@id/transferFailedFragment"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="accountNumberTargetTransfer"
+            app:argType="string" />
+        <argument
+            android:name="amountTransfer"
+            app:argType="string" />
+        <argument
+            android:name="noteTransfer"
+            app:argType="string" />
+        <argument
+            android:name="accountNumberSenderTransfer"
+            app:argType="string" />
+        <argument
+            android:name="mytokenTransfer"
+            app:argType="string" />
+        <argument
+            android:name="avatarSenderPath"
+            app:argType="string" />
+        <argument
+            android:name="avatarTargetPath"
+            app:argType="string" />
+        <argument
+            android:name="senderName"
+            app:argType="string" />
+        <argument
+            android:name="receiverName"
+            app:argType="string" />
+        <argument
+            android:name="bankSender"
+            app:argType="string" />
+        <argument
+            android:name="bankReceiver"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_transferPINFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

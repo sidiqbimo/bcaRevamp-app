@@ -1,21 +1,21 @@
 package com.synrgyseveneight.bcarevamp.ui.transfer
 
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.synrgyseveneight.bcarevamp.R
 import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
 import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
@@ -23,7 +23,6 @@ import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
 import com.synrgyseveneight.bcarevamp.viewmodel.TransferViewModel
-import org.w3c.dom.Text
 
 
 class TransferConfirmationFragment : Fragment() {
@@ -95,10 +94,18 @@ class TransferConfirmationFragment : Fragment() {
         viewModelTransfer.accountData.observe(viewLifecycleOwner, Observer { accountData ->
             if (accountData != null) {
                 receiverAccountName.text = accountData.name
-                imagePathSender = accountData.image_path
+                imagePathReceiver = accountData.image_path
                 bankTypeTarget.text = accountData.bank
+                receiverBankType = accountData.bank
 
                Log.d("TransferConfirmation", "All data get to the LIINE 98 : $accountData")
+                Log.d("TransferConfirmation", "Image  path  : $imagePathReceiver")
+
+                Glide.with(this)
+                    .load(imagePathReceiver)
+                    .circleCrop()
+                    .error(R.drawable.icon_person)
+                    .into(receiverAccountPhotoPath)
             }
         })
 
@@ -120,10 +127,17 @@ class TransferConfirmationFragment : Fragment() {
         viewModelTransferCheckSender.senderAccountData.observe(viewLifecycleOwner, Observer { senderAccountData ->
             if (senderAccountData != null) {
                 senderAccountName.text = senderAccountData.name
-                imagePathReceiver = senderAccountData.image_path
+                imagePathSender = senderAccountData.image_path
                 senderBankType = senderAccountData.bank
 
                 Log.d("TransferConfirmation", "All data get to the LIINE 111 or SENDER : $senderAccountData")
+                Log.d("TransferConfirmation", "Image  path : $imagePathSender")
+
+                Glide.with(this)
+                    .load(imagePathSender)
+                    .circleCrop()
+                    .error(R.drawable.icon_person)
+                    .into(senderAccountPhotoPath)
             }
         })
 
@@ -159,6 +173,30 @@ class TransferConfirmationFragment : Fragment() {
             transferNotes.text = transferNote
         }
 
+        // Confirm transfer
+        val nextButton = view.findViewById<Button>(R.id.btnStartTransferConfirmation)
+
+        nextButton.setOnClickListener {
+
+            // TODO : Save to daftar tersimpan
+
+            // Navigate to next screen tp bawa value
+            val action = TransferConfirmationFragmentDirections.actionTransferConfirmationFragmentToTransferPINFragment(
+                accountNumberTarget,
+                transferAmount.replace(".",""),
+                transferNote,
+                accountNumberSender.replace("-", ""),
+                token,
+                imagePathSender,
+                imagePathReceiver,
+                senderAccountName.text.toString(),
+                receiverAccountName.text.toString(),
+                senderBankType,
+                receiverBankType
+            )
+            Log.d("TransferSuccessFragment", "Account Number Target: $accountNumberTarget bank of $receiverBankType")
+            findNavController().navigate(action)
+        }
     }
 
 }
