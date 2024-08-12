@@ -6,6 +6,7 @@
     android:background="#FFFFFFFF"
     android:clipChildren="false"
     android:clipToPadding="false"
+    tools:context=".ui.ewallet.EWalletSuccessFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -44,7 +45,6 @@
         android:clipToPadding="false"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toTopOf="@id/btnTopUp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
@@ -296,15 +296,14 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnTopUp"
-        android:layout_width="300dp"
+        android:id="@+id/button_share"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/rounded_button"
-        android:text="bagikan Bukti Transaksi"
-        android:textColor="@android:color/white"
+        android:text="Bagikan Bukti Transaksi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/buttonblue_whitetext"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

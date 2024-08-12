@@ -5,6 +5,8 @@ import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
 import com.synrgyseveneight.bcarevamp.data.model.AuthRequest
 import com.synrgyseveneight.bcarevamp.data.model.AuthResponse
 import com.synrgyseveneight.bcarevamp.data.model.BalanceResponse
+import com.synrgyseveneight.bcarevamp.data.model.SearchAccountResponse
+import com.synrgyseveneight.bcarevamp.data.model.TransferResponse
 import com.synrgyseveneight.bcarevamp.data.network.ApiService
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
@@ -17,8 +19,8 @@ class AuthRepository (private val apiService: ApiService, private val dataStore:
     }
 
     // Fungsi untuk menyimpan data pengguna
-    suspend fun saveUserData(signature: String, name: String, accountNumber: String, avatarPath: String, bankName: String, token: String) {
-        dataStore.saveUserData(signature, name, accountNumber, avatarPath, bankName, token)
+    suspend fun saveUserData(signature: String, name: String, accountNumber: String, imagePath: String, bankName: String, token: String) {
+        dataStore.saveUserData(signature, name, accountNumber, imagePath, bankName, token)
     }
 
     // Mendapatkan saldo
@@ -27,6 +29,11 @@ class AuthRepository (private val apiService: ApiService, private val dataStore:
     return if (response.isSuccessful) response.body() else null
     }
 
+    // Search Akun Rekening Tujuan
+    suspend fun searchAccount(token: String,accountNumber: String): SearchAccountResponse? {
+        val response = apiService.searchAccount("Bearer $token", accountNumber)
+        return if (response.isSuccessful) response.body() else null
+    }
 
     // Fungsi untuk menghapus token
     suspend fun clearToken() {
@@ -49,8 +56,8 @@ class AuthRepository (private val apiService: ApiService, private val dataStore:
     }
 
     // Mendapatkan jalur gambar avatar pengguna
-    fun getUserAvatarPath(): Flow<String?> {
-        return dataStore.userAvatarPath
+    fun getUserImagePath(): Flow<String?> {
+        return dataStore.userImagePath
     }
 
     // Mendapatkan nama bank pengguna
