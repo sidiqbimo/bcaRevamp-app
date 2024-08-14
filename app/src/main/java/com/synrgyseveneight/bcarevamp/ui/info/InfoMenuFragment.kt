@@ -166,7 +166,7 @@ class InfoMenuFragment : Fragment() {
                     }
                 }
                 "Mutasi" -> {
-                    // TODO : Navigasi ke fragment Mutasi
+                    findNavController().navigate(R.id.action_infoMenuFragment_to_mutationHistoryFragment)
                 }
                 "Rekening Deposito" -> {
                     // TODO : Navigasi ke fragment Rekening Deposito

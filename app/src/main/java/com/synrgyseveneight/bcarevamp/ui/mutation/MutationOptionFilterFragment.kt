@@ -34,6 +34,7 @@ class MutationOptionFilterFragment : Fragment() {
         val datePickerView = view.findViewById<LinearLayout>(R.id.date_picker_mutation)
         val buttonOptionDate1 = view.findViewById<Button>(R.id.date_option_button1)
         val buttonOptionDate2 = view.findViewById<Button>(R.id.date_option_button2)
+        val btnTerapkan = view.findViewById<Button>(R.id.buttonTerapkan)
 
 
         optionTransaction.visibility = View.GONE
@@ -62,6 +63,7 @@ class MutationOptionFilterFragment : Fragment() {
         }
         buttonOptionDate1.setOnClickListener { showDatePicker(buttonOptionDate1) }
         buttonOptionDate2.setOnClickListener { showDatePicker(buttonOptionDate2) }
+        btnTerapkan.setOnClickListener {activity?.onBackPressed()}
 
     }
 

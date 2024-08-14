@@ -275,8 +275,22 @@
         </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/buttonTerapkan"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:text="Terapkan"
+        android:textColor="@color/white"
+        android:textColorLink="@color/Primary100"
+        android:textSize="14sp"
+        app:backgroundTint="@color/Primary100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transaction_option" />
 
 
 
