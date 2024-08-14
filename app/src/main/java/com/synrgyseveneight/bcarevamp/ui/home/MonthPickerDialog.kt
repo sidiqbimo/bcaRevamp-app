@@ -38,7 +38,7 @@ class MonthPickerDialog(
         yearPicker.value = currentYear
 
 
-        val materialAlertDialog = MaterialAlertDialogBuilder(context)
+        val materialAlertDialog = MaterialAlertDialogBuilder(context, R.style.dialog_theme_picker)
             .setTitle("Pilih Bulan :")
             .setView(dialogView)
             .setPositiveButton("OK") { dialog, _ ->
