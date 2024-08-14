@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@color/white"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <NumberPicker
             android:id="@+id/monthPicker"
+            android:theme="@style/color_number_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foregroundTint="#000000" />
@@ -16,6 +18,7 @@
             android:id="@+id/yearPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/color_number_picker"
             android:layout_marginLeft="30dp" />
     </LinearLayout>
 
