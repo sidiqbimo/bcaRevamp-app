@@ -129,6 +129,7 @@ class InfoMenuFragment : Fragment() {
                             if (retryCountForSaldo <= 3) {
                                 viewModelAuth.fetchBalance(viewModelAuth.userToken.value?:"")
                             } else {
+
                                 // Kalau udah tiga kali masih null, balik ke Beranda
                                 Toast.makeText(context, "Gagal memuat saldo. Silakan coba lagi", Toast.LENGTH_SHORT).show()
                                 findNavController().navigate(R.id.action_infoMenuFragment_to_homeFragment)
