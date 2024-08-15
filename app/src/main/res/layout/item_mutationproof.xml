@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/whitebackground_roundedrectangle"
+    android:elevation="5dp"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="20dp"
+    android:layout_marginBottom="16dp"
+    android:clipToPadding="false"
+    android:clipChildren="false">
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunitoregular"
+        android:text="11-07-2024"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/text_reff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunitoregular"
+        android:text="No Reff:2333"
+        android:textColor="@color/Neutral300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_category"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunitoregular"
+        android:text="Transfer M-Banking"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/text_date"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/text_status"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunitoregular"
+        android:text="Sukses"
+        android:textColor="@color/Success0"
+        app:layout_constraintTop_toBottomOf="@id/text_reff"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/text_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunitoregular"
+        android:text="******1515"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/text_category"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/text_nominal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunitoregular"
+        android:layout_marginStart="10dp"
+        android:text="Rp 100.000"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/text_category"
+        app:layout_constraintLeft_toRightOf="@id/text_id" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

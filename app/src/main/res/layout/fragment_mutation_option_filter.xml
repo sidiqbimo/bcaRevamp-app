@@ -255,7 +255,7 @@
                 android:fontFamily="@font/nunitoregular"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Hari ini" />
+                android:text="Sema Transaksi" />
             <RadioButton
                 android:id="@+id/trans_in"
                 android:textColor="@color/blue"
@@ -263,7 +263,7 @@
                 app:buttonTint="@color/blue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="7 Hari Terakhir"/>
+                android:text="Uang Masuk"/>
             <RadioButton
                 android:id="@+id/trans_out"
                 android:fontFamily="@font/nunitoregular"
@@ -271,7 +271,7 @@
                 app:buttonTint="@color/blue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="15 Hari Terakhir"/>
+                android:text="Uang Keluar"/>
         </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
