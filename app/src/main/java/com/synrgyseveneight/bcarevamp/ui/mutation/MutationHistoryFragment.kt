@@ -8,10 +8,10 @@ import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.synrgyseveneight.bcarevamp.R
 
 class MutationHistoryFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -21,8 +21,13 @@ class MutationHistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val btnToMutationProof = view.findViewById<ConstraintLayout>(R.id.switch_button_proof)
         val btnToFilter = view.findViewById<Button>(R.id.option_filter)
+
+        val receivedDate = arguments?.getString("date")
+        val displayedDate = if (receivedDate.isNullOrEmpty()) "Saring Pencarian" else receivedDate
+        btnToFilter.text = displayedDate
 
         btnToFilter.setOnClickListener{
             findNavController().navigate(R.id.action_mutationHistoryFragment_to_mutationOptionFilterFragment)

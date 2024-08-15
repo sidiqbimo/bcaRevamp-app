@@ -431,10 +431,17 @@
             app:destination="@id/infoMenuFragment" />
         <action
             android:id="@+id/action_mutationHistoryFragment_to_mutationProofFragment"
-            app:destination="@id/mutationProofFragment" />
+            app:destination="@id/mutationProofFragment"
+            app:popUpTo="@id/mutationHistoryFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_mutationHistoryFragment_to_mutationOptionFilterFragment"
-            app:destination="@id/mutationOptionFilterFragment" />
+            app:destination="@id/mutationOptionFilterFragment" >
+            <argument
+                android:name="screen"
+                app:argType="string"
+                android:defaultValue="screen1"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/mutationProofFragment"
@@ -445,11 +452,18 @@
             android:id="@+id/action_mutationProofFragment_to_infoMenuFragment"
             app:destination="@id/infoMenuFragment" />
         <action
-            android:id="@+id/action_mutationProofFragment_to_mutationOptionFilterFragment"
-            app:destination="@id/mutationOptionFilterFragment" />
-        <action
             android:id="@+id/action_mutationProofFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment" />
+            app:destination="@id/mutationHistoryFragment"
+            app:popUpTo="@id/mutationProofFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_mutationProofFragment_to_mutationOptionFilterFragment"
+            app:destination="@id/mutationOptionFilterFragment" >
+            <argument
+                android:name="screen"
+                app:argType="string"
+                android:defaultValue="screen2"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/mutationOptionFilterFragment"
@@ -458,9 +472,23 @@
         android:label="MutationOptionFilterFragment" >
         <action
             android:id="@+id/action_mutationOptionFilterFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment" />
+            app:destination="@id/mutationHistoryFragment"
+            app:popUpTo="@id/mutationOptionFilterFragment"
+            app:popUpToInclusive="true">
+            <argument
+                android:name="date"
+                app:argType="string"
+                android:defaultValue="null"/>
+        </action>
         <action
             android:id="@+id/action_mutationOptionFilterFragment_to_mutationProofFragment"
-            app:destination="@id/mutationProofFragment" />
+            app:destination="@id/mutationProofFragment"
+            app:popUpTo="@id/mutationOptionFilterFragment"
+            app:popUpToInclusive="true">
+            <argument
+                android:name="date"
+                app:argType="string"
+                android:defaultValue="null"/>
+        </action>
     </fragment>
 </navigation>
