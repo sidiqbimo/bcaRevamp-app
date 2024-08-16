@@ -5,12 +5,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:elevation="5dp"
+    android:elevation="1dp"
     android:paddingVertical="16dp"
     android:paddingHorizontal="20dp"
-    android:layout_marginBottom="16dp"
-    android:clipToPadding="false"
-    android:clipChildren="false">
+    android:layout_marginBottom="16dp">
 
     <TextView
         android:id="@+id/text_id"
@@ -23,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/text_category"
+        android:id="@+id/text_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunitoregular"

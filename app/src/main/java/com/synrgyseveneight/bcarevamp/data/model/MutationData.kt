@@ -1,6 +1,7 @@
 package com.synrgyseveneight.bcarevamp.data.model
 
 data class MutationData(
+    val transaction_id: String,
     val unique_code: String,
     val type: String,
     val total_amount: Int,

@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/text_category"
+        android:id="@+id/text_type"
         android:layout_width="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         android:fontFamily="@font/nunitoregular"
         android:text="******1515"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/text_category"
+        app:layout_constraintTop_toBottomOf="@id/text_type"
         app:layout_constraintStart_toStartOf="parent" />
     <TextView
         android:id="@+id/text_nominal"
@@ -71,7 +71,7 @@
         android:layout_marginStart="10dp"
         android:text="Rp 100.000"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/text_category"
+        app:layout_constraintTop_toBottomOf="@id/text_type"
         app:layout_constraintLeft_toRightOf="@id/text_id" />
 
 
