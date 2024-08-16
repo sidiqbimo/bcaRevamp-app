@@ -49,7 +49,7 @@ class EWalletConfirmationFragment : Fragment() {
         }
 
         buttonStartTf.setOnClickListener {
-            findNavController().navigate(R.id.action_eWalletConfirmationFragment_to_eWalletSuccessFragment)
+            findNavController().navigate(R.id.action_eWalletConfirmationFragment_to_pinFragment)
         }
 
         return view

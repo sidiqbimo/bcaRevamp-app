@@ -228,10 +228,20 @@
         android:label="E-Wallet Konfirmasi"
         tools:layout="@layout/fragment_e_wallet_confirmation">
         <action
-            android:id="@+id/action_eWalletConfirmationFragment_to_eWalletSuccessFragment"
+            android:id="@+id/action_eWalletConfirmationFragment_to_pinFragment"
+            app:destination="@id/pinFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pinFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.auth.PinFragment"
+        android:label="Pin"
+        tools:layout="@layout/fragment_pin">
+        <action
+            android:id="@+id/action_pinFragment_to_eWalletSuccessFragment"
             app:destination="@id/eWalletSuccessFragment" />
         <action
-            android:id="@+id/action_eWalletConfirmationFragment_to_eWalletFailedFragment"
+            android:id="@+id/action_pinFragment_to_eWalletFailedFragment"
             app:destination="@id/eWalletFailedFragment" />
     </fragment>
 
