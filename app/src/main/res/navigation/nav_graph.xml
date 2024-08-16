@@ -205,11 +205,11 @@
     <fragment
         android:id="@+id/eWalletNewInputFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletNewInputFragment"
-        android:label="E-Wallet Contact List"
+        android:label="E-Wallet New Input"
         tools:layout="@layout/fragment_e_wallet_new_input">
         <action
-            android:id="@+id/action_eWalletNewInputFragment_to_eWalletInputFragment"
-            app:destination="@id/eWalletInputFragment" />
+            android:id="@+id/action_eWalletNewInputFragment_to_eWalletConfirmationFragment"
+            app:destination="@id/eWalletConfirmationFragment" />
     </fragment>
 
     <fragment
