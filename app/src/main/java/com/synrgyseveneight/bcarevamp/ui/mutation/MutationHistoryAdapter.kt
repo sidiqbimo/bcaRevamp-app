@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
+import com.synrgyseveneight.bcarevamp.data.model.MutationData
 
-class MutationHistoryAdapter(private val mutationItems: List<MutationItem>) :
+class MutationHistoryAdapter(private var mutationItems: List<MutationData>) :
     RecyclerView.Adapter<MutationHistoryAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textId: TextView = itemView.findViewById(R.id.text_id)
-        val textCategory: TextView = itemView.findViewById(R.id.text_category)
+        val textType: TextView = itemView.findViewById(R.id.text_type)
         val textNominal: TextView = itemView.findViewById(R.id.text_nominal)
         val textTime: TextView = itemView.findViewById(R.id.text_time)
     }
@@ -25,18 +26,16 @@ class MutationHistoryAdapter(private val mutationItems: List<MutationItem>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mutationItems[position]
-        holder.textId.text = item.id
-        holder.textCategory.text = item.category
-        holder.textNominal.text = item.nominal
-        holder.textTime.text = item.time
+        holder.textId.text = item.unique_code
+        holder.textType.text = item.type
+        holder.textNominal.text = item.total_amount.toString()
+        holder.textTime.text = item.formatted_time
     }
 
     override fun getItemCount(): Int = mutationItems.size
 
-    data class MutationItem(
-        val id: String,
-        val category: String,
-        val nominal: String,
-        val time: String
-    )
+    fun updateData(newItems: List<MutationData>) {
+        mutationItems = newItems
+        notifyDataSetChanged()
+    }
 }
