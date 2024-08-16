@@ -64,6 +64,9 @@
             android:id="@+id/action_homeFragment_to_eWalletOptionFragment"
             app:destination="@id/eWalletOptionFragment"
             app:exitAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_QRISCameraFragment"
+            app:destination="@id/QRISCameraFragment" />
     </fragment>
 
     <!--    Mutasi -->
@@ -462,5 +465,32 @@
         <action
             android:id="@+id/action_mutationOptionFilterFragment_to_mutationProofFragment"
             app:destination="@id/mutationProofFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/QRISCameraFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.qris.QRISCameraFragment"
+        android:label="QRISCameraFragment"
+        tools:layout="@layout/fragment_q_r_i_s_camera">
+        <action
+            android:id="@+id/action_QRISCameraFragment_to_QRISNominalInputFragment"
+            app:destination="@id/QRISNominalInputFragment" />
+        <argument
+            android:name="token"
+            app:argType="string" />
+        <argument
+            android:name="id_qris"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/QRISNominalInputFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.qris.QRISNominalInputFragment"
+        android:label="fragment_q_r_i_s_nominal_input"
+        tools:layout="@layout/fragment_q_r_i_s_nominal_input" >
+        <argument
+            android:name="id_qris"
+            app:argType="string" />
+        <argument
+            android:name="token"
+            app:argType="string" />
     </fragment>
 </navigation>
