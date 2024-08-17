@@ -58,7 +58,9 @@ class MutationFragment : Fragment() {
         val btnToFilter = view.findViewById<Button>(R.id.option_filter)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
 
-        val receivedDate = arguments?.getString("date")
+        val receivedDate = arguments?.getString("dateOption")
+        val receivedDateStart = arguments?.getString("dateStart")
+        val receivedDateEnd = arguments?.getString("dateEnd")
         val receivedScreen = arguments?.getString("screen")
         val displayedDate = if (receivedDate.isNullOrEmpty()) "Saring Pencarian" else receivedDate
 
@@ -98,14 +100,29 @@ class MutationFragment : Fragment() {
 
         })
 
-        viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
-            val requestBody = MutationRequest(
-                startDate = "2024-08-01",
-                endDate = "2024-08-16",
-                transactionCategory = "ALL_TRANSACTIONS"
-            )
-            viewModelMutation.fetchMutations(page = 0, size = 10, token = "$token", requestBody = requestBody)
+        if (receivedDateStart != null && receivedDateEnd != null) {
+            Toast.makeText(context, "Tanggal : $receivedDateStart - $receivedDateEnd", Toast.LENGTH_SHORT).show()
+            viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
+                val requestBody = MutationRequest(
+                    startDate = receivedDateStart.toString(),
+                    endDate = receivedDateEnd.toString(),
+                    transactionCategory = "ALL_TRANSACTIONS"
+                )
+                viewModelMutation.fetchMutations(page = 0, size = 10, token = "$token", requestBody = requestBody)
+            }
+        }else{
+
+            viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
+                val requestBody = MutationRequest(
+                    startDate = "2024-08-01",
+                    endDate = "2024-08-16",
+                    transactionCategory = "ALL_TRANSACTIONS"
+                )
+                viewModelMutation.fetchMutations(page = 0, size = 10, token = "$token", requestBody = requestBody)
+            }
         }
+
+
 
         btnSwitchHistory.setOnClickListener {
             pageHistoryActive = true

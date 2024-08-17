@@ -438,7 +438,15 @@
             app:popUpTo="@id/mutationFragment"
             app:popUpToInclusive="true">
             <argument
-                android:name="date"
+                android:name="dateOption"
+                app:argType="string"
+                android:defaultValue="null"/>
+            <argument
+                android:name="dateStart"
+                app:argType="string"
+                android:defaultValue="null"/>
+            <argument
+                android:name="dateEnd"
                 app:argType="string"
                 android:defaultValue="null"/>
             <argument
