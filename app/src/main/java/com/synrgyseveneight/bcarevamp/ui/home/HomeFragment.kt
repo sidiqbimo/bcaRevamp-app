@@ -28,6 +28,7 @@ import com.synrgyseveneight.bcarevamp.data.repository.MonthlyReportRepository
 import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
+import com.synrgyseveneight.bcarevamp.viewmodel.ErrorType
 import com.synrgyseveneight.bcarevamp.viewmodel.MonthlyReportViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.MonthlyReportViewModelFactory
 import kotlinx.coroutines.launch
@@ -168,6 +169,8 @@ class HomeFragment : Fragment() {
         val amountSelisih = view.findViewById<TextView>(R.id.amount_selisih)
 
 
+
+
         viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
             if (token != null) {
                 viewModelAuth.fetchBalance(token)
@@ -247,6 +250,16 @@ class HomeFragment : Fragment() {
             }.show()
         }
 
+        reportViewModel.navigationEvent.observe(viewLifecycleOwner, { errorType ->
+            when(errorType){
+                ErrorType.ERROR_404 -> findNavController().navigate(R.id.action_homeFragment_to_error404Fragment)
+                ErrorType.ERROR_500 -> findNavController().navigate(R.id.action_homeFragment_to_error500Fragment)
+                ErrorType.UNKNOWN_ERROR -> {
+                    Toast.makeText(requireContext(), "Unknown error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
         logoutButton.setOnClickListener{
             viewModelAuth.clearToken {
                 // Navigasi kembali ke LoginFragment
@@ -268,6 +281,8 @@ class HomeFragment : Fragment() {
         }
 
     }
+
+
 
     private fun formatBalance(balance: Double): String {
         val formatter = NumberFormat.getNumberInstance(Locale.GERMANY)

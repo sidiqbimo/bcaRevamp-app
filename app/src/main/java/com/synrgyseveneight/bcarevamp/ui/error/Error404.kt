@@ -9,7 +9,6 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.synrgyseveneight.bcarevamp.R
 
-
 class Error404 : Fragment() {
 
     override fun onCreateView(

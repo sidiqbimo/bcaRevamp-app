@@ -64,6 +64,12 @@
             android:id="@+id/action_homeFragment_to_eWalletOptionFragment"
             app:destination="@id/eWalletOptionFragment"
             app:exitAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_error404Fragment"
+            app:destination="@+id/erro404Fragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_error500Fragment"
+            app:destination="@+id/erro500Fragment"/>
 
     </fragment>
 

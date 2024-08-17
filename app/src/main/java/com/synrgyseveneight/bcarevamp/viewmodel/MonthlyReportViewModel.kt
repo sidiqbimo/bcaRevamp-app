@@ -7,6 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.synrgyseveneight.bcarevamp.data.repository.MonthlyReportRepository
 import kotlinx.coroutines.launch
 
+enum class ErrorType{
+    ERROR_404,
+    ERROR_500,
+    UNKNOWN_ERROR
+}
+
 
 class MonthlyReportViewModel(private val repository: MonthlyReportRepository) : ViewModel() {
     private val _income = MutableLiveData<Int>()
@@ -17,6 +23,9 @@ class MonthlyReportViewModel(private val repository: MonthlyReportRepository) : 
 
     private val _total = MutableLiveData<Int>()
     val total: LiveData<Int> get() = _total
+
+    private val _navigationEvent = MutableLiveData<ErrorType>()
+    val navigationEvent: LiveData<ErrorType> get() = _navigationEvent
 
     fun getMonthlyReport(month: String, year: String, token: String) {
         viewModelScope.launch {
@@ -29,9 +38,18 @@ class MonthlyReportViewModel(private val repository: MonthlyReportRepository) : 
                     _total.value = data?.total
                 } else {
                     // Handle error
+                    when (response.code()){
+                        404 -> _navigationEvent.value = ErrorType.ERROR_404
+                        500 -> _navigationEvent.value = ErrorType.ERROR_500
+                        else -> {
+                            //handle other error
+                            _navigationEvent.value = ErrorType.UNKNOWN_ERROR
+                        }
+                    }
                 }
             } catch (e: Exception) {
                 // Handle exception
+                _navigationEvent.value = ErrorType.UNKNOWN_ERROR
             }
         }
     }
