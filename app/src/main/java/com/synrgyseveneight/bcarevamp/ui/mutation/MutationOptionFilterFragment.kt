@@ -53,7 +53,7 @@ class MutationOptionFilterFragment : Fragment() {
             title_tab.text = "Saring Pencarian Histori Mutasi"
             btnTerapkan.setOnClickListener {
                 if (dateSelected != null) {
-                    val action = MutationOptionFilterFragmentDirections.actionMutationOptionFilterFragmentToMutationHistoryFragment(dateSelected.toString())
+                    val action = MutationOptionFilterFragmentDirections.actionMutationOptionFilterFragmentToMutationFragment(dateSelected.toString(),"screen1")
                     findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(),
@@ -66,7 +66,7 @@ class MutationOptionFilterFragment : Fragment() {
             transaction_option.visibility = View.GONE
             btnTerapkan.setOnClickListener {
                 if (dateSelected != null) {
-                    val action = MutationOptionFilterFragmentDirections.actionMutationOptionFilterFragmentToMutationProofFragment(dateSelected.toString())
+                    val action = MutationOptionFilterFragmentDirections.actionMutationOptionFilterFragmentToMutationFragment(dateSelected.toString(),"screen2")
                     findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(),
