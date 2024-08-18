@@ -52,8 +52,6 @@ class MutationOptionFilterFragment : Fragment() {
         optionTransaction.visibility = View.GONE
         datePickerView.visibility = View.GONE
 
-
-        //screen histori mutasi
         if(screen == "screen1"){
             title_tab.text = "Saring Pencarian Histori Mutasi"
             dataWithCatgory = true
@@ -72,7 +70,7 @@ class MutationOptionFilterFragment : Fragment() {
                         "Pilih tanggal terlebih dahulu", Toast.LENGTH_SHORT).show()
                 }
             }
-        //screen bukti mutasi
+
         }else if(screen == "screen2"){
             title_tab.text = "Saring Pencarian Bukti Mutasi"
             transaction_option.visibility = View.GONE
@@ -113,7 +111,6 @@ class MutationOptionFilterFragment : Fragment() {
                     else -> "ALL_TRANSACTIONS"
                 }
                 buttonTransaction.text = selectedText
-                // Sembunyikan RadioGroup setelah pilihan dibuat
                 optionTransaction.visibility = View.GONE
                 dataCategory = pilihanCtg
             }
@@ -132,7 +129,6 @@ class MutationOptionFilterFragment : Fragment() {
                 dateEnd = buttonOptionDate2.text.toString()
             } else {
                 datePickerView.visibility = View.GONE
-                // Hitung tanggal awal dan akhir berdasarkan opsi yang dipilih
                 val calendar = Calendar.getInstance()
                 val tanggalAkhir = calendar.time
 

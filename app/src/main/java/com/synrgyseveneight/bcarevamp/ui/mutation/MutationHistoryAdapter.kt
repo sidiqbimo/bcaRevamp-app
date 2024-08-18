@@ -35,11 +35,10 @@ class MutationHistoryAdapter(private var mutationHistoryItems: List<MutationData
         holder.textType.text = item.type
 
 
-        if (item.type.equals("DEPOSIT", ignoreCase = true)) { // Sesuaikan dengan kondisi Anda
+        if (item.type.equals("DEPOSIT", ignoreCase = true)) {
             holder.textNominal.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.teal_700))
             holder.textNominal.text = "+ " + formatBalance(item.total_amount.toDouble())
         } else {
-            // Kembalikan ke warna default jika bukan "Deposit"
             holder.textNominal.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.Error0))
             holder.textNominal.text = "- " + formatBalance(item.total_amount.toDouble())
         }
