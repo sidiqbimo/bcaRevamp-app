@@ -241,21 +241,22 @@
 
         <RadioGroup
             android:id="@+id/radioGroup_trans_option"
-            android:checkedButton="@+id/all_trans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:layoutDirection="rtl"
             app:layout_constraintTop_toTopOf="parent">
+
             <RadioButton
                 android:id="@+id/all_trans"
-                android:textColor="@color/blue"
-                app:buttonTint="@color/blue"
-                android:fontFamily="@font/nunitoregular"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Sema Transaksi" />
+                android:fontFamily="@font/nunitoregular"
+                android:text="Semua Transaksi"
+                android:textColor="@color/blue"
+                app:buttonTint="@color/blue" />
+
             <RadioButton
                 android:id="@+id/trans_in"
                 android:textColor="@color/blue"

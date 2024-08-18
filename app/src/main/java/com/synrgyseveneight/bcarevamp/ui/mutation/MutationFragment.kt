@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import com.google.android.material.button.MaterialButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -26,6 +26,7 @@ import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
 import com.synrgyseveneight.bcarevamp.viewmodel.MutationViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.MutationViewModelFactory
+import java.time.LocalDate
 
 class MutationFragment : Fragment() {
     private lateinit var historyAdapter: MutationHistoryAdapter
@@ -55,14 +56,19 @@ class MutationFragment : Fragment() {
         val textSwitchHistory = view.findViewById<TextView>(R.id.text_switch_history)
         val textSwitchProof = view.findViewById<TextView>(R.id.text_switch_proof)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
-        val btnToFilter = view.findViewById<Button>(R.id.option_filter)
+        val btnToFilter = view.findViewById<MaterialButton>(R.id.option_filter)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
 
         val receivedDate = arguments?.getString("dateOption")
         val receivedDateStart = arguments?.getString("dateStart")
         val receivedDateEnd = arguments?.getString("dateEnd")
+        val receivedCategory = arguments?.getString("dataCategory")
         val receivedScreen = arguments?.getString("screen")
+
+        setFilterButtonState(receivedDate, btnToFilter)
         val displayedDate = if (receivedDate.isNullOrEmpty()) "Saring Pencarian" else receivedDate
+        val categoryTransaction = if (receivedCategory.isNullOrEmpty()) "ALL_TRANSACTIONS" else receivedCategory
+        btnToFilter.text = displayedDate
 
         if (receivedScreen == "screen1") {
             pageHistoryActive = true
@@ -70,7 +76,6 @@ class MutationFragment : Fragment() {
             pageHistoryActive = false
         }
 
-        btnToFilter.text = displayedDate
 
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         historyAdapter = MutationHistoryAdapter(emptyList())
@@ -84,7 +89,6 @@ class MutationFragment : Fragment() {
             recyclerView.adapter = proofAdapter
             setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, false)
         }
-
 
         // Observer untuk memperbarui data di kedua adapter
         viewModelMutation.mutationData.observe(viewLifecycleOwner, Observer { mutationList ->
@@ -106,17 +110,18 @@ class MutationFragment : Fragment() {
                 val requestBody = MutationRequest(
                     startDate = receivedDateStart.toString(),
                     endDate = receivedDateEnd.toString(),
-                    transactionCategory = "ALL_TRANSACTIONS"
+                    transactionCategory = categoryTransaction.toString()
                 )
                 viewModelMutation.fetchMutations(page = 0, size = 10, token = "$token", requestBody = requestBody)
             }
         }else{
-
+            val today = LocalDate.now()
+            val startDate = today.withDayOfMonth(1)
             viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
                 val requestBody = MutationRequest(
-                    startDate = "2024-08-01",
-                    endDate = "2024-08-16",
-                    transactionCategory = "ALL_TRANSACTIONS"
+                    startDate = startDate.toString(),
+                    endDate = today.toString(),
+                    transactionCategory = categoryTransaction.toString()
                 )
                 viewModelMutation.fetchMutations(page = 0, size = 10, token = "$token", requestBody = requestBody)
             }
@@ -161,5 +166,23 @@ class MutationFragment : Fragment() {
             textSwitchHistory.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
         }
     }
+
+    private fun setFilterButtonState(receivedDate: String?, btnToFilter: MaterialButton){
+        if (!receivedDate.isNullOrEmpty()) {
+            // Jika receivedDate memiliki nilai, ubah tampilan btnToFilter
+            btnToFilter.background = ContextCompat.getDrawable(requireContext(), R.drawable.bluebackground_roundedrectangle)
+            btnToFilter.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            btnToFilter.icon = null // Hapus ikon
+            btnToFilter.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.blue)
+
+        } else {
+            // Jika receivedDate tidak memiliki nilai, kembalikan tampilan default btnToFilter
+            btnToFilter.background = ContextCompat.getDrawable(requireContext(), R.drawable.whitebackground_roundedrectangle)
+            btnToFilter.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+            btnToFilter.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_funnel) // Tampilkan ikon
+            btnToFilter.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
+        }
+    }
+
 
 }

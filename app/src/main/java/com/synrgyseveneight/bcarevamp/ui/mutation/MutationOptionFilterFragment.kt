@@ -32,9 +32,11 @@ class MutationOptionFilterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var dataWithCatgory:Boolean = false
         var dateSelected: String? = null
         var dateStart: String? = null
         var dateEnd: String? = null
+        var dataCategory: String? = "ALL_TRANSACTIONS"
         val screen = arguments?.getString("screen")
         val buttonTransaction = view.findViewById<MaterialButton>(R.id.transaction_option_button)
         val optionTransaction = view.findViewById<ConstraintLayout>(R.id.list_trans)
@@ -50,19 +52,20 @@ class MutationOptionFilterFragment : Fragment() {
         optionTransaction.visibility = View.GONE
         datePickerView.visibility = View.GONE
 
-        buttonTransaction.setOnClickListener {
-            optionTransaction.visibility = View.VISIBLE
-        }
+
         //screen histori mutasi
         if(screen == "screen1"){
             title_tab.text = "Saring Pencarian Histori Mutasi"
+            dataWithCatgory = true
             btnTerapkan.setOnClickListener {
                 if (dateSelected != null) {
                     if (dateRangeRadioGroup.checkedRadioButtonId == R.id.radio_date_picker) {
-                        dateStart = buttonOptionDate1.text.toString()
-                        dateEnd = buttonOptionDate2.text.toString()
+                        dateStart = formatDateToYYYYMMDD(buttonOptionDate1.text.toString())
+                        dateEnd = formatDateToYYYYMMDD(buttonOptionDate2.text.toString())
+                        dateSelected = buttonOptionDate1.text.toString() + " - " + buttonOptionDate2.text.toString()
                     }
-                    val action = MutationOptionFilterFragmentDirections.actionMutationOptionFilterFragmentToMutationFragment(dateSelected.toString(),dateStart.toString(),dateEnd.toString(),"screen1")
+                    val action = MutationOptionFilterFragmentDirections.
+                    actionMutationOptionFilterFragmentToMutationFragment(dateSelected.toString(),dateStart.toString(),dateEnd.toString(),dataCategory.toString(),"screen1")
                     findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(),
@@ -73,14 +76,16 @@ class MutationOptionFilterFragment : Fragment() {
         }else if(screen == "screen2"){
             title_tab.text = "Saring Pencarian Bukti Mutasi"
             transaction_option.visibility = View.GONE
+            dataWithCatgory = false
             btnTerapkan.setOnClickListener {
                 if (dateSelected != null) {
                     if (dateRangeRadioGroup.checkedRadioButtonId == R.id.radio_date_picker) {
-                        dateStart = buttonOptionDate1.text.toString()
-                        dateEnd = buttonOptionDate2.text.toString()
+                        dateStart = formatDateToYYYYMMDD(buttonOptionDate1.text.toString())
+                        dateEnd = formatDateToYYYYMMDD(buttonOptionDate2.text.toString())
+                        dateSelected = buttonOptionDate1.text.toString() + " - " + buttonOptionDate2.text.toString()
                     }
                     val action = MutationOptionFilterFragmentDirections.
-                    actionMutationOptionFilterFragmentToMutationFragment(dateSelected.toString(),dateStart.toString(),dateEnd.toString(),"screen2")
+                    actionMutationOptionFilterFragmentToMutationFragment(dateSelected.toString(),dateStart.toString(),dateEnd.toString(),dataCategory.toString(),"screen2")
                     findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(),
@@ -89,13 +94,34 @@ class MutationOptionFilterFragment : Fragment() {
             }
         }
 
-        transactionTypeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val selectedRadioButton = view.findViewById<View>(checkedId) as? RadioButton
-            val selectedText = selectedRadioButton?.text?.toString() ?: ""
-            buttonTransaction.text = selectedText
-            // Sembunyikan RadioGroup setelah pilihan dibuat
-            optionTransaction.visibility = View.GONE
+        buttonTransaction.setOnClickListener {
+            if (optionTransaction.visibility == View.VISIBLE) {
+                optionTransaction.visibility = View.GONE
+            } else {
+                optionTransaction.visibility = View.VISIBLE
+            }
         }
+
+        if(dataWithCatgory){
+            transactionTypeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+                val selectedRadioButton = view.findViewById<View>(checkedId) as? RadioButton
+                val selectedText = selectedRadioButton?.text?.toString() ?: ""
+                val pilihanCtg = when (checkedId){
+                    R.id.all_trans -> "ALL_TRANSACTIONS"
+                    R.id.trans_in -> "INCOMING"
+                    R.id.trans_out -> "OUTGOING"
+                    else -> "ALL_TRANSACTIONS"
+                }
+                buttonTransaction.text = selectedText
+                // Sembunyikan RadioGroup setelah pilihan dibuat
+                optionTransaction.visibility = View.GONE
+                dataCategory = pilihanCtg
+            }
+        }else{
+           dataCategory = "ALL_TRANSACTIONS"
+        }
+
+
 
         dateRangeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == R.id.radio_date_picker) {
@@ -148,8 +174,7 @@ class MutationOptionFilterFragment : Fragment() {
             requireContext(),
             { _, yearSelected, monthOfYear,
               dayOfMonth ->
-                val formattedDate =
-                    String.format("%02d-%02d-%02d",  yearSelected, monthOfYear + 1, dayOfMonth)
+                val formattedDate = String.format("%02d/%02d/%02d", dayOfMonth, monthOfYear + 1, yearSelected )
                 button.text = formattedDate
             },
             year,
@@ -161,6 +186,19 @@ class MutationOptionFilterFragment : Fragment() {
     private fun formatTanggal(date: Date): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return dateFormat.format(date)
+    }
+
+    private fun formatDateToYYYYMMDD(dateString: String): String {
+        val inputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        try {
+            val date = inputFormat.parse(dateString)
+            return outputFormat.format(date)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return dateString
+        }
     }
 }
 

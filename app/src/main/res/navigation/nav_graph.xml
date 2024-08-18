@@ -440,19 +440,23 @@
             <argument
                 android:name="dateOption"
                 app:argType="string"
-                android:defaultValue="null"/>
+                />
             <argument
                 android:name="dateStart"
                 app:argType="string"
-                android:defaultValue="null"/>
+                />
             <argument
                 android:name="dateEnd"
                 app:argType="string"
-                android:defaultValue="null"/>
+                />
+            <argument
+                android:name="dataCategory"
+                app:argType="string"
+                />
             <argument
                 android:name="screen"
                 app:argType="string"
-                android:defaultValue="screen1"/>
+                />
         </action>
     </fragment>
     <fragment
