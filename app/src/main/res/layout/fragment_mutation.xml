@@ -177,7 +177,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_mutationproof"
-        android:layout_marginTop="16dp"
         android:clipChildren="false"
         />
 

@@ -112,7 +112,7 @@ class MutationFragment : Fragment() {
                     endDate = receivedDateEnd.toString(),
                     transactionCategory = categoryTransaction.toString()
                 )
-                viewModelMutation.fetchMutations(page = 0, size = 10, token = "$token", requestBody = requestBody)
+                viewModelMutation.fetchMutations(page = 0, size = 100, token = "$token", requestBody = requestBody)
             }
         }else{
             val today = LocalDate.now()
@@ -123,7 +123,7 @@ class MutationFragment : Fragment() {
                     endDate = today.toString(),
                     transactionCategory = categoryTransaction.toString()
                 )
-                viewModelMutation.fetchMutations(page = 0, size = 10, token = "$token", requestBody = requestBody)
+                viewModelMutation.fetchMutations(page = 0, size = 100, token = "$token", requestBody = requestBody)
             }
         }
 

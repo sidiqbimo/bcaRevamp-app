@@ -6,24 +6,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:elevation="1dp"
-    android:paddingVertical="16dp"
-    android:paddingHorizontal="20dp"
     android:layout_marginBottom="16dp">
 
+
     <TextView
-        android:id="@+id/text_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/text_date"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
         android:fontFamily="@font/nunitoregular"
-        android:text="******1515"
-        android:textColor="@color/black"
+        android:background="@color/Neutral300"
+        android:text="17 Agustus 2021"
+        android:textColor="@color/Primary100"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/text_type"
+        android:id="@+id/text_id"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:fontFamily="@font/nunitoregular"
+        android:text="******1515"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/text_date"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/text_type"
+        android:paddingBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
         android:fontFamily="@font/nunitoregular"
         android:text="Transfer M-Banking"
         android:textColor="@color/black"
@@ -31,16 +47,20 @@
         app:layout_constraintStart_toStartOf="parent" />
     <TextView
         android:id="@+id/text_nominal"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingEnd="20dp"
         android:fontFamily="@font/nunitoregular"
         android:layout_marginStart="10dp"
         android:text="- Rp 100.000"
         android:textColor="@color/Error0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/text_date"/>
     <TextView
         android:id="@+id/text_time"
+        android:paddingBottom="10dp"
+        android:paddingEnd="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="14:11:00 WIB"
