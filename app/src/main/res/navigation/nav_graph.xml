@@ -431,10 +431,14 @@
         android:label="MutationHistoryFragment" >
         <action
             android:id="@+id/action_mutationHistoryFragment_to_infoMenuFragment"
-            app:destination="@id/infoMenuFragment" />
+            app:destination="@id/infoMenuFragment"
+            app:popUpTo="@id/action_mutationHistoryFragment_to_infoMenuFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_mutationHistoryFragment_to_mutationProofFragment"
-            app:destination="@id/mutationProofFragment" />
+            app:destination="@id/mutationProofFragment"
+            app:popUpTo="@id/action_mutationHistoryFragment_to_mutationProofFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_mutationHistoryFragment_to_mutationOptionFilterFragment"
             app:destination="@id/mutationOptionFilterFragment" />
@@ -446,13 +450,17 @@
         android:label="MutationProofFragment" >
         <action
             android:id="@+id/action_mutationProofFragment_to_infoMenuFragment"
-            app:destination="@id/infoMenuFragment" />
+            app:destination="@id/infoMenuFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/action_mutationProofFragment_to_infoMenuFragment"/>
         <action
             android:id="@+id/action_mutationProofFragment_to_mutationOptionFilterFragment"
             app:destination="@id/mutationOptionFilterFragment" />
         <action
             android:id="@+id/action_mutationProofFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment" />
+            app:destination="@id/mutationHistoryFragment"
+            app:popUpTo="@id/action_mutationProofFragment_to_mutationHistoryFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/mutationOptionFilterFragment"
@@ -461,10 +469,14 @@
         android:label="MutationOptionFilterFragment" >
         <action
             android:id="@+id/action_mutationOptionFilterFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment" />
+            app:destination="@id/mutationHistoryFragment"
+            app:popUpTo="@id/action_mutationOptionFilterFragment_to_mutationHistoryFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_mutationOptionFilterFragment_to_mutationProofFragment"
-            app:destination="@id/mutationProofFragment" />
+            app:destination="@id/mutationProofFragment"
+            app:popUpTo="@id/action_mutationOptionFilterFragment_to_mutationProofFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/QRISCameraFragment"
@@ -480,6 +492,9 @@
         <argument
             android:name="id_qris"
             app:argType="string" />
+        <action
+            android:id="@+id/action_QRISCameraFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/QRISNominalInputFragment"

@@ -7,16 +7,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageProxy
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.mlkit.vision.barcode.BarcodeScanner
@@ -24,14 +27,28 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import com.synrgyseveneight.bcarevamp.R
+import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
+import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
+import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
+import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
+import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class QRISCameraFragment : Fragment() {
 
+    private val viewModelAuth: AuthViewModel by viewModels {
+        AuthViewModelFactory(AuthRepository(RetrofitClient.instance, AuthDataStore.getInstance(requireContext())))
+    }
+
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var barcodeScanner: BarcodeScanner
     private lateinit var previewView: PreviewView
+
+    private var isFlashOn = false
+    private lateinit var flashcameratoggle: ImageView
+
+    private var imageCapture: ImageCapture? = null
 
     private val args: QRISCameraFragmentArgs by navArgs()
 
@@ -41,6 +58,7 @@ class QRISCameraFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_q_r_i_s_camera, container, false)
         previewView = view.findViewById(R.id.previewView)
+
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -52,6 +70,49 @@ class QRISCameraFragment : Fragment() {
             requestCameraPermission() // Add this line
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        flashcameratoggle = view.findViewById<ImageView>(R.id.flashButton)
+        // flash camera
+        flashcameratoggle.setOnClickListener {
+            toggleFlash()
+        }
+
+        // Initialize flashcameratoggle
+        flashcameratoggle = view.findViewById<ImageView>(R.id.flashButton)
+
+        // Initialize ImageCapture
+        val cameraSelector = CameraSelector.Builder()
+            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+            .build()
+
+        imageCapture = ImageCapture.Builder().build()
+
+        // Set flashcameratoggle click listener
+        flashcameratoggle.setOnClickListener {
+            imageCapture?.flashMode = if (imageCapture?.flashMode == ImageCapture.FLASH_MODE_ON) {
+                ImageCapture.FLASH_MODE_OFF
+            } else {
+                ImageCapture.FLASH_MODE_ON
+            }
+        }
+    }
+
+    // flash camera
+    private fun toggleFlash() {
+        isFlashOn = if (isFlashOn) {
+            // Turn off the flash
+            flashcameratoggle.setImageResource(R.drawable.button_flash_whiteborder)
+            Log.d("QRISCameraFragment", "Flash off")
+            false
+        } else {
+            // Turn on the flash
+            flashcameratoggle.setImageResource(R.drawable.button_flash_white)
+            Log.d("QRISCameraFragment", "Flash on")
+            true
+        }
     }
 
     private fun setupCamera() {
@@ -95,7 +156,10 @@ class QRISCameraFragment : Fragment() {
                             val idQris = qrCode
                             Log.d("QRISCameraFragment", "QR Code: $idQris" )
                             findNavController().navigate(
-                                R.id.action_QRISCameraFragment_to_QRISNominalInputFragment
+                                QRISCameraFragmentDirections.actionQRISCameraFragmentToQRISNominalInputFragment(
+                                    idQris,
+                                    viewModelAuth.userToken.value?:""
+                                )
                             )
                             return@addOnSuccessListener
                         }
@@ -130,7 +194,7 @@ class QRISCameraFragment : Fragment() {
                     setupCamera()
                 } else {
                     Toast.makeText(requireContext(), "Izin kamera dibutuhkan", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
+                    findNavController().navigate(QRISCameraFragmentDirections.actionQRISCameraFragmentToHomeFragment())
                 }
                 return
             }
