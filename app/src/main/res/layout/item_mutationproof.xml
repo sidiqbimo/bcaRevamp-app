@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/whitebackground_roundedrectangle"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     android:elevation="5dp"
     android:paddingVertical="16dp"
     android:paddingHorizontal="20dp"
@@ -46,33 +48,45 @@
     <TextView
         android:id="@+id/text_status"
         android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nunitoregular"
+        android:fontFamily="@font/nunitobold"
         android:text="Sukses"
         android:textColor="@color/Success0"
         app:layout_constraintTop_toBottomOf="@id/text_reff"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/text_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nunitoregular"
-        android:text="******1515"
-        android:textColor="@color/black"
+    <LinearLayout
+        android:id="@+id/layoutNominal"
+        android:layout_width="190dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_type"
-        app:layout_constraintStart_toStartOf="parent" />
-    <TextView
-        android:id="@+id/text_nominal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nunitoregular"
-        android:layout_marginStart="10dp"
-        android:text="Rp 100.000"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/text_type"
-        app:layout_constraintLeft_toRightOf="@id/text_id" />
+        >
+        <TextView
+            android:id="@+id/text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitoregular"
+            android:text="******1515"
+            android:textColor="@color/black"
+            />
+        <Space
+            android:id="@+id/space_id_nominal"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/text_nominal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitoregular"
+            android:text="Rp 100.000"
+            android:textColor="@color/black"
+             />
+    </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,6 @@ class MutationViewModel(private val repository: MutationRepository) : ViewModel(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
-    // LiveData untuk status loading
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.google.android.material.button.MaterialButton
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -58,6 +59,7 @@ class MutationFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
         val btnToFilter = view.findViewById<MaterialButton>(R.id.option_filter)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+        val imageNotFound = view.findViewById<ImageView>(R.id.img_trans_not_found)
 
         val receivedDate = arguments?.getString("dateOption")
         val receivedDateStart = arguments?.getString("dateStart")
@@ -81,7 +83,7 @@ class MutationFragment : Fragment() {
         historyAdapter = MutationHistoryAdapter(emptyList())
         proofAdapter = MutationProofAdapter(emptyList())
 
-        // Set historyAdapter sebagai default awal
+
         if (pageHistoryActive) {
             recyclerView.adapter = historyAdapter
             setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, true)
@@ -90,10 +92,13 @@ class MutationFragment : Fragment() {
             setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, false)
         }
 
-        // Observer untuk memperbarui data di kedua adapter
+
         viewModelMutation.mutationData.observe(viewLifecycleOwner, Observer { mutationList ->
             historyAdapter.updateData(mutationList)
             proofAdapter.updateData(mutationList)
+            val isEmpty = mutationList.isEmpty()
+            recyclerView.visibility = if (isEmpty) View.GONE else View.VISIBLE
+            imageNotFound.visibility = if (isEmpty) View.VISIBLE else View.GONE
         })
 
         viewModelMutation.error.observe(viewLifecycleOwner, Observer { errorMessage ->
@@ -112,7 +117,7 @@ class MutationFragment : Fragment() {
                     endDate = receivedDateEnd.toString(),
                     transactionCategory = categoryTransaction.toString()
                 )
-                viewModelMutation.fetchMutations(page = 0, size = 10, token = "$token", requestBody = requestBody)
+                viewModelMutation.fetchMutations(page = 0, size = 100, token = "$token", requestBody = requestBody)
             }
         }else{
             val today = LocalDate.now()
@@ -123,7 +128,7 @@ class MutationFragment : Fragment() {
                     endDate = today.toString(),
                     transactionCategory = categoryTransaction.toString()
                 )
-                viewModelMutation.fetchMutations(page = 0, size = 10, token = "$token", requestBody = requestBody)
+                viewModelMutation.fetchMutations(page = 0, size = 100, token = "$token", requestBody = requestBody)
             }
         }
 
@@ -169,17 +174,17 @@ class MutationFragment : Fragment() {
 
     private fun setFilterButtonState(receivedDate: String?, btnToFilter: MaterialButton){
         if (!receivedDate.isNullOrEmpty()) {
-            // Jika receivedDate memiliki nilai, ubah tampilan btnToFilter
+
             btnToFilter.background = ContextCompat.getDrawable(requireContext(), R.drawable.bluebackground_roundedrectangle)
             btnToFilter.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            btnToFilter.icon = null // Hapus ikon
+            btnToFilter.icon = null
             btnToFilter.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.blue)
 
         } else {
-            // Jika receivedDate tidak memiliki nilai, kembalikan tampilan default btnToFilter
+
             btnToFilter.background = ContextCompat.getDrawable(requireContext(), R.drawable.whitebackground_roundedrectangle)
             btnToFilter.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
-            btnToFilter.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_funnel) // Tampilkan ikon
+            btnToFilter.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_funnel)
             btnToFilter.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
         }
     }
