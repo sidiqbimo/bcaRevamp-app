@@ -69,8 +69,6 @@
             app:destination="@id/QRISCameraFragment" />
     </fragment>
 
-    <!--    Mutasi -->
-
     <!--    Coming Soon-->
     <fragment
         android:id="@+id/comingsonFragment"
@@ -175,9 +173,12 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
         <action
+            android:id="@+id/action_infoMenuFragment_to_mutationHistoryFragment"
+            app:destination="@id/mutationHistoryFragment" />
+        <action
             android:id="@+id/action_infoMenuFragment_to_mutationFragment"
-            app:destination="@id/mutationFragment" >
-        </action>
+            app:destination="@id/mutationFragment" />
+
     </fragment>
 
     <!--    E-Wallet-->
@@ -469,23 +470,6 @@
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
-
-        android:id="@+id/mutationOptionFilterFragment"
-        tools:layout="@layout/fragment_mutation_option_filter"
-        android:name="com.synrgyseveneight.bcarevamp.ui.mutation.MutationOptionFilterFragment"
-        android:label="MutationOptionFilterFragment" >
-        <action
-            android:id="@+id/action_mutationOptionFilterFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment"
-            app:popUpTo="@id/action_mutationOptionFilterFragment_to_mutationHistoryFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_mutationOptionFilterFragment_to_mutationProofFragment"
-            app:destination="@id/mutationProofFragment"
-            app:popUpTo="@id/action_mutationOptionFilterFragment_to_mutationProofFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
-    <fragment
         android:id="@+id/QRISCameraFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.qris.QRISCameraFragment"
         android:label="QRISCameraFragment"
@@ -706,6 +690,16 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/mutationOptionFilterFragment"
+        tools:layout="@layout/fragment_mutation_option_filter"
+        android:name="com.synrgyseveneight.bcarevamp.ui.mutation.MutationOptionFilterFragment"
+        android:label="MutationOptionFilterFragment" >
+        <action
             android:id="@+id/action_mutationOptionFilterFragment_to_mutationFragment"
             app:destination="@id/mutationFragment"
             app:popUpTo="@id/mutationFragment"
@@ -749,226 +743,7 @@
                 android:defaultValue="screen1"/>
         </action>
     </fragment>
-    <fragment
-        android:id="@+id/QRISCameraFragment"
-        android:name="com.synrgyseveneight.bcarevamp.ui.qris.QRISCameraFragment"
-        android:label="QRISCameraFragment"
-        tools:layout="@layout/fragment_q_r_i_s_camera">
-        <action
-            android:id="@+id/action_QRISCameraFragment_to_QRISNominalInputFragment"
-            app:destination="@id/QRISNominalInputFragment" />
-        <argument
-            android:name="token"
-            app:argType="string" />
-        <argument
-            android:name="id_qris"
-            app:argType="string" />
-        <argument
-            android:name="amountTransfer"
-            app:argType="string" />
-        <argument
-            android:name="noteTransfer"
-            app:argType="string" />
-        <argument
-            android:name="accountNumberSenderTransfer"
-            app:argType="string" />
-        <argument
-            android:name="avatarSenderPath"
-            app:argType="string" />
-        <argument
-            android:name="avatarTargetPath"
-            app:argType="string" />
-        <argument
-            android:name="senderName"
-            app:argType="string" />
-        <argument
-            android:name="receiverName"
-            app:argType="string" />
-        <argument
-            android:name="bankSender"
-            app:argType="string" />
-        <argument
-            android:name="nmid"
-            app:argType="string" />
-        <argument
-            android:name="terminalid"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_QRISCameraFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_QRISCameraFragment_to_QRISNominalInputFragment2"
-            app:destination="@id/QRISNominalInputFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/QRISNominalInputFragment"/>
-    </fragment>
-    <fragment
-        android:id="@+id/QRISNominalInputFragment"
-        android:name="com.synrgyseveneight.bcarevamp.ui.qris.QRISNominalInputFragment"
-        android:label="fragment_q_r_i_s_nominal_input"
-        tools:layout="@layout/fragment_q_r_i_s_nominal_input" >
-        <argument
-            android:name="id_qris"
-            app:argType="string" />
-        <argument
-            android:name="token"
-            app:argType="string" />
-        <argument
-            android:name="amountTransfer"
-            app:argType="string" />
-        <argument
-            android:name="noteTransfer"
-            app:argType="string" />
-        <argument
-            android:name="accountNumberSenderTransfer"
-            app:argType="string" />
-        <argument
-            android:name="avatarSenderPath"
-            app:argType="string" />
-        <argument
-            android:name="avatarTargetPath"
-            app:argType="string" />
-        <argument
-            android:name="senderName"
-            app:argType="string" />
-        <argument
-            android:name="receiverName"
-            app:argType="string" />
-        <argument
-            android:name="bankSender"
-            app:argType="string" />
-        <argument
-            android:name="nmid"
-            app:argType="string" />
-        <argument
-            android:name="terminalid"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_QRISNominalInputFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_QRISNominalInputFragment_to_qrisPinFragment"
-            app:destination="@id/qrisPinFragment"
-            app:popUpTo="@id/qrisPinFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
-    <fragment
-        android:id="@+id/qrisPinFragment"
-        android:name="com.synrgyseveneight.bcarevamp.ui.qris.QrisPinFragment"
-        android:label="QrisPinFragment"
-        tools:layout="@layout/fragment_qris_pin">
-        <argument
-            android:name="id_qris"
-            app:argType="string" />
-        <argument
-            android:name="token"
-            app:argType="string" />
-        <argument
-            android:name="amountTransfer"
-            app:argType="string" />
-        <argument
-            android:name="noteTransfer"
-            app:argType="string" />
-        <argument
-            android:name="accountNumberSenderTransfer"
-            app:argType="string" />
-        <argument
-            android:name="avatarSenderPath"
-            app:argType="string" />
-        <argument
-            android:name="avatarTargetPath"
-            app:argType="string" />
-        <argument
-            android:name="senderName"
-            app:argType="string" />
-        <argument
-            android:name="receiverName"
-            app:argType="string" />
-        <argument
-            android:name="bankSender"
-            app:argType="string" />
-        <argument
-            android:name="nmid"
-            app:argType="string" />
-        <argument
-            android:name="terminalid"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_qrisPinFragment_to_QRISSuccessFragment"
-            app:destination="@id/QRISSuccessFragment"
-            app:popUpTo="@id/QRISSuccessFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_qrisPinFragment_to_QRISFailedFragment"
-            app:destination="@id/QRISFailedFragment"
-            app:popUpTo="@id/QRISFailedFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
-    <fragment
-        android:id="@+id/QRISFailedFragment"
-        android:name="com.synrgyseveneight.bcarevamp.ui.qris.QRISFailedFragment"
-        android:label="fragment_q_r_i_s_failed"
-        tools:layout="@layout/fragment_q_r_i_s_failed" >
-        <action
-            android:id="@+id/action_QRISFailedFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_QRISFailedFragment_to_QRISCameraFragment"
-            app:destination="@id/QRISCameraFragment"
-            app:popUpTo="@id/QRISCameraFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
-    <fragment
-        android:id="@+id/QRISSuccessFragment"
-        android:name="com.synrgyseveneight.bcarevamp.ui.qris.QRISSuccessFragment"
-        android:label="QRISSuccessFragment"
-        tools:layout="@layout/fragment_q_r_i_s_success">
-        <argument
-            android:name="id_qris"
-            app:argType="string" />
-        <argument
-            android:name="token"
-            app:argType="string" />
-        <argument
-            android:name="amountTransfer"
-            app:argType="string" />
-        <argument
-            android:name="noteTransfer"
-            app:argType="string" />
-        <argument
-            android:name="accountNumberSenderTransfer"
-            app:argType="string" />
-        <argument
-            android:name="avatarSenderPath"
-            app:argType="string" />
-        <argument
-            android:name="avatarTargetPath"
-            app:argType="string" />
-        <argument
-            android:name="senderName"
-            app:argType="string" />
-        <argument
-            android:name="receiverName"
-            app:argType="string" />
-        <argument
-            android:name="bankSender"
-            app:argType="string" />
-        <argument
-            android:name="nmid"
-            app:argType="string" />
-        <argument
-            android:name="terminalid"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_QRISSuccessFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
+
+
+
 </navigation>
