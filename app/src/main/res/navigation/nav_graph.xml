@@ -67,11 +67,6 @@
     </fragment>
 
     <!--    Mutasi -->
-    <fragment
-        android:id="@+id/mutationFragment"
-        android:name="com.synrgyseveneight.bcarevamp.ui.info.MutationFragment"
-        android:label="MutationFragment"
-        tools:layout="@layout/fragment_mutation"/>
 
     <!--    Coming Soon-->
     <fragment
@@ -177,8 +172,9 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
         <action
-            android:id="@+id/action_infoMenuFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment" />
+            android:id="@+id/action_infoMenuFragment_to_mutationFragment"
+            app:destination="@id/mutationFragment" >
+        </action>
     </fragment>
 
     <!--    E-Wallet-->
@@ -205,11 +201,11 @@
     <fragment
         android:id="@+id/eWalletNewInputFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.ewallet.EWalletNewInputFragment"
-        android:label="E-Wallet Contact List"
+        android:label="E-Wallet New Input"
         tools:layout="@layout/fragment_e_wallet_new_input">
         <action
-            android:id="@+id/action_eWalletNewInputFragment_to_eWalletInputFragment"
-            app:destination="@id/eWalletInputFragment" />
+            android:id="@+id/action_eWalletNewInputFragment_to_eWalletConfirmationFragment"
+            app:destination="@id/eWalletConfirmationFragment" />
     </fragment>
 
     <fragment
@@ -228,10 +224,20 @@
         android:label="E-Wallet Konfirmasi"
         tools:layout="@layout/fragment_e_wallet_confirmation">
         <action
-            android:id="@+id/action_eWalletConfirmationFragment_to_eWalletSuccessFragment"
+            android:id="@+id/action_eWalletConfirmationFragment_to_pinFragment"
+            app:destination="@id/pinFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pinFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.auth.PinFragment"
+        android:label="Pin"
+        tools:layout="@layout/fragment_pin">
+        <action
+            android:id="@+id/action_pinFragment_to_eWalletSuccessFragment"
             app:destination="@id/eWalletSuccessFragment" />
         <action
-            android:id="@+id/action_eWalletConfirmationFragment_to_eWalletFailedFragment"
+            android:id="@+id/action_pinFragment_to_eWalletFailedFragment"
             app:destination="@id/eWalletFailedFragment" />
     </fragment>
 
@@ -422,45 +428,52 @@
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
-        android:id="@+id/mutationHistoryFragment"
-        tools:layout="@layout/fragment_mutation_history"
-        android:name="com.synrgyseveneight.bcarevamp.ui.mutation.MutationHistoryFragment"
-        android:label="MutationHistoryFragment" >
-        <action
-            android:id="@+id/action_mutationHistoryFragment_to_infoMenuFragment"
-            app:destination="@id/infoMenuFragment" />
-        <action
-            android:id="@+id/action_mutationHistoryFragment_to_mutationProofFragment"
-            app:destination="@id/mutationProofFragment" />
-        <action
-            android:id="@+id/action_mutationHistoryFragment_to_mutationOptionFilterFragment"
-            app:destination="@id/mutationOptionFilterFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mutationProofFragment"
-        tools:layout="@layout/fragment_mutation_proof"
-        android:name="com.synrgyseveneight.bcarevamp.ui.mutation.MutationProofFragment"
-        android:label="MutationProofFragment" >
-        <action
-            android:id="@+id/action_mutationProofFragment_to_infoMenuFragment"
-            app:destination="@id/infoMenuFragment" />
-        <action
-            android:id="@+id/action_mutationProofFragment_to_mutationOptionFilterFragment"
-            app:destination="@id/mutationOptionFilterFragment" />
-        <action
-            android:id="@+id/action_mutationProofFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/mutationOptionFilterFragment"
         tools:layout="@layout/fragment_mutation_option_filter"
         android:name="com.synrgyseveneight.bcarevamp.ui.mutation.MutationOptionFilterFragment"
         android:label="MutationOptionFilterFragment" >
         <action
-            android:id="@+id/action_mutationOptionFilterFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment" />
+            android:id="@+id/action_mutationOptionFilterFragment_to_mutationFragment"
+            app:destination="@id/mutationFragment"
+            app:popUpTo="@id/mutationFragment"
+            app:popUpToInclusive="true">
+            <argument
+                android:name="dateOption"
+                app:argType="string"
+                />
+            <argument
+                android:name="dateStart"
+                app:argType="string"
+                />
+            <argument
+                android:name="dateEnd"
+                app:argType="string"
+                />
+            <argument
+                android:name="dataCategory"
+                app:argType="string"
+                />
+            <argument
+                android:name="screen"
+                app:argType="string"
+                />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/mutationFragment"
+        tools:layout="@layout/fragment_mutation"
+        android:name="com.synrgyseveneight.bcarevamp.ui.mutation.MutationFragment"
+        android:label="MutationFragment" >
         <action
-            android:id="@+id/action_mutationOptionFilterFragment_to_mutationProofFragment"
-            app:destination="@id/mutationProofFragment" />
+            android:id="@+id/action_mutationFragment_to_infoMenuFragment"
+            app:destination="@id/infoMenuFragment" />
+        <action
+            android:id="@+id/action_mutationFragment_to_mutationOptionFilterFragment"
+            app:destination="@id/mutationOptionFilterFragment">
+            <argument
+                android:name="screen"
+                app:argType="string"
+                android:defaultValue="screen1"/>
+        </action>
     </fragment>
 </navigation>

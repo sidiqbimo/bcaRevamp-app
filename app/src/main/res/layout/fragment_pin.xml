@@ -1,14 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFFFF"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:context=".ui.auth.PinFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.auth.PinFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
+        android:id="@+id/scrollArea"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:layout_marginTop="70dp"
+        android:background="#FFFBFCFF"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contentArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingLeft="24dp"
+            android:paddingTop="20dp"
+            android:paddingRight="24dp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Masukkan Pin Anda"
+                android:textColor="#115DA9"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Layout untuk menampilkan bulatan PIN -->
+            <LinearLayout
+                android:id="@+id/pinContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+                <ImageView
+                    android:id="@+id/pinDot1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/pin_inactive" />
+
+                <ImageView
+                    android:id="@+id/pinDot2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/pin_inactive" />
+
+                <ImageView
+                    android:id="@+id/pinDot3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/pin_inactive" />
+
+                <ImageView
+                    android:id="@+id/pinDot4"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/pin_inactive" />
+
+                <ImageView
+                    android:id="@+id/pinDot5"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/pin_inactive" />
+
+                <ImageView
+                    android:id="@+id/pinDot6"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/pin_inactive" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btnLupaPassword"
+                android:layout_width="96dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp"
+                android:drawablePadding="8dp"
+                android:src="@drawable/lupa_pin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pinContainer" />
+
+            <GridLayout
+                android:id="@+id/numpad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:alignmentMode="alignMargins"
+                android:columnCount="3"
+                android:padding="8dp"
+                android:rowCount="3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLupaPassword">
+
+                <!-- Tombol angka 1 -->
+                <Button
+                    android:id="@+id/btn1"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="1"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <!-- Tombol angka 2 -->
+                <Button
+                    android:id="@+id/btn2"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="2"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <!-- Tombol angka 3 -->
+                <Button
+                    android:id="@+id/btn3"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="3"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <!-- Tombol angka 4 -->
+                <Button
+                    android:id="@+id/btn4"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="4"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <!-- Tombol angka 5 -->
+                <Button
+                    android:id="@+id/btn5"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="5"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <!-- Tombol angka 6 -->
+                <Button
+                    android:id="@+id/btn6"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="6"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <!-- Tombol angka 7 -->
+                <Button
+                    android:id="@+id/btn7"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="7"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <!-- Tombol angka 8 -->
+                <Button
+                    android:id="@+id/btn8"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="8"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <!-- Tombol angka 9 -->
+                <Button
+                    android:id="@+id/btn9"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="9"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/btnFingerprint"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="12dp"
+                    android:src="@drawable/button_fingerprint"
+                    android:textSize="24sp" />
+                <Button
+                    android:id="@+id/btn0"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/number_button_background"
+                    android:text="0"
+                    android:textColor="@drawable/number_text_color"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/btnDelete"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="12dp"
+                    android:src="@drawable/button_delete"
+                    android:textSize="24sp" />
+
+            </GridLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

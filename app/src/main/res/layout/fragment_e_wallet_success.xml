@@ -27,7 +27,7 @@
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_exit"
+            android:background="@drawable/icon_x"
             android:contentDescription="Kembali"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -196,7 +196,7 @@
                                     android:id="@+id/tvEWalletDestinationDetails"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="E-Wallet 1 - 0987654321"
+                                    android:text="OVO - 0987654321"
                                     android:textColor="#115DA9"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -225,7 +225,6 @@
                             android:layout_height="wrap_content"
                             android:text="Rp 0"
                             android:textSize="14sp"
-                            android:layout_marginLeft="16dp"
                             android:textColor="#115DA9"/>
                     </TableRow>
 
@@ -244,7 +243,6 @@
                             android:layout_height="wrap_content"
                             android:text="Rp 0"
                             android:textSize="14sp"
-                            android:layout_marginLeft="16dp"
                             android:textColor="#115DA9"/>
                     </TableRow>
 
@@ -263,7 +261,6 @@
                             android:layout_height="wrap_content"
                             android:text="-"
                             android:textSize="14sp"
-                            android:layout_marginLeft="16dp"
                             android:textColor="#115DA9"/>
                     </TableRow>
 
@@ -284,7 +281,6 @@
                             android:text="Rp 0"
                             android:textSize="16sp"
                             android:layout_marginTop="8dp"
-                            android:layout_marginLeft="16dp"
                             android:textStyle="bold"
                             android:textColor="#115DA9"/>
                     </TableRow>
