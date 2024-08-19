@@ -28,7 +28,7 @@ import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
-import com.synrgyseveneight.bcarevamp.viewmodel.TransferViewModel
+import com.synrgyseveneight.bcarevamp.viewmodel.EWalletViewModel
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -38,7 +38,7 @@ class EWalletNewInputFragment : Fragment() {
         AuthViewModelFactory(AuthRepository(RetrofitClient.instance, AuthDataStore.getInstance(requireContext())))
     }
 
-    private lateinit var viewModelTransfer : TransferViewModel
+    private lateinit var viewModelEWallet : EWalletViewModel
 
     private var balance: Double = 0.0
     private var retryCountForSaldo = 0
