@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -166,6 +167,7 @@ class HomeFragment : Fragment() {
         val amountIncome = view.findViewById<TextView>(R.id.amount_income)
         val amountOutcome = view.findViewById<TextView>(R.id.amount_outcome)
         val amountSelisih = view.findViewById<TextView>(R.id.amount_selisih)
+        val progressBarReport = view.findViewById<View>(R.id.progressBarReport)
 
 
         viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
@@ -254,6 +256,11 @@ class HomeFragment : Fragment() {
             }
             Toast.makeText(this.context, "Berhasil Logout", Toast.LENGTH_SHORT).show()
         }
+
+        reportViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            progressBarReport.visibility = if (isLoading) View.VISIBLE else View.GONE
+
+        })
 
         reportViewModel.income.observe(viewLifecycleOwner) { income ->
             amountIncome.text = formatBalance(income.toDouble())

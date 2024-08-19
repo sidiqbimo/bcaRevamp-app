@@ -18,7 +18,11 @@ class MonthlyReportViewModel(private val repository: MonthlyReportRepository) : 
     private val _total = MutableLiveData<Int>()
     val total: LiveData<Int> get() = _total
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun getMonthlyReport(month: String, year: String, token: String) {
+        _isLoading.value = true
         viewModelScope.launch {
             try {
                 val response = repository.getMonthlyReport(month, year, token)
@@ -32,6 +36,8 @@ class MonthlyReportViewModel(private val repository: MonthlyReportRepository) : 
                 }
             } catch (e: Exception) {
                 // Handle exception
+            }finally {
+                _isLoading.value = false
             }
         }
     }

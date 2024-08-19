@@ -4,5 +4,5 @@ data class MutationResponse(
     val code: Int,
     val message: String,
     val status: Boolean,
-    val data: List<MutationData>? = null
+    val data: MutationData
 )

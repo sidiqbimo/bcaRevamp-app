@@ -93,7 +93,7 @@ class MutationFragment : Fragment() {
         }
 
 
-        viewModelMutation.mutationData.observe(viewLifecycleOwner, Observer { mutationList ->
+        viewModelMutation.mutationResponseData.observe(viewLifecycleOwner, Observer { mutationList ->
             historyAdapter.updateData(mutationList)
             proofAdapter.updateData(mutationList)
             val isEmpty = mutationList.isEmpty()
@@ -117,18 +117,19 @@ class MutationFragment : Fragment() {
                     endDate = receivedDateEnd.toString(),
                     transactionCategory = categoryTransaction.toString()
                 )
-                viewModelMutation.fetchMutations(page = 0, size = 100, token = "$token", requestBody = requestBody)
+                viewModelMutation.fetchMutations(page = 0, size = 10000, token = "$token", requestBody = requestBody)
             }
         }else{
             val today = LocalDate.now()
             val startDate = today.withDayOfMonth(1)
             viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
+                Toast.makeText(context, "Tanggal : $startDate - $today", Toast.LENGTH_SHORT).show()
                 val requestBody = MutationRequest(
                     startDate = startDate.toString(),
                     endDate = today.toString(),
                     transactionCategory = categoryTransaction.toString()
                 )
-                viewModelMutation.fetchMutations(page = 0, size = 100, token = "$token", requestBody = requestBody)
+                viewModelMutation.fetchMutations(page = 0, size = 10000, token = "$token", requestBody = requestBody)
             }
         }
 
@@ -150,6 +151,11 @@ class MutationFragment : Fragment() {
             val screen = if (pageHistoryActive) "screen1" else "screen2"
             val action = MutationFragmentDirections.actionMutationFragmentToMutationOptionFilterFragment(screen)
             findNavController().navigate(action)
+        }
+
+        val backButton = view.findViewById<ImageView>(R.id.backButton)
+        backButton.setOnClickListener {
+            activity?.onBackPressed()
         }
     }
     private fun setSwitchButtonState(
