@@ -1,14 +1,473 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.qris.QRISNominalInputFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.qris.QRISNominalInputFragment"
+    android:background="#FBFDFF">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_newtfbca"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:paddingVertical="24dp"
+        android:paddingLeft="19dp"
+        android:paddingRight="22dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-</FrameLayout>
+
+
+        <ImageView
+            android:contentDescription="Tombol kembali"
+            android:id="@+id/backButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/button_back_blue"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:contentDescription="Judul Halaman - Input nominal transaksi QRIS"
+            android:id="@+id/title_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Input Nominal QRIS"
+            style="@style/tabTitle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/header_newtfbca"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_qrismerchantinfo"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circularImageViewMerchant"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/icon_person"
+                android:layout_gravity="center_vertical"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/merchant_name"/>
+
+            <TextView
+                android:id="@+id/merchant_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Memuat Merchant..."
+                style="@style/title_merchant_qris"
+
+                app:layout_constraintTop_toBottomOf="@id/circularImageViewMerchant"
+                app:layout_constraintStart_toStartOf="@id/circularImageViewMerchant"
+                app:layout_constraintEnd_toEndOf="@id/circularImageViewMerchant"
+
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:id="@+id/merchant_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Memuat Lokasi..."
+                style="@style/subtitle_merchant_qris"
+
+                app:layout_constraintTop_toBottomOf="@id/merchant_name"
+                app:layout_constraintStart_toStartOf="@id/merchant_name"
+                app:layout_constraintEnd_toEndOf="@id/merchant_name"
+
+                android:layout_marginTop="4dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        Sumber Rekening -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_sumberrekening"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_qrismerchantinfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+            <TextView
+                android:id="@+id/title_sumberrekening"
+                style="@style/tf_titlebig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Sumber Rekening"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <!--            CONTAINER Picker Sumber Rekening-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/containerPickerSumberRekening"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                app:layout_constraintTop_toBottomOf="@id/title_sumberrekening"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/whitebackground_roundedrectangle"
+                android:elevation="5dp"
+
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="12dp">
+
+                <!--                Account Source Details CONTAINER-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/accountdetails_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/mybalance_container"
+
+                    android:layout_marginLeft="12dp">
+                    <TextView
+                        android:id="@+id/accounttype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tahapan BCA"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/contactlist_accountsubtitle"
+                        android:textAllCaps="true"
+                        android:textColor="#115DA9"/>
+
+                    <TextView
+                        android:importantForAccessibility="no"
+                        android:id="@+id/separator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="•"
+                        android:textAlignment="center"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/contactlist_accountsubtitle"
+                        app:layout_constraintStart_toEndOf="@id/accounttype"
+                        app:layout_constraintEnd_toStartOf="@id/accountnumbersubtitle"
+                        android:textColor="#115DA9"
+
+                        android:layout_marginLeft="5dp"/>
+
+                    <TextView
+                        android:id="@+id/accountnumbersubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        app:layout_constraintStart_toEndOf="@id/separator"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/contactlist_accountsubtitle"
+                        android:textColor="#115DA9"
+
+                        android:layout_marginLeft="5dp"/>
+
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--                Balance-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mybalance_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/accountdetails_container"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    android:layout_marginLeft="12dp">
+
+
+                    <TextView
+                        android:contentDescription="Saldo disembunyikan"
+                        android:id="@+id/censoredSaldoCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="******"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        app:layout_constraintStart_toEndOf="@id/toggleView"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/nunitobold"
+                        android:textSize="14sp"
+                        android:textColor="#115DA9"
+
+                        android:layout_marginLeft="8dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/saldotf_BCA_tersisa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="000000"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        app:layout_constraintStart_toEndOf="@id/censoredSaldoCheck"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/nunitobold"
+                        android:textSize="14sp"
+                        android:textColor="#115DA9"
+
+                        android:layout_marginLeft="8dp"
+                        />
+
+                    <ImageView
+                        android:contentDescription="Tombol toggle, klik untuk menyembunyikan saldo"
+                        android:id="@+id/toggleView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/censoredSaldoCheck"
+                        app:layout_constraintTop_toTopOf="@id/saldotf_BCA_tersisa"
+                        app:layout_constraintBottom_toBottomOf="@id/saldotf_BCA_tersisa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_blueeye_open" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:importantForAccessibility="no"
+                    android:id="@+id/ic_dropdown"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/icon_dropdown"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginRight="8dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--    Separator -->
+
+        <View
+            android:importantForAccessibility="no"
+            android:id="@+id/separator_tftonominal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@drawable/separator_gray"
+            app:layout_constraintTop_toBottomOf="@id/container_sumberrekening"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!--    Nominal Transfer -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/separator_tftonominal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/transfernominal_container">
+
+            <TextView
+                android:id="@+id/title_nominal_tf"
+                style="@style/tf_titlebig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Nominal Transfer"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tf_inputnominal_container"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tf_inputnominal_container"
+                app:layout_constraintTop_toBottomOf="@id/title_nominal_tf"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/whitebackground_bottomnoround"
+                android:elevation="5dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp">
+
+                <!--                Input nominal edittext -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nominalinput_edittext_container"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <TextView
+                        android:contentDescription="Simbol rupiah"
+                        android:id="@+id/rupiah_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tf_inputtext_nominal"
+                        android:textSize="18sp"
+                        android:textColor="@color/Neutral400"
+
+                        android:layout_marginLeft="16dp"
+                        />
+
+                    <EditText
+                        android:contentDescription="Kolom input nominal transfer"
+                        android:id="@+id/tf_inputtext_nominal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:hint="Masukkan Nominal Transfer"
+                        android:textColorHint="@color/Neutral300"
+                        android:fontFamily="@font/nunitobold"
+                        android:textColor="@color/Neutral400"
+                        android:backgroundTint="#FFFFFF"
+                        android:imeOptions="actionDone"
+
+                        app:layout_constraintStart_toEndOf="@id/rupiah_sign"
+                        app:layout_constraintTop_toTopOf="@id/rupiah_sign"
+                        app:layout_constraintBottom_toBottomOf="@id/rupiah_sign"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="16dp"
+                        />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/error_message_tf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Terjadi kesalahan"
+                    style="@style/errortext_tf"
+
+
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/nominalinput_edittext_container"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tf_inputnominal_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/whitebackground_notestransfer"
+                android:elevation="5dp"
+                android:layout_marginHorizontal="24dp"
+                >
+
+                <EditText
+                    android:contentDescription="Kolom input catatan transfer"
+                    android:id="@+id/tf_inputtext_notes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:hint="Tulis Catatan (Opsional)"
+                    android:textColorHint="@color/Neutral300"
+                    android:fontFamily="@font/nunitoregular"
+                    android:textColor="@color/Neutral400"
+                    android:textSize="16sp"
+                    android:backgroundTint="#FFFFFF"
+                    android:imeOptions="actionDone"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    android:layout_marginHorizontal="16dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:contentDescription="Tombol Lanjutkan proses transfer"
+            android:id="@+id/button_start_tf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lanjutkan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/buttonblue_whitetext"
+
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -144,6 +144,7 @@ class NewAccountTransferInput : Fragment() {
         val checkBox = view.findViewById<CheckBox>(R.id.title_saveascontact)
         val saveAsWhoContainer = view.findViewById<View>(R.id.saveaswho_container)
 
+        /*
         // Initially hide the container
         saveAsWhoContainer.visibility = View.GONE
 
@@ -157,6 +158,8 @@ class NewAccountTransferInput : Fragment() {
                 saveAsWhoContainer.visibility = View.GONE
             }
         }
+
+         */
 
 //        Titik setiap tiga digit di edittext nominal
         transferNominalInput.addTextChangedListener(object : TextWatcher {

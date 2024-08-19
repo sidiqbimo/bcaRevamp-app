@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
@@ -20,7 +21,12 @@ class TransferFailedFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_transfer_failed, container, false)
 
         val exitButton = view.findViewById<ImageView>(R.id.btnBack)
+        val repeatButton = view.findViewById<Button>(R.id.btnTopUp)
+
         exitButton.setOnClickListener {
+            findNavController().navigate(R.id.action_transferFailedFragment_to_transferListFragment)
+        }
+        repeatButton.setOnClickListener {
             findNavController().navigate(R.id.action_transferFailedFragment_to_transferListFragment)
         }
 

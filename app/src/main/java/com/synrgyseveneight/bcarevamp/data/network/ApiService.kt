@@ -4,9 +4,12 @@ import com.synrgyseveneight.bcarevamp.data.model.AuthRequest
 import com.synrgyseveneight.bcarevamp.data.model.AuthResponse
 import com.synrgyseveneight.bcarevamp.data.model.BalanceResponse
 import com.synrgyseveneight.bcarevamp.data.model.MonthlyReportResponse
+import com.synrgyseveneight.bcarevamp.data.model.QRISResponse
+import com.synrgyseveneight.bcarevamp.data.model.QRISTransferRequest
 import com.synrgyseveneight.bcarevamp.data.model.MutationRequest
 import com.synrgyseveneight.bcarevamp.data.model.MutationResponse
 import com.synrgyseveneight.bcarevamp.data.model.SearchAccountResponse
+import com.synrgyseveneight.bcarevamp.data.model.SearchQrisResponse
 import com.synrgyseveneight.bcarevamp.data.model.TransferRequest
 import com.synrgyseveneight.bcarevamp.data.model.TransferResponse
 import retrofit2.Call
@@ -44,6 +47,18 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Response<MonthlyReportResponse>
 
+
+    // Info QRIS
+    @GET("api/v1/merchants/qris/{id_qris}")
+    suspend fun searchQris(@Header("Authorization") token: String, @Path("id_qris") id_qris: String): Response<SearchQrisResponse>
+
+    // Transfer QRIS
+    @POST("api/v1/transactions/merchant-transaction")
+    suspend fun performQrisTransfer(
+        @Header("Authorization") token: String,
+        @Body request: QRISTransferRequest
+    ): Response<QRISResponse>
+
     // Endpoint untuk mendapatkan data mutasi
     @POST("api/v1/transactions/get-all-mutation")
     suspend fun getAllMutation(
@@ -52,4 +67,5 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body requestBody: MutationRequest
     ): Response<MutationResponse>
+
 }

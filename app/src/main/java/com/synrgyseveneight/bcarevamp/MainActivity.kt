@@ -1,27 +1,16 @@
 package com.synrgyseveneight.bcarevamp
 
+//import com.google.android.material.bottomappbar.BottomAppBar
 import android.os.Bundle
 import android.view.View
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomappbar.BottomAppBar
-//import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.synrgyseveneight.bcarevamp.ui.theme.BCARevampTheme
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,7 +36,9 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomAppBar = findViewById(R.id.bottomAppBar)
 
+
 //        bottomNavigationView.setupWithNavController(navController)
+        // NAVIGATION
 
 
         // Handle navigation item clicks
@@ -75,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         // Handle FloatingActionButton click
         fab.setOnClickListener {
-            navController.navigate(R.id.comingsonFragment)
+            navController.navigate(R.id.QRISCameraFragment)
             true
         }
 
