@@ -64,6 +64,9 @@
             android:id="@+id/action_homeFragment_to_eWalletOptionFragment"
             app:destination="@id/eWalletOptionFragment"
             app:exitAnim="@android:anim/slide_in_left" />
+         <action
+            android:id="@+id/action_homeFragment_to_QRISCameraFragment"
+            app:destination="@id/QRISCameraFragment" />
     </fragment>
 
     <!--    Mutasi -->
