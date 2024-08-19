@@ -7,11 +7,11 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
-import com.synrgyseveneight.bcarevamp.data.model.MutationData
+import com.synrgyseveneight.bcarevamp.data.model.MutationResponseData
 import java.text.NumberFormat
 import java.util.Locale
 
-class MutationHistoryAdapter(private var mutationHistoryItems: List<MutationData>) :
+class MutationHistoryAdapter(private var mutationHistoryItems: List<MutationResponseData>) :
     RecyclerView.Adapter<MutationHistoryAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -53,7 +53,7 @@ class MutationHistoryAdapter(private var mutationHistoryItems: List<MutationData
 
     override fun getItemCount(): Int = mutationHistoryItems.size
 
-    fun updateData(newItems: List<MutationData>) {
+    fun updateData(newItems: List<MutationResponseData>) {
         mutationHistoryItems = newItems.sortedByDescending { it.time}
         notifyDataSetChanged()
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -155,6 +156,11 @@ class MutationOptionFilterFragment : Fragment() {
             val selectedRadioButton = view.findViewById<View>(checkedId) as? RadioButton
             val selectedText = selectedRadioButton?.text?.toString() ?: ""
             dateSelected = selectedText
+        }
+
+        val backButton = view.findViewById<ImageView>(R.id.backButton)
+        backButton.setOnClickListener {
+            activity?.onBackPressed()
         }
 
     }

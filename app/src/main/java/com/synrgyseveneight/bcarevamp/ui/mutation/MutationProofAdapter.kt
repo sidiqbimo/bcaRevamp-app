@@ -7,11 +7,11 @@ import android.widget.Space
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
-import com.synrgyseveneight.bcarevamp.data.model.MutationData
+import com.synrgyseveneight.bcarevamp.data.model.MutationResponseData
 import java.text.NumberFormat
 import java.util.Locale
 
-class MutationProofAdapter(private var mutationProofItems: List<MutationData>) :
+class MutationProofAdapter(private var mutationProofItems: List<MutationResponseData>) :
     RecyclerView.Adapter<MutationProofAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -51,7 +51,7 @@ class MutationProofAdapter(private var mutationProofItems: List<MutationData>) :
 
     override fun getItemCount(): Int = mutationProofItems.size
 
-    fun updateData(newItems: List<MutationData>) {
+    fun updateData(newItems: List<MutationResponseData>) {
         mutationProofItems = newItems.sortedByDescending { it.formatted_date }
         notifyDataSetChanged()
     }

@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.synrgyseveneight.bcarevamp.data.model.MutationData
+import com.synrgyseveneight.bcarevamp.data.model.MutationResponseData
 import com.synrgyseveneight.bcarevamp.data.model.MutationRequest
 import com.synrgyseveneight.bcarevamp.data.repository.MutationRepository
 import kotlinx.coroutines.launch
 
 class MutationViewModel(private val repository: MutationRepository) : ViewModel() {
 
-    private val _mutationData = MutableLiveData<List<MutationData>>()
-    val mutationData: LiveData<List<MutationData>> get() = _mutationData
+    private val _mutationResponseData = MutableLiveData<List<MutationResponseData>>()
+    val mutationResponseData: LiveData<List<MutationResponseData>> get() = _mutationResponseData
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
@@ -26,7 +26,8 @@ class MutationViewModel(private val repository: MutationRepository) : ViewModel(
             try {
                 val response = repository.getAllMutations(page, size, token, requestBody)
                 if (response.isSuccessful) {
-                    _mutationData.value = response.body()?.data ?: emptyList()
+                    // Akses `mutation_responses` dari `data`
+                    _mutationResponseData.value = response.body()?.data?.mutation_responses ?: emptyList()
                 } else {
                     _error.value = response.code().toString()
                 }

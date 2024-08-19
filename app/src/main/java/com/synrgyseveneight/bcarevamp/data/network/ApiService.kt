@@ -40,7 +40,7 @@ interface ApiService {
     ): Response<TransferResponse>
 
     // Endpoint untuk mendapatkan laporan bulanan
-    @GET("api/v1/transactions/getMonthlyReport")
+    @GET("api/v1/transactions/get-monthly-report")
     suspend fun getMonthlyReport(
         @Query("month") month: String,
         @Query("year") year: String,

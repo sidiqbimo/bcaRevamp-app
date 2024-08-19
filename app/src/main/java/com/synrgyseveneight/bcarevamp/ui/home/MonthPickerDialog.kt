@@ -61,7 +61,4 @@ class MonthPickerDialog(
         return calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, context.resources.configuration.locale)
     }
 
-    private fun updateSelectedDate(month: Int, year: Int, textView: TextView) {
-        textView.text = "Tanggal terpilih: $month/$year"
-    }
 }
