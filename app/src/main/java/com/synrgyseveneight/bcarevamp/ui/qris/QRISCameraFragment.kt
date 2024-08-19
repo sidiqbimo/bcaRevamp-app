@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.OptIn
+import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
@@ -49,8 +50,11 @@ class QRISCameraFragment : Fragment() {
     private lateinit var flashcameratoggle: ImageView
 
     private var imageCapture: ImageCapture? = null
+    private var camera: Camera? = null
 
     private val args: QRISCameraFragmentArgs by navArgs()
+
+    private var loadingCircle: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,6 +63,13 @@ class QRISCameraFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_q_r_i_s_camera, container, false)
         previewView = view.findViewById(R.id.previewView)
 
+        val backButton = view.findViewById<ImageView>(R.id.quitButton)
+        backButton.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
+        val loadingCircle = view.findViewById<View>(R.id.loadingCircle)
+        loadingCircle?.visibility = View.INVISIBLE
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -67,16 +78,18 @@ class QRISCameraFragment : Fragment() {
         ) {
             setupCamera()
         } else {
-            requestCameraPermission() // Add this line
+            requestCameraPermission()
         }
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         flashcameratoggle = view.findViewById<ImageView>(R.id.flashButton)
         // flash camera
         flashcameratoggle.setOnClickListener {
+            Log.d("QRISCameraFragment", "Flash button clicked")
             toggleFlash()
         }
 
@@ -102,16 +115,22 @@ class QRISCameraFragment : Fragment() {
 
     // flash camera
     private fun toggleFlash() {
-        isFlashOn = if (isFlashOn) {
-            // Turn off the flash
-            flashcameratoggle.setImageResource(R.drawable.button_flash_whiteborder)
-            Log.d("QRISCameraFragment", "Flash off")
-            false
+        if (camera?.cameraInfo?.hasFlashUnit() == true) {
+            isFlashOn = if (isFlashOn) {
+                // Turn off the torch
+                camera?.cameraControl?.enableTorch(false)
+                flashcameratoggle.setImageResource(R.drawable.button_flash_whiteborder)
+                Log.d("QRISCameraFragment", "Torch off")
+                false
+            } else {
+                // Turn on the torch
+                camera?.cameraControl?.enableTorch(true)
+                flashcameratoggle.setImageResource(R.drawable.button_flash_white)
+                Log.d("QRISCameraFragment", "Torch on")
+                true
+            }
         } else {
-            // Turn on the flash
-            flashcameratoggle.setImageResource(R.drawable.button_flash_white)
-            Log.d("QRISCameraFragment", "Flash on")
-            true
+            Toast.makeText(requireContext(), "Lampu kilat tidak ditemukan", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -143,32 +162,51 @@ class QRISCameraFragment : Fragment() {
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
+
+
     @OptIn(ExperimentalGetImage::class)
     private fun processImageProxy(imageProxy: ImageProxy) {
         val mediaImage = imageProxy.image ?: return
         val inputImage = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
-        barcodeScanner.process(inputImage)
-            .addOnSuccessListener { barcodes ->
-                for (barcode in barcodes) {
-                    barcode.rawValue?.let { qrCode ->
-                        if (barcode.valueType == Barcode.TYPE_TEXT) {
-                            val idQris = qrCode
-                            Log.d("QRISCameraFragment", "QR Code: $idQris" )
-                            findNavController().navigate(
-                                QRISCameraFragmentDirections.actionQRISCameraFragmentToQRISNominalInputFragment(
-                                    idQris,
-                                    viewModelAuth.userToken.value?:""
-                                )
-                            )
-                            return@addOnSuccessListener
+        try {
+            barcodeScanner.process(inputImage)
+                .addOnSuccessListener { barcodes ->
+                    for (barcode in barcodes) {
+                        barcode.rawValue?.let { qrCode ->
+                            if (barcode.valueType == Barcode.TYPE_TEXT) {
+                                val idQris = qrCode
+                                Log.d("QRISCameraFragment", "QR Code: $idQris" )
+                                    findNavController().navigate(
+                                        QRISCameraFragmentDirections.actionQRISCameraFragmentToQRISNominalInputFragment(
+                                            idQris,
+                                            "0",
+                                            "0",
+                                            "0",
+                                            "0",
+                                            "0",
+                                            "0",
+                                            "0",
+                                            "0",
+                                            "0",
+                                            "0",
+                                            "0"
+                                        )
+                                    )
+
+
+                                return@addOnSuccessListener
+                            }
                         }
                     }
                 }
-            }
-            .addOnCompleteListener {
-                imageProxy.close()
-            }
+                .addOnCompleteListener {
+                    imageProxy.close()
+                }
+        } catch (e: Exception) {
+            Log.e("QRISCameraFragment", "Error processing image", e)
+            findNavController().navigate(R.id.action_QRISCameraFragment_to_homeFragment)
+        }
     }
 
     override fun onDestroyView() {

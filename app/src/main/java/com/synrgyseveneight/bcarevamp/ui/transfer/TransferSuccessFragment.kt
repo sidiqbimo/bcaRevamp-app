@@ -17,11 +17,6 @@ import com.synrgyseveneight.bcarevamp.R.id.action_transferSuccessFragment_to_hom
 import java.text.NumberFormat
 import java.util.Locale
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TransferSuccessFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TransferSuccessFragment : Fragment() {
 
     private val args: TransferPINFragmentArgs by navArgs()
