@@ -1,5 +1,7 @@
 package com.synrgyseveneight.bcarevamp.data.model
 
+// Account
+
 data class Account(
     val name: String,
     val account_number: String,
