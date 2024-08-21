@@ -14,8 +14,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.divider.MaterialDivider
 import com.google.android.material.textfield.TextInputLayout
@@ -25,7 +23,6 @@ import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
-import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
@@ -65,6 +62,7 @@ class LoginFragment : Fragment() {
 //            }
 //        }
 
+        etPassword.transformationMethod = PasswordTransform()
         btnLogin.setOnClickListener {
 
             val signature = etSignature.text.toString()

@@ -1,6 +1,7 @@
 package com.synrgyseveneight.bcarevamp.ui.mutation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,12 +61,14 @@ class MutationFragment : Fragment() {
         val btnToFilter = view.findViewById<MaterialButton>(R.id.option_filter)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
         val imageNotFound = view.findViewById<ImageView>(R.id.img_trans_not_found)
+        val accountNumber = view.findViewById<TextView>(R.id.account_number)
 
         val receivedDate = arguments?.getString("dateOption")
         val receivedDateStart = arguments?.getString("dateStart")
         val receivedDateEnd = arguments?.getString("dateEnd")
         val receivedCategory = arguments?.getString("dataCategory")
         val receivedScreen = arguments?.getString("screen")
+
 
         setFilterButtonState(receivedDate, btnToFilter)
         val displayedDate = if (receivedDate.isNullOrEmpty()) "Saring Pencarian" else receivedDate
@@ -92,6 +95,9 @@ class MutationFragment : Fragment() {
             setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, false)
         }
 
+        viewModelAuth.userAccountNumber.observe(viewLifecycleOwner) {
+            accountNumber.text = formattedAccountNumber(it?: "Gagal memuat")
+        }
 
         viewModelMutation.mutationResponseData.observe(viewLifecycleOwner, Observer { mutationList ->
             historyAdapter.updateData(mutationList)
@@ -110,7 +116,7 @@ class MutationFragment : Fragment() {
         })
 
         if (receivedDateStart != null && receivedDateEnd != null) {
-            Toast.makeText(context, "Tanggal : $receivedDateStart - $receivedDateEnd", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Tanggal : $receivedDateStart - $receivedDateEnd", Toast.LENGTH_SHORT).show()
             viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
                 val requestBody = MutationRequest(
                     startDate = receivedDateStart.toString(),
@@ -123,7 +129,7 @@ class MutationFragment : Fragment() {
             val today = LocalDate.now()
             val startDate = today.withDayOfMonth(1)
             viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
-                Toast.makeText(context, "Tanggal : $startDate - $today", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Tanggal : $startDate - $today", Toast.LENGTH_SHORT).show()
                 val requestBody = MutationRequest(
                     startDate = startDate.toString(),
                     endDate = today.toString(),
@@ -132,8 +138,6 @@ class MutationFragment : Fragment() {
                 viewModelMutation.fetchMutations(page = 0, size = 10000, token = "$token", requestBody = requestBody)
             }
         }
-
-
 
         btnSwitchHistory.setOnClickListener {
             pageHistoryActive = true
@@ -193,6 +197,14 @@ class MutationFragment : Fragment() {
             btnToFilter.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_funnel)
             btnToFilter.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
         }
+    }
+    private fun formattedAccountNumber (accountNumber: String): String {
+        val cleanStringNomorRekening = accountNumber.replace("-", "")
+        val parsedNoRek = cleanStringNomorRekening.toString()
+        val formattedNoRek = parsedNoRek.replace(Regex("(\\d{4})"), "$1-")
+        return if (formattedNoRek.endsWith("-")) {
+            formattedNoRek.dropLast(1)
+        } else {formattedNoRek}
     }
 
 

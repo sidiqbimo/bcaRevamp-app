@@ -13,7 +13,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.divider.MaterialDivider
 import com.google.android.material.textfield.TextInputLayout
@@ -24,7 +23,6 @@ import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
-import kotlinx.coroutines.launch
 
 
 class LoginSecondFragment : Fragment() {
@@ -52,6 +50,9 @@ class LoginSecondFragment : Fragment() {
         val tilPassword: TextInputLayout = view.findViewById(R.id.inputPassword)
         val txtErrorPw: TextView = view.findViewById(R.id.errorPwInput)
         val linePw: MaterialDivider = view.findViewById(R.id.garis)
+
+        // mengubah *
+        etPassword.transformationMethod = PasswordTransform()
 
         viewModelAuth.userName.observe(viewLifecycleOwner) { name ->
             textName.text = name
@@ -104,9 +105,8 @@ class LoginSecondFragment : Fragment() {
     }
     private fun maskSignature(signature: String): String {
         if (signature.length < 5) {
-            return signature // Signature terlalu pendek, tampilkan apa adanya
+            return signature
         }
-        // Ambil karakter pertama, tambahkan *, lalu ambil karakter terakhir
         return signature[0] + "******" + signature.last()
     }
 }
