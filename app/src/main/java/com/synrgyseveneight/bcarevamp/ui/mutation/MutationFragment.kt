@@ -1,7 +1,7 @@
 package com.synrgyseveneight.bcarevamp.ui.mutation
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -28,6 +29,7 @@ import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
 import com.synrgyseveneight.bcarevamp.viewmodel.MutationViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.MutationViewModelFactory
+import java.io.File
 import java.time.LocalDate
 
 class MutationFragment : Fragment() {
@@ -62,7 +64,7 @@ class MutationFragment : Fragment() {
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
         val imageNotFound = view.findViewById<ImageView>(R.id.img_trans_not_found)
         val accountNumber = view.findViewById<TextView>(R.id.account_number)
-
+        val buttonDownload = view.findViewById<MaterialButton>(R.id.button_download)
         val receivedDate = arguments?.getString("dateOption")
         val receivedDateStart = arguments?.getString("dateStart")
         val receivedDateEnd = arguments?.getString("dateEnd")
@@ -161,7 +163,30 @@ class MutationFragment : Fragment() {
         backButton.setOnClickListener {
             activity?.onBackPressed()
         }
+
+        buttonDownload.setOnClickListener {
+            viewModelAuth.userToken.observe(viewLifecycleOwner) { token ->
+                if (token != null) {
+                    viewModelMutation.downloadMutationReport(token, requireContext())
+                }
+            }
+        }
+
+        viewModelMutation.pdfFilePath.observe(viewLifecycleOwner, Observer { filePath ->
+            if (filePath != null) {
+                openPdfFile(filePath)
+            }
+        })
+
+        viewModelMutation.downloadSuccess.observe(viewLifecycleOwner, Observer { success ->
+            if (success) {
+                Toast.makeText(context, "File downloaded successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Failed to download file", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
     private fun setSwitchButtonState(
         btnSwitchHistory: ConstraintLayout,
         textSwitchHistory: TextView,
@@ -205,6 +230,16 @@ class MutationFragment : Fragment() {
         return if (formattedNoRek.endsWith("-")) {
             formattedNoRek.dropLast(1)
         } else {formattedNoRek}
+    }
+
+    private fun openPdfFile(filePath: String) {
+        val file = File(filePath)
+        val uri = FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.provider", file)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/pdf")
+            flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_GRANT_READ_URI_PERMISSION
+        }
+        startActivity(Intent.createChooser(intent, "Open PDF with"))
     }
 
 
