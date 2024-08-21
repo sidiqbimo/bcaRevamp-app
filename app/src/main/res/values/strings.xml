@@ -21,6 +21,8 @@
     <string name="user_id_hint">Masukkan user id anda</string>
     <string name="password">Password</string>
     <string name="reset_password">Reset Password</string>
+    <string name="error_password">Password yang dimasukkan salah</string>
+    <string name="error_user_id">User ID yang dimasukkan salah</string>
 
 
     <!--    Navbar-->

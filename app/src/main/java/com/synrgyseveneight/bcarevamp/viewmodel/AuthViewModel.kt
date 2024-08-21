@@ -56,7 +56,7 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
                 } else {
 
                     val errorMessage = when (response.code()) {
-                        401 -> "Signature atau password salah"
+                        401 -> "User Id atau password salah"
                         else -> response.message()
                     }
                     onError(errorMessage)
