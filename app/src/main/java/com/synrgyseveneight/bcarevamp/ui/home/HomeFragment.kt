@@ -2,15 +2,19 @@ package com.synrgyseveneight.bcarevamp.ui.home
 
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -249,12 +253,25 @@ class HomeFragment : Fragment() {
             }.show()
         }
 
-        logoutButton.setOnClickListener{
-            viewModelAuth.clearToken {
-                // Navigasi kembali ke LoginFragment
-                findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
+        logoutButton.setOnClickListener {
+            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_logout, null)
+            val dialog = MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .setBackground(ColorDrawable(Color.Transparent.toArgb()))
+                .create()
+            val btnCancel = dialogView.findViewById<Button>(R.id.btnCancel)
+            val btnLogout = dialogView.findViewById<Button>(R.id.btnLogout)
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
             }
-            Toast.makeText(this.context, "Berhasil Logout", Toast.LENGTH_SHORT).show()
+            btnLogout.setOnClickListener {
+                viewModelAuth.clearToken {
+                    findNavController().navigate(R.id.action_homeFragment_to_loginSecondFragment)
+                }
+                Toast.makeText(this.context, "Berhasil Logout", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
+            dialog.show()
         }
 
         reportViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->

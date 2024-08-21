@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/whitebackground_roundedrectangle"
+    android:padding="16dp"
+    >
+
+   <TextView
+       android:id="@+id/text_logout"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Konfirmasi Logout"
+       android:textSize="15dp"
+       android:layout_marginTop="30dp"
+       android:textColor="@color/blue"
+       android:fontFamily="@font/nunitobold"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       />
+
+    <TextView
+        android:id="@+id/text_logout_desc"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:textSize="12dp"
+        android:text="Apakah anda yakin ingin keluar dari aplikasi ini?"
+        android:textColor="@color/black"
+        android:fontFamily="@font/nunitoregular"
+        app:layout_constraintTop_toBottomOf="@id/text_logout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_logout_desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="#E4EDFF"
+            android:fontFamily="@font/nunitobold"
+            android:text="Tidak"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            app:layout_constraintEnd_toStartOf="@+id/btnLogout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/nunitobold"
+            android:text="Ya,Keluar"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnCancel"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
