@@ -1,10 +1,12 @@
 package com.synrgyseveneight.bcarevamp.ui.transfer
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +16,11 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -303,7 +307,7 @@ class NewAccountTransferInput : Fragment() {
         viewModelTransfer.error.observe(viewLifecycleOwner, Observer { error ->
             if (error != null) {
                 goneWhenNotVerified()
-                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+                showCustomToast(error)
             }
         })
 
@@ -351,7 +355,7 @@ class NewAccountTransferInput : Fragment() {
                     viewModelAuth.fetchBalance(viewModelAuth.userToken.value?:"")
                 } else {
                     // Kalau udah tiga kali masih null, balik ke Beranda
-                    Toast.makeText(context, "Gagal memuat saldo. Silakan coba lagi", Toast.LENGTH_SHORT).show()
+                    showCustomToast("Gagal memuat saldo. Silakan coba lagi")
                     findNavController().navigate(R.id.action_newAccountTransferInput_to_homeFragment)
 
 
@@ -441,6 +445,56 @@ class NewAccountTransferInput : Fragment() {
 
         // Disable Button when verified
         buttonStartTransfer?.visibility = View.GONE
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun showCustomToast(message: String){
+
+        //create linear layout
+        val customToastLayout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(16, 16, 16, 16)
+            background = ContextCompat.getDrawable(requireContext(), R.drawable.toast_background)
+            elevation = 10f
+        }
+
+        val toastIcon = ImageView(requireContext()).apply {
+            setImageResource(R.drawable.icon_toast)
+            setPadding(0, 0, 16, 0)
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                gravity = Gravity.CENTER_VERTICAL
+                setMargins(24, 0, 24, 0)
+            }
+        }
+
+        val typefaces = ResourcesCompat.getFont(requireContext(), R.font.nunitoregular)
+
+
+        //text view for toast message
+        val toastTextView = TextView(requireContext()).apply {
+            text = message
+            setTextColor(R.color.darkBlue)
+            textSize = 16f
+            typeface = typefaces
+
+        }
+
+        customToastLayout.addView(toastIcon)
+        customToastLayout.addView(toastTextView)
+
+        with(Toast(requireContext())){
+            duration = Toast.LENGTH_SHORT
+            view = customToastLayout
+            setGravity(Gravity.CENTER, 0,400)
+            show()
+        }
+
+        //accessibility
+        customToastLayout.announceForAccessibility(message)
+
     }
 
 }

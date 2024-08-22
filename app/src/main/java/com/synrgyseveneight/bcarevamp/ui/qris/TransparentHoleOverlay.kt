@@ -23,6 +23,7 @@ class TransparentHoleOverlay(context: Context, attrs: AttributeSet) : View(conte
 
     private val holeRect = RectF()
 
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 

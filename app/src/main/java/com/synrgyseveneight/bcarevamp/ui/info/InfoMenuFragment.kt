@@ -1,6 +1,9 @@
 package com.synrgyseveneight.bcarevamp.ui.info
 
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -10,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.compose.material3.AlertDialog
@@ -20,6 +24,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
@@ -86,7 +93,7 @@ class InfoMenuFragment : Fragment() {
 
                     val window = dialog.window
                     window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                    window?.setGravity(Gravity.BOTTOM)
+                    window?.setGravity(Gravity.CENTER)
                     window?.setBackgroundDrawable(null)
 
                     // Textview dalam dialog
@@ -170,24 +177,32 @@ class InfoMenuFragment : Fragment() {
                 }
                 "Rekening Deposito" -> {
                     // TODO : Navigasi ke fragment Rekening Deposito
+                    showCustomToast("Mohon maaf, layanan belum tersedia")
                 }
                 "Info Reward BCA" -> {
                     // TODO : Navigasi ke fragment Info Reward BCA
+                    showCustomToast("Mohon maaf, layanan belum tersedia")
                 }
                 "Info Reksadana" -> {
                     // TODO : Navigasi ke fragment Info Reksadana
+                    showCustomToast("Mohon maaf, layanan belum tersedia")
                 }
                 "Info Kurs" -> {
                     // TODO : Navigasi ke fragment Info Kurs
+                    showCustomToast("Mohon maaf, layanan belum tersedia")
                 }
                 "Info RDN" -> {
                     // TODO : Navigasi ke fragment Info RDN
+                    showCustomToast("Mohon maaf, layanan belum tersedia")
                 }
                 "Info KPR" -> {
                     // TODO : Navigasi ke fragment Info KPR
+                    showCustomToast("Mohon maaf, layanan belum tersedia")
+
                 }
                 "Info Kartu Kredit" -> {
                     // TODO : Navigasi ke fragment Info Kartu Kredit
+                    showCustomToast("Mohon maaf, layanan belum tersedia")
                 }
             }
         }
@@ -203,6 +218,57 @@ class InfoMenuFragment : Fragment() {
 
         return view
     }
+
+    @SuppressLint("ResourceAsColor")
+    private fun showCustomToast(message: String){
+
+        //create linear layout
+        val customToastLayout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(16, 16, 16, 16)
+            background = ContextCompat.getDrawable(requireContext(), R.drawable.toast_background)
+            elevation = 10f
+        }
+
+        val toastIcon = ImageView(requireContext()).apply {
+            setImageResource(R.drawable.icon_toast)
+            setPadding(0, 0, 16, 0)
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                gravity = Gravity.CENTER_VERTICAL
+                setMargins(24, 0, 24, 0)
+            }
+        }
+
+        val typefaces = ResourcesCompat.getFont(requireContext(), R.font.nunitoregular)
+
+
+        //text view for toast message
+        val toastTextView = TextView(requireContext()).apply {
+            text = message
+            setTextColor(R.color.darkBlue)
+            textSize = 16f
+            typeface = typefaces
+
+        }
+
+        customToastLayout.addView(toastIcon)
+        customToastLayout.addView(toastTextView)
+
+        with(Toast(requireContext())){
+            duration = Toast.LENGTH_SHORT
+            view = customToastLayout
+            setGravity(Gravity.CENTER, 0,400)
+            show()
+        }
+
+        //accessibility
+        customToastLayout.announceForAccessibility(message)
+
+    }
+
 
     private fun formattedAccountNumber (accountNumber: String): String {
         val cleanStringNomorRekening = accountNumber.replace("-", "")

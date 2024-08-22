@@ -58,25 +58,33 @@
         android:layout_marginBottom="48dp"
         android:paddingHorizontal="24dp">
 
-        <Button
+        <ImageView
+            android:contentDescription="Tombol mode QRIS pindai"
             android:id="@+id/button_scan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Scan QRIS"
-            style="@style/buttonblue_whitetext"
+            app:srcCompat="@drawable/button_scanqris_img"
+
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+
+            android:layout_marginRight="8dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/button_Qristampil"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-            android:layout_marginEnd="6dp"/>
-
-        <Button
+        <ImageView
+            android:contentDescription="Tombol mode QRIS tampil"
             android:id="@+id/button_Qristampil"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Show QRIS"
+            app:srcCompat="@drawable/button_showqris_img"
 
-            style="@style/tombolbirucerah_denganteksputih"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+
+            android:clickable="true"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +104,7 @@
 
 
         <ImageView
+            android:contentDescription="Keluar"
             android:id="@+id/quitButton"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -122,6 +131,7 @@
             android:layout_marginTop="36dp">
 
             <ImageView
+                android:contentDescription="Saklar kilat kamera"
                 android:id="@+id/flashButton"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -140,6 +150,7 @@
                 />
 
             <ImageView
+                android:contentDescription="Tombol pindai QR dari galeri"
                 android:id="@+id/galleryButton"
                 android:layout_width="35dp"
                 android:layout_height="35dp"

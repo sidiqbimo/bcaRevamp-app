@@ -18,14 +18,21 @@ class QRISViewModel : ViewModel(){
     val qrisData = MutableLiveData<QrisData>()
     val error = MutableLiveData<String>()
 
+    val qrisNotFoundString: MutableLiveData<String> = MutableLiveData()
+
     fun searchQris (token: String, qrisId: String) {
         viewModelScope.launch {
             val response = apiService.searchQris("Bearer $token", qrisId)
             Log.d("QRISViewModel", "searchQris: $response with token $token and qrisId $qrisId")
             if (response.isSuccessful && response.body()?.status == true) {
                 Log.d("QRISViewModel", "Response Body: ${response.body()}")
+                Log.d("QRISViewModel","THE RESPONSE CODE IS ${response.code()}")
                 qrisData.value = response.body()?.data
-            } else {
+            } else if (response.code() == 500){
+                Log.d("QRISViewModel", "RESPONSE BODY IS 500")
+                qrisNotFoundString.value = "notfound"
+            }
+            else {
                 error.value = response.body()?.message ?: "Nomor rekening tidak ditemukan"
                 Log.d("QRISViewModel", "Error Body: ${response.errorBody()?.string()}")
             }

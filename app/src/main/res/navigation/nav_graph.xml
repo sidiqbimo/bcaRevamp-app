@@ -67,6 +67,13 @@
         <action
             android:id="@+id/action_homeFragment_to_QRISCameraFragment"
             app:destination="@id/QRISCameraFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_error404Fragment"
+            app:destination="@+id/erro404Fragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_error500Fragment"
+            app:destination="@+id/erro500Fragment"/>
+
     </fragment>
 
     <!--    Coming Soon-->
@@ -427,6 +434,31 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_transferPinFragment_to_error404Fragment"
+            app:destination="@+id/erro404Fragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/erro404Fragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.error.Error404"
+        android:label="Error 404"
+        tools:layout="@layout/fragment_error404">
+
+        <action
+            android:id="@+id/action_error404Fragment_to_homeFragment"
+            app:destination="@+id/homeFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/erro500Fragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.error.Error500"
+        android:label="Error 500"
+        tools:layout="@layout/fragment_error500">
+
+        <action
+            android:id="@+id/action_error500Fragment_to_homeFragment"
+            app:destination="@+id/homeFragment"/>
     </fragment>
 
     <fragment
@@ -703,6 +735,10 @@
                 android:defaultValue="screen1"/>
         </action>
     </fragment>
+
+
+
+
 
 
 

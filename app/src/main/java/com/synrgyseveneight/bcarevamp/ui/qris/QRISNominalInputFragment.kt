@@ -1,10 +1,14 @@
 package com.synrgyseveneight.bcarevamp.ui.qris
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper.getMainLooper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +17,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -214,11 +221,15 @@ class QRISNominalInputFragment : Fragment() {
         val nextButton = view.findViewById<TextView>(R.id.button_start_tf)
         val merchantImage = view.findViewById<ImageView>(R.id.circularImageViewMerchant)
 
+        val edittextContainerNominalInput = view.findViewById<View>(R.id.tf_inputnominal_container)
+
         var imagePathMerchant : String = ""
         var accountSenderName : String = ""
         var imagePathSender : String = ""
         var nmid : String = ""
         var terminalId : String = ""
+
+        val navigateToHome = MutableLiveData<Boolean>()
 
         viewModelQris = ViewModelProvider(this).get(QRISViewModel::class.java)
         viewModelTransferCheckSender = ViewModelProvider(this).get(TransferViewModel::class.java)
@@ -264,9 +275,25 @@ class QRISNominalInputFragment : Fragment() {
         // GET Qris Data
         viewModelQris.qrisData.observe(viewLifecycleOwner) { qrisData ->
             if (qrisData != null) {
+                Log.d ("QRISNominalInputFragment", "${qrisData}")
+
                 merchantName.text = qrisData.name
                 merchantLocation.text = qrisData.address
                 nominalInput.text = qrisData.amount?.toString() ?: ""
+
+                // if amount is 0
+                if (qrisData.amount > 0) {
+                    Handler(getMainLooper()).postDelayed({
+                        // edittext won't be editable
+                        nominalInput.isEnabled = false
+                    }, 500)
+                    edittextContainerNominalInput.setBackgroundResource(R.drawable.graybackground_bottomnoround)
+                    nominalInput.announceForAccessibility("Nominal transfer sudah terisi sebesar ${qrisData.amount} rupiah")
+                    // set nominalInput text to the center
+                    nominalInput.gravity = Gravity.CENTER
+                    nominalInput.background = null
+                }
+
                 imagePathMerchant = qrisData.image_path ?: ""
                 nmid = qrisData.nmid ?: ""
                 terminalId = qrisData.terminal_id ?: ""
@@ -276,8 +303,12 @@ class QRISNominalInputFragment : Fragment() {
                     .circleCrop()
                     .error(R.drawable.icon_person)
                     .into(merchantImage)
+
             }
+
         }
+
+
 
         // Get sender info
         viewModelTransferCheckSender.senderAccountData.observe(viewLifecycleOwner) { senderAccountData ->
@@ -320,6 +351,18 @@ class QRISNominalInputFragment : Fragment() {
                     viewModelAuth.userName.observe(viewLifecycleOwner) {
                         Log.d("QRISNominalInputFragment", "Name updated: $it")
                         accountSenderName = it ?: ""
+                    }
+
+                    // Check if false code
+                    viewModelQris.qrisNotFoundString.observe(viewLifecycleOwner) { data ->
+                        Log.d("QRISNominalInputFragment", "QRIS not found: $data")
+                        if (data == "notfound") {
+                            showCustomToast("QRIS tidak dikenali")
+                            findNavController().apply {
+                                popBackStack(R.id.homeFragment, false)
+                                navigate(R.id.homeFragment)
+                            }
+                        }
                     }
 
                     //SearchSenderAccount
@@ -398,5 +441,55 @@ class QRISNominalInputFragment : Fragment() {
         return if (formattedNoRek.endsWith("-")) {
             formattedNoRek.dropLast(1)
         } else {formattedNoRek}
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun showCustomToast(message: String){
+
+        //create linear layout
+        val customToastLayout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(16, 16, 16, 16)
+            background = ContextCompat.getDrawable(requireContext(), R.drawable.toast_background)
+            elevation = 10f
+        }
+
+        val toastIcon = ImageView(requireContext()).apply {
+            setImageResource(R.drawable.icon_toast)
+            setPadding(0, 0, 16, 0)
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                gravity = Gravity.CENTER_VERTICAL
+                setMargins(24, 0, 24, 0)
+            }
+        }
+
+        val typefaces = ResourcesCompat.getFont(requireContext(), R.font.nunitoregular)
+
+
+        //text view for toast message
+        val toastTextView = TextView(requireContext()).apply {
+            text = message
+            setTextColor(R.color.darkBlue)
+            textSize = 16f
+            typeface = typefaces
+
+        }
+
+        customToastLayout.addView(toastIcon)
+        customToastLayout.addView(toastTextView)
+
+        with(Toast(requireContext())){
+            duration = Toast.LENGTH_SHORT
+            view = customToastLayout
+            setGravity(Gravity.CENTER, 0,400)
+            show()
+        }
+
+        //accessibility
+        customToastLayout.announceForAccessibility(message)
+
     }
 }

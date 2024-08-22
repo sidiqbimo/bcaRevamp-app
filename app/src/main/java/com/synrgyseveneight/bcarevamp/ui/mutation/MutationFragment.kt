@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.google.android.material.button.MaterialButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.synrgyseveneight.bcarevamp.R
 import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
 import com.synrgyseveneight.bcarevamp.data.model.MutationRequest
@@ -242,7 +242,7 @@ class MutationFragment : Fragment() {
             setDataAndType(uri, "application/pdf")
             flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_GRANT_READ_URI_PERMISSION
         }
-        startActivity(Intent.createChooser(intent, "Open PDF with"))
+        startActivity(Intent.createChooser(intent, "Buka PDF Mutasi dengan..."))
     }
 
 

@@ -64,7 +64,7 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
             }
 
             override fun onFailure(call: retrofit2.Call<AuthResponse>, t: Throwable) {
-                onError(t.message ?: "Unknown error")
+//                onError(t.message ?: "Unknown error")
             }
         })
     }
