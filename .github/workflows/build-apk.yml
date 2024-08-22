@@ -4,7 +4,10 @@ name: Build APK
 on:
   push:
     branches:
-      - main # You can specify the branch where the workflow should trigger
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
