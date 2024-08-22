@@ -91,10 +91,10 @@ class MutationFragment : Fragment() {
 
         if (pageHistoryActive) {
             recyclerView.adapter = historyAdapter
-            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, true)
+            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, true)
         }else{
             recyclerView.adapter = proofAdapter
-            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, false)
+            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, false)
         }
 
         viewModelAuth.userAccountNumber.observe(viewLifecycleOwner) {
@@ -143,13 +143,13 @@ class MutationFragment : Fragment() {
 
         btnSwitchHistory.setOnClickListener {
             pageHistoryActive = true
-            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, true)
+            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, true)
             recyclerView.adapter = historyAdapter
         }
 
         btnSwitchProof.setOnClickListener {
             pageHistoryActive = false
-            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, false)
+            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, false)
             recyclerView.adapter = proofAdapter
         }
 
@@ -192,6 +192,7 @@ class MutationFragment : Fragment() {
         textSwitchHistory: TextView,
         btnSwitchProof: ConstraintLayout,
         textSwitchProof: TextView,
+        buttonDownload: MaterialButton,
         isHistoryActive: Boolean
     ) {
         if (isHistoryActive) {
@@ -199,11 +200,13 @@ class MutationFragment : Fragment() {
             textSwitchHistory.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
             btnSwitchProof.background = null
             textSwitchProof.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            buttonDownload.visibility = View.VISIBLE
         } else {
             btnSwitchProof.background = ContextCompat.getDrawable(requireContext(), R.drawable.switch_rounded_active)
             textSwitchProof.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
             btnSwitchHistory.background = null
             textSwitchHistory.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            buttonDownload.visibility = View.GONE
         }
     }
 
