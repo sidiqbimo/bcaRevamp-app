@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.firebase.firebase-perf")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -73,6 +75,7 @@ dependencies {
     implementation ("com.google.android.material:material:1.4.0")
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.firebase.perf)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

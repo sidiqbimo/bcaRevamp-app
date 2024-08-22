@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.perf.ktx.performance
 import com.synrgyseveneight.bcarevamp.data.model.AccountData
 import com.synrgyseveneight.bcarevamp.data.model.SingleLiveEvent
 import com.synrgyseveneight.bcarevamp.data.model.TransferRequest
@@ -104,6 +106,7 @@ class TransferViewModel : ViewModel() {
         note: String,
         savedAccount: Boolean
     ): Response<TransferResponse>? {
+        val myTrace = Firebase.performance.newTrace("performTransfer_trace ${System.currentTimeMillis()} with data $destinationAccountNumber, $amount, $mpin, $note, $savedAccount")
         val request = TransferRequest(destinationAccountNumber, amount, mpin, note, savedAccount)
         Log.d("TransferViewModel", "Performing Transfer with Token: $token")
         Log.d("TransferViewModel", "Performing Transfer Request Body: $request")

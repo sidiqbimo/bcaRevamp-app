@@ -34,6 +34,8 @@ import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
 import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import com.synrgyseveneight.bcarevamp.data.repository.MonthlyReportRepository
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.perf.FirebasePerformance
 import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
