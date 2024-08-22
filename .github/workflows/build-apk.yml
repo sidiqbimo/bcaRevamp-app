@@ -23,6 +23,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
+    - name: Grant execute permission for Gradle Wrapper
+      run: chmod +x ./gradlew
+      
     - name: Cache Gradle dependencies
       uses: actions/cache@v3
       with:
