@@ -117,6 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password_hint"
+                android:fontFamily="@font/nunitoregular"
                 android:textColorHint="#C4C4C4"
                 android:inputType="textPassword"
                 android:paddingStart="0dp"
@@ -181,6 +182,7 @@
             android:textColorLink="#115DA9"
             android:textSize="16sp"
             app:backgroundTint="#115DA9"
+            android:contentDescription="tombol untuk login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_error_pw" />
@@ -211,6 +213,7 @@
             app:cornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="tombol tentang BCA"
             app:layout_constraintTop_toBottomOf="@id/textGanti" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

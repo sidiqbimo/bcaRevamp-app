@@ -27,6 +27,7 @@
             android:layout_height="24dp"
             android:src="@drawable/button_back"
             android:scaleType="fitXY"
+            android:contentDescription="Tombol kembali"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -60,8 +61,8 @@
             android:checkedButton="@+id/radio_button_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:layoutDirection="rtl"
             app:layout_constraintTop_toTopOf="parent">
             <RadioButton
@@ -160,32 +161,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/transaction_option_title" />
-
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:id="@+id/dateInputLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:boxBackgroundColor="@color/white"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_marginEnd="10dp"-->
-<!--            android:textColorHint="@color/blue"-->
-<!--            android:fontFamily="@font/nunitoregular"-->
-<!--            android:hint="Pilih Tanggal"-->
-
-<!--            >-->
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/dateEditText"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="none"-->
-<!--                android:focusable="false"-->
-<!--                android:fontFamily="@font/nunitoregular"-->
-<!--                android:textColor="@color/blue"-->
-<!--                android:textColorHint="@color/blue"-->
-<!--                />-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
     </LinearLayout>
 
 
@@ -203,6 +178,7 @@
         android:id="@+id/transaction_option_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Jenis Transaksi"
         android:textColor="@color/blue"
         android:fontFamily="@font/nunitobold"
@@ -289,6 +265,7 @@
         android:textColorLink="@color/Primary100"
         android:textSize="14sp"
         app:backgroundTint="@color/Primary100"
+        android:contentDescription="tombol untuk menerapkan filter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/transaction_option" />

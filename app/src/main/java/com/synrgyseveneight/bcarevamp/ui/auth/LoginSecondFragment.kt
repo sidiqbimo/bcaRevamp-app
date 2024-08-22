@@ -51,7 +51,6 @@ class LoginSecondFragment : Fragment() {
         val txtErrorPw: TextView = view.findViewById(R.id.errorPwInput)
         val linePw: MaterialDivider = view.findViewById(R.id.garis)
 
-        // mengubah *
         etPassword.transformationMethod = PasswordTransform()
 
         viewModelAuth.userName.observe(viewLifecycleOwner) { name ->
@@ -89,7 +88,6 @@ class LoginSecondFragment : Fragment() {
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
                 txtErrorPw.visibility = TextView.GONE
                 tilPassword.setEndIconTintList(ContextCompat.getColorStateList(requireContext(), R.color.Primary100))
                 linePw.setDividerColor(ContextCompat.getColor(requireContext(), R.color.Primary100))
@@ -98,6 +96,18 @@ class LoginSecondFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         }
         etPassword.addTextChangedListener(textWatcher)
+
+
+        tilPassword.setEndIconOnClickListener {
+            val isPasswordVisible = etPassword.transformationMethod == null
+            if (isPasswordVisible) {
+                etPassword.transformationMethod = PasswordTransform()
+                etPassword.setSelection(etPassword.text.length)
+            } else {
+                etPassword.transformationMethod = null
+                etPassword.setSelection(etPassword.text.length)
+            }
+        }
 
     }
     private fun showLoading(isLoading: Boolean) {

@@ -173,9 +173,6 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
         <action
-            android:id="@+id/action_infoMenuFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment" />
-        <action
             android:id="@+id/action_infoMenuFragment_to_mutationFragment"
             app:destination="@id/mutationFragment" />
 
@@ -431,44 +428,7 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
     </fragment>
-    <fragment
-        android:id="@+id/mutationHistoryFragment"
-        tools:layout="@layout/fragment_mutation_history"
-        android:name="com.synrgyseveneight.bcarevamp.ui.mutation.MutationHistoryFragment"
-        android:label="MutationHistoryFragment" >
-        <action
-            android:id="@+id/action_mutationHistoryFragment_to_infoMenuFragment"
-            app:destination="@id/infoMenuFragment"
-            app:popUpTo="@id/action_mutationHistoryFragment_to_infoMenuFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_mutationHistoryFragment_to_mutationProofFragment"
-            app:destination="@id/mutationProofFragment"
-            app:popUpTo="@id/action_mutationHistoryFragment_to_mutationProofFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_mutationHistoryFragment_to_mutationOptionFilterFragment"
-            app:destination="@id/mutationOptionFilterFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mutationProofFragment"
-        tools:layout="@layout/fragment_mutation_proof"
-        android:name="com.synrgyseveneight.bcarevamp.ui.mutation.MutationProofFragment"
-        android:label="MutationProofFragment" >
-        <action
-            android:id="@+id/action_mutationProofFragment_to_infoMenuFragment"
-            app:destination="@id/infoMenuFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/action_mutationProofFragment_to_infoMenuFragment"/>
-        <action
-            android:id="@+id/action_mutationProofFragment_to_mutationOptionFilterFragment"
-            app:destination="@id/mutationOptionFilterFragment" />
-        <action
-            android:id="@+id/action_mutationProofFragment_to_mutationHistoryFragment"
-            app:destination="@id/mutationHistoryFragment"
-            app:popUpTo="@id/action_mutationProofFragment_to_mutationHistoryFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
+
     <fragment
         android:id="@+id/QRISCameraFragment"
         android:name="com.synrgyseveneight.bcarevamp.ui.qris.QRISCameraFragment"
