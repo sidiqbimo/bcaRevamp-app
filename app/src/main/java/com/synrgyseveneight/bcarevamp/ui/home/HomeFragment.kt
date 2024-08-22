@@ -1,20 +1,25 @@
 package com.synrgyseveneight.bcarevamp.ui.home
 
+import android.annotation.SuppressLint
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -48,6 +53,8 @@ class HomeFragment : Fragment() {
         MonthlyReportViewModelFactory(MonthlyReportRepository(RetrofitClient.instance))
     }
     private lateinit var favoriteTransactionAdapter: FavoriteTransactionAdapter
+
+    private lateinit var transaksiFavorit : RecyclerView
 
 
     override fun onCreateView(
@@ -151,10 +158,53 @@ class HomeFragment : Fragment() {
         transferButton.setOnClickListener(clickListener)
         transferTitle.setOnClickListener(clickListener)
 
+        // ewallet
         val eWalletLogo = view.findViewById<ImageView>(R.id.ewallletButton)
         eWalletLogo.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_eWalletOptionFragment)
+            showCustomToast("Mohon maaf, layanan belum tersedia")
         }
+
+        // Pembelian
+        val purchaseLogo = view.findViewById<ImageView>(R.id.buyButton)
+        val purchaseTitle = view.findViewById<TextView>(R.id.buyTitle)
+        purchaseLogo.setOnClickListener {
+            showCustomToast("Mohon maaf, layanan belum tersedia")
+        }
+        purchaseTitle.setOnClickListener {
+            showCustomToast("Mohon maaf, layanan belum tersedia")
+        }
+
+        // Cardless
+        val cardlessLogo = view.findViewById<ImageView>(R.id.cardlessButton)
+        val cardlessTitle = view.findViewById<TextView>(R.id.cardlessTitle)
+        cardlessLogo.setOnClickListener {
+            showCustomToast("Mohon maaf, layanan belum tersedia")
+        }
+        cardlessTitle.setOnClickListener {
+            showCustomToast("Mohon maaf, layanan belum tersedia")
+        }
+
+        // Lainnya
+        val moreLogo = view.findViewById<ImageView>(R.id.moreButton)
+        val moreTitle = view.findViewById<TextView>(R.id.moreTitle)
+        moreLogo.setOnClickListener {
+            showCustomToast("Mohon maaf, layanan belum tersedia")
+        }
+        moreTitle.setOnClickListener {
+            showCustomToast("Mohon maaf, layanan belum tersedia")
+        }
+
+        val editMenuTitle = view.findViewById<TextView>(R.id.editMenuTitle)
+        val editMenuButton = view.findViewById<ImageView>(R.id.editMenuButton)
+        editMenuButton.setOnClickListener{
+            showCustomToast("Mohon maaf, layanan belum tersedia")
+        }
+        editMenuTitle.setOnClickListener{
+            showCustomToast("Mohon maaf, layanan belum tersedia")
+        }
+
+        
+
         return view
     }
 
@@ -321,5 +371,55 @@ class HomeFragment : Fragment() {
     // Variabel untuk menyimpan pilihan dari NumberPicker
     private var selectedMonth: Int = Calendar.getInstance().get(Calendar.MONTH) + 1
     private var selectedYear: Int = Calendar.getInstance().get(Calendar.YEAR)
+
+    @SuppressLint("ResourceAsColor")
+    private fun showCustomToast(message: String){
+
+        //create linear layout
+        val customToastLayout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(16, 16, 16, 16)
+            background = ContextCompat.getDrawable(requireContext(), R.drawable.toast_background)
+            elevation = 10f
+        }
+
+        val toastIcon = ImageView(requireContext()).apply {
+            setImageResource(R.drawable.icon_toast)
+            setPadding(0, 0, 16, 0)
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                gravity = Gravity.CENTER_VERTICAL
+                setMargins(24, 0, 24, 0)
+            }
+        }
+
+        val typefaces = ResourcesCompat.getFont(requireContext(), R.font.nunitoregular)
+
+
+        //text view for toast message
+        val toastTextView = TextView(requireContext()).apply {
+            text = message
+            setTextColor(R.color.darkBlue)
+            textSize = 16f
+            typeface = typefaces
+
+        }
+
+        customToastLayout.addView(toastIcon)
+        customToastLayout.addView(toastTextView)
+
+        with(Toast(requireContext())){
+            duration = Toast.LENGTH_SHORT
+            view = customToastLayout
+            setGravity(Gravity.CENTER, 0,400)
+            show()
+        }
+
+        //accessibility
+        customToastLayout.announceForAccessibility(message)
+
+    }
 
 }
