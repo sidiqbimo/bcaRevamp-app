@@ -86,7 +86,7 @@ class InfoMenuFragment : Fragment() {
 
                     val window = dialog.window
                     window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                    window?.setGravity(Gravity.BOTTOM)
+                    window?.setGravity(Gravity.CENTER)
                     window?.setBackgroundDrawable(null)
 
                     // Textview dalam dialog

@@ -27,6 +27,7 @@
             android:layout_height="24dp"
             android:scaleType="fitXY"
             android:src="@drawable/button_back"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

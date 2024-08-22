@@ -131,7 +131,7 @@
                         android:fontFamily="@font/nunitomedium"
                         android:text="No. Rekening"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="10sp" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -146,7 +146,7 @@
                             android:fontFamily="@font/nunitobold"
                             android:text="000000000"
                             android:textColor="@color/white"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -173,7 +173,7 @@
                         android:fontFamily="@font/nunitomedium"
                         android:text="Total Saldo"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -188,7 +188,7 @@
                             android:fontFamily="@font/nunitobold"
                             android:text="Rp ..."
                             android:textColor="@color/white"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -201,7 +201,7 @@
                             android:fontFamily="@font/nunitobold"
                             android:text="Rp ---"
                             android:textColor="@color/white"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/saldoAmount"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -408,32 +408,6 @@
                         app:layout_constraintTop_toBottomOf="@id/buyButton" />
 
                     <ImageView
-                        android:id="@+id/investButton"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/bg_menu_bright"
-                        android:paddingHorizontal="16.5dp"
-                        android:paddingVertical="14dp"
-                        android:src="@drawable/button_pig"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="Tombol menu investasi"/>
-
-                    <TextView
-                        android:id="@+id/investTitle"
-                        style="@style/quickMenuTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:text="Investasi"
-                        app:layout_constraintLeft_toLeftOf="@id/investButton"
-                        app:layout_constraintRight_toRightOf="@id/investButton"
-                        app:layout_constraintTop_toBottomOf="@id/investButton" />
-
-                    <ImageView
                         android:id="@+id/cardlessButton"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -442,9 +416,10 @@
                         android:paddingVertical="14dp"
                         android:src="@drawable/button_card"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="Tombol menu cashless"/>
+                        android:contentDescription="Tombol menu cardless"/>
 
                     <TextView
                         android:id="@+id/cardlessTitle"
@@ -457,6 +432,31 @@
                         app:layout_constraintLeft_toLeftOf="@id/cardlessButton"
                         app:layout_constraintRight_toRightOf="@id/cardlessButton"
                         app:layout_constraintTop_toBottomOf="@id/cardlessButton" />
+
+                    <ImageView
+                        android:id="@+id/moreButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_menu_bright"
+                        android:paddingHorizontal="16.5dp"
+                        android:paddingVertical="14dp"
+                        android:src="@drawable/button_threedots"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="Tombol menu cashless"/>
+
+                    <TextView
+                        android:id="@+id/moreTitle"
+                        style="@style/quickMenuTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="Lainnya"
+                        app:layout_constraintLeft_toLeftOf="@id/moreButton"
+                        app:layout_constraintRight_toRightOf="@id/moreButton"
+                        app:layout_constraintTop_toBottomOf="@id/moreButton" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

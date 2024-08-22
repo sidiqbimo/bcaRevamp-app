@@ -1,7 +1,9 @@
 package com.synrgyseveneight.bcarevamp
 
 //import com.google.android.material.bottomappbar.BottomAppBar
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -16,9 +18,9 @@ class MainActivity : AppCompatActivity() {
 
 //    private lateinit var bottomAppBar: BottomAppBar
     private lateinit var fab: FloatingActionButton
-    private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var bottomAppBar: BottomAppBar
 
+    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,36 +35,76 @@ class MainActivity : AppCompatActivity() {
 //        setupActionBarWithNavController(navController)
 //        bottomAppBar = findViewById(R.id.bottomAppBar)
         fab = findViewById(R.id.fab)
-        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        val bottomNavigationViewMy = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomAppBar = findViewById(R.id.bottomAppBar)
 
 
 //        bottomNavigationView.setupWithNavController(navController)
         // NAVIGATION
-
+        bottomNavigationViewMy.setupWithNavController(navController)
 
         // Handle navigation item clicks
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
+        bottomNavigationViewMy.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
                 R.id.homeFragmentBottom -> {
-                    navController.navigate(R.id.homeFragment)
+                    findNavController(R.id.nav_host_fragment).apply {
+                        Log.d("MainActivity", "Home Fragment")
+                        popBackStack(R.id.homeFragment, false)
+                        navigate(R.id.homeFragment)
+                    }
                     true
                 }
                 R.id.mutasiFragmentBottom -> {
-                    navController.navigate(R.id.mutationFragment)
+                    Log.d("MainActivity", "Mutation Fragment")
+                    findNavController(R.id.nav_host_fragment).apply {
+                        Log.d("MainActivity", "Mutation Fragment")
+                        popBackStack(R.id.mutationFragment, false)
+                        navigate(R.id.mutationFragment)
+                    }
                     true
                 }
                 R.id.notifikasiFragmentBottom -> {
-                    navController.navigate(R.id.comingsonFragment)
+                    findNavController(R.id.nav_host_fragment).apply {
+                        popBackStack(R.id.comingsonFragment, false)
+                        navigate(R.id.comingsonFragment)
+                    }
                     true
                 }
                 R.id.profileFragmentBottom -> {
-                    navController.navigate(R.id.comingsonFragment)
+                    findNavController(R.id.nav_host_fragment).apply {
+                        popBackStack(R.id.comingsonFragment, false)
+                        navigate(R.id.comingsonFragment)
+                    }
                     true
                 }
                 else -> false
             }
         }
+//        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.homeFragmentBottom -> {
+//                    Log.d("MainActivity", "Home Fragment")
+//                    navController.navigate(R.id.homeFragment)
+//                    true
+//                }
+//                R.id.mutasiFragmentBottom -> {
+//                    Log.d("MainActivity", "Mutation Fragment")
+//                    navController.navigate(R.id.mutationFragment)
+//                    true
+//                }
+//                R.id.notifikasiFragmentBottom -> {
+//                    Log.d("MainActivity", "Notification Fragment")
+//                    navController.navigate(R.id.comingsonFragment)
+//                    true
+//                }
+//                R.id.profileFragmentBottom -> {
+//                    Log.d("MainActivity", "Profile Fragment")
+//                    navController.navigate(R.id.comingsonFragment)
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
 
         // Handle FloatingActionButton click
         fab.setOnClickListener {
@@ -77,12 +119,12 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.homeFragment -> {
-                    bottomNavigationView.visibility = View.VISIBLE
+                    bottomNavigationViewMy.visibility = View.VISIBLE
                     fab.visibility = View.VISIBLE
                     bottomAppBar.visibility = View.VISIBLE}
 
                 else -> {
-                    bottomNavigationView.visibility = View.GONE
+                    bottomNavigationViewMy.visibility = View.GONE
                     fab.visibility = View.GONE
                     bottomAppBar.visibility = View.GONE
                     }

@@ -6,8 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 //    private const val BASE_URL = "https://setara-api-service-production-77a3.up.railway.app/"
-    private const val BASE_URL = "https://setara-api-service-staging-93e4.up.railway.app/"
-
+//    private const val BASE_URL = "https://setara-api-service-staging-93e4.up.railway.app/"
+    private const val BASE_URL = "https://setara-api-service-production-b57c.up.railway.app/"
 
     // Inisialisasi Retrofit
     val instance: ApiService by lazy {
