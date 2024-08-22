@@ -27,6 +27,7 @@
             android:layout_height="24dp"
             android:scaleType="fitXY"
             android:src="@drawable/button_back"
+            android:contentDescription="Tombol kembali"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,6 +58,7 @@
                 android:layout_height="match_parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="Tombol berganti ke halaman riwayat Transaksi"
                 >
                 <TextView
                     android:id="@+id/text_switch_history"
@@ -77,6 +79,7 @@
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="Tombol berganti ke halaman Bukti Transaksi"
                 >
                 <TextView
                     android:id="@+id/text_switch_proof"
@@ -102,7 +105,8 @@
         android:background="#FBFDFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_container"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/info_rek"
@@ -113,7 +117,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/option_filter"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:accessibilityTraversalBefore="@+id/layout_info_rek"
+            android:contentDescription="Info sumber rekening pengguna">
 
             <LinearLayout
                 android:id="@+id/layout_info_rek"
@@ -200,6 +206,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="tombol download laporan mutasi"
 
         />
 
@@ -208,6 +215,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

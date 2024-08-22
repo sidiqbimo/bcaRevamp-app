@@ -51,18 +51,8 @@ class LoginFragment : Fragment() {
         val linePw: MaterialDivider = view.findViewById(R.id.garis2)
         val tilPassword: TextInputLayout = view.findViewById(R.id.inputPassword)
 
-//        viewModel.userSignature.observe(viewLifecycleOwner) { signature ->
-//            lifecycleScope.launch {
-//                if (signature != null) {
-//                    etSignature.setText(signature)
-//                    etSignature.isEnabled = false
-//                } else {
-//                    etSignature.isEnabled = true
-//                }
-//            }
-//        }
-
         etPassword.transformationMethod = PasswordTransform()
+
         btnLogin.setOnClickListener {
 
             val signature = etSignature.text.toString()
@@ -70,7 +60,7 @@ class LoginFragment : Fragment() {
 
             // Validasi input sebelum melakukan sign-in
             if (signature.isEmpty()) {
-                Toast.makeText(requireContext(), "Signature tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "User Id tidak boleh kosong", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (password.isEmpty()) {
@@ -112,6 +102,18 @@ class LoginFragment : Fragment() {
         }
         etSignature.addTextChangedListener(textWatcher)
         etPassword.addTextChangedListener(textWatcher)
+
+
+        tilPassword.setEndIconOnClickListener {
+            val isPasswordVisible = etPassword.transformationMethod == null
+            if (isPasswordVisible) {
+                etPassword.transformationMethod = PasswordTransform()
+                etPassword.setSelection(etPassword.text.length)
+            } else {
+                etPassword.transformationMethod = null
+                etPassword.setSelection(etPassword.text.length)
+            }
+        }
     }
     private fun showLoading(isLoading: Boolean) {
         progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE

@@ -73,7 +73,7 @@ class MutationViewModel(private val repository: MutationRepository) : ViewModel(
 
     private fun savePdfToStorage(body: ResponseBody, context: Context) {
         try {
-            val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "mutation_report.pdf")
+            val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "Laporan_Mutasi.pdf")
             var inputStream: InputStream? = null
             var outputStream: OutputStream? = null
 

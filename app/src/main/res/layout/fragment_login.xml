@@ -57,7 +57,6 @@
             android:layout_height="wrap_content"
             app:boxBackgroundMode="none"
             app:hintEnabled="false"
-
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/user_id_hint"
                 android:textColor="@color/Primary100"
+                android:fontFamily="@font/nunitoregular"
                 android:inputType="text"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
@@ -133,6 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password_hint"
+                android:fontFamily="@font/nunitoregular"
                 android:textColor="@color/Primary100"
                 android:textColorHint="#C4C4C4"
                 android:inputType="textPassword"
@@ -193,6 +194,7 @@
             android:textColorLink="@color/Primary100"
             android:textSize="14sp"
             app:backgroundTint="@color/Primary100"
+            android:contentDescription="tombol untuk login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_error_pw" />
@@ -221,6 +223,7 @@
             app:backgroundTint="@color/bgBluSk"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="tombol tentang BCA"
             app:layout_constraintTop_toBottomOf="@id/textGanti" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -236,14 +239,15 @@
             android:id="@+id/menu_pengajuan"
             android:layout_width="98dp"
             android:layout_height="45dp"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:contentDescription="@string/des_btn_pengajuan">
 
             <ImageView
-                android:contentDescription="@string/des_btn_pengajuan"
                 android:layout_width="28dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="5dp"
                 android:src="@drawable/icon_atm"
+                android:contentDescription="@string/des_btn_pengajuan"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -267,7 +271,8 @@
             android:layout_width="98dp"
             android:layout_height="45dp"
             android:layout_marginStart="10dp"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:contentDescription="@string/des_btn_halobca">
 
             <ImageView
                 android:contentDescription="@string/des_btn_halobca"
@@ -298,7 +303,8 @@
             android:layout_width="98dp"
             android:layout_height="45dp"
             android:layout_marginStart="10dp"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:contentDescription="@string/des_btn_wabca">
 
             <ImageView
                 android:contentDescription="@string/des_btn_wabca"

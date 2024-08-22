@@ -180,9 +180,9 @@ class MutationFragment : Fragment() {
 
         viewModelMutation.downloadSuccess.observe(viewLifecycleOwner, Observer { success ->
             if (success) {
-                Toast.makeText(context, "File downloaded successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Laporan Mutasi Berhasil Didownload", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "Failed to download file", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Gagal Mendownload Laporan", Toast.LENGTH_SHORT).show()
             }
         })
     }
