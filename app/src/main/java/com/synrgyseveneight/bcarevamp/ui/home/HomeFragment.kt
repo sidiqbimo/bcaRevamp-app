@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
@@ -259,7 +258,7 @@ class HomeFragment : Fragment() {
                 ErrorType.ERROR_404 -> findNavController().navigate(R.id.action_homeFragment_to_error404Fragment)
                 ErrorType.ERROR_500 -> findNavController().navigate(R.id.action_homeFragment_to_error500Fragment)
                 ErrorType.UNKNOWN_ERROR -> {
-                    Toast.makeText(requireContext(), "Unknown error", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), "Unknown error", Toast.LENGTH_SHORT).show()
                 }
             }
         })

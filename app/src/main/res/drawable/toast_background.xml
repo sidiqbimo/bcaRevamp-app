@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#E4EDFF"/>
-    <corners android:radius="8dp"/>
-    <padding
-        android:left="16dp"
-        android:top="8dp"
-        android:right="16dp"
-        android:bottom="8dp"/>
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Shadow Layer -->
+    <item android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#E4EDFF" />
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+
+    <!-- Border Layer -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#E4EDFF" />
+            <stroke
+                android:width="2dp"
+                android:color="#9CB3E4"/> <!-- You can change this color to match your design -->
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+
+</layer-list>

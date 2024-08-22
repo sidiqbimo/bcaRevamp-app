@@ -227,11 +227,19 @@ class InfoMenuFragment : Fragment() {
             orientation = LinearLayout.HORIZONTAL
             setPadding(16, 16, 16, 16)
             background = ContextCompat.getDrawable(requireContext(), R.drawable.toast_background)
+            elevation = 10f
         }
 
         val toastIcon = ImageView(requireContext()).apply {
             setImageResource(R.drawable.icon_toast)
             setPadding(0, 0, 16, 0)
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                gravity = Gravity.CENTER_VERTICAL
+                setMargins(24, 0, 24, 0)
+            }
         }
 
         val typefaces = ResourcesCompat.getFont(requireContext(), R.font.nunitoregular)
@@ -252,7 +260,7 @@ class InfoMenuFragment : Fragment() {
         with(Toast(requireContext())){
             duration = Toast.LENGTH_SHORT
             view = customToastLayout
-            setGravity(Gravity.BOTTOM, 0,100)
+            setGravity(Gravity.CENTER, 0,400)
             show()
         }
 

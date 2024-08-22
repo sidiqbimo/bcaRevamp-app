@@ -107,8 +107,8 @@ class TransferViewModel : ViewModel() {
         val request = TransferRequest(destinationAccountNumber, amount, mpin, note, savedAccount)
         Log.d("TransferViewModel", "Performing Transfer with Token: $token")
         Log.d("TransferViewModel", "Performing Transfer Request Body: $request")
-        val response = apiService.transfer("Bearer $token", request)
-        Log.d("TransferViewModel", "Performing Transfer Response Body: $response")
+//        val response = apiService.transfer("Bearer $token", request)
+//        Log.d("TransferViewModel", "Performing Transfer Response Body: $response")
 
         // biar kalau timeout, ga langsung crash
         return try {

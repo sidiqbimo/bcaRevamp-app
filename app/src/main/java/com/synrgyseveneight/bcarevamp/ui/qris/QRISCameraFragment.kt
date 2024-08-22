@@ -1,13 +1,22 @@
 package com.synrgyseveneight.bcarevamp.ui.qris
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.camera.core.Camera
@@ -19,6 +28,7 @@ import androidx.camera.core.ImageProxy
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -33,6 +43,7 @@ import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
+import java.io.IOException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -46,8 +57,10 @@ class QRISCameraFragment : Fragment() {
     private lateinit var barcodeScanner: BarcodeScanner
     private lateinit var previewView: PreviewView
 
+    // gallery scan
+    private val PICK_IMAGE_REQUEST_CODE = 101
+
     private var isFlashOn = false
-    private lateinit var flashcameratoggle: ImageView
 
     private var imageCapture: ImageCapture? = null
     private var camera: Camera? = null
@@ -60,7 +73,14 @@ class QRISCameraFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+//        Toast.makeText(requireContext(), "Scan QRIS", Toast.LENGTH_SHORT).show()
         val view = inflater.inflate(R.layout.fragment_q_r_i_s_camera, container, false)
+        val qrisShowButton = view.findViewById<ImageView>(R.id.button_Qristampil)
+
+        qrisShowButton.setOnClickListener {
+           showCustomToast("Mohon maaf, layanan belum tersedia.")
+        }
+
         previewView = view.findViewById(R.id.previewView)
 
         val backButton = view.findViewById<ImageView>(R.id.quitButton)
@@ -86,15 +106,14 @@ class QRISCameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        flashcameratoggle = view.findViewById<ImageView>(R.id.flashButton)
-        // flash camera
-        flashcameratoggle.setOnClickListener {
-            Log.d("QRISCameraFragment", "Flash button clicked")
-            toggleFlash()
-        }
+        val flashcameraButton = view.findViewById<ImageView>(R.id.flashButton)
+        val galleryscanbutton = view.findViewById<ImageView>(R.id.galleryButton)
 
-        // Initialize flashcameratoggle
-        flashcameratoggle = view.findViewById<ImageView>(R.id.flashButton)
+        // Scan QRIS from gallery
+        galleryscanbutton.setOnClickListener {
+            Log.d("QRISuCameraFragment", "Gallery button clicked")
+            openGallery()
+        }
 
         // Initialize ImageCapture
         val cameraSelector = CameraSelector.Builder()
@@ -104,33 +123,9 @@ class QRISCameraFragment : Fragment() {
         imageCapture = ImageCapture.Builder().build()
 
         // Set flashcameratoggle click listener
-        flashcameratoggle.setOnClickListener {
-            imageCapture?.flashMode = if (imageCapture?.flashMode == ImageCapture.FLASH_MODE_ON) {
-                ImageCapture.FLASH_MODE_OFF
-            } else {
-                ImageCapture.FLASH_MODE_ON
-            }
-        }
-    }
-
-    // flash camera
-    private fun toggleFlash() {
-        if (camera?.cameraInfo?.hasFlashUnit() == true) {
-            isFlashOn = if (isFlashOn) {
-                // Turn off the torch
-                camera?.cameraControl?.enableTorch(false)
-                flashcameratoggle.setImageResource(R.drawable.button_flash_whiteborder)
-                Log.d("QRISCameraFragment", "Torch off")
-                false
-            } else {
-                // Turn on the torch
-                camera?.cameraControl?.enableTorch(true)
-                flashcameratoggle.setImageResource(R.drawable.button_flash_white)
-                Log.d("QRISCameraFragment", "Torch on")
-                true
-            }
-        } else {
-            Toast.makeText(requireContext(), "Lampu kilat tidak ditemukan", Toast.LENGTH_SHORT).show()
+        flashcameraButton.setOnClickListener {
+            Log.d("QRISCameraFragment", "Flash button clicked")
+            toggleFlash()
         }
     }
 
@@ -148,20 +143,103 @@ class QRISCameraFragment : Fragment() {
 
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
+            imageCapture = ImageCapture.Builder().build()
+
             val imageAnalyzer = ImageAnalysis.Builder().build().also {
                 it.setAnalyzer(cameraExecutor, { imageProxy ->
                     processImageProxy(imageProxy)
                 })
             }
 
+            // Bind everything to the lifecycle, including ImageCapture
             cameraProvider.unbindAll()
-            cameraProvider.bindToLifecycle(
-                this, cameraSelector, preview, imageAnalyzer
+            camera = cameraProvider.bindToLifecycle(
+                this, cameraSelector, preview, imageCapture, imageAnalyzer
             )
+
+            // Test turning on the torch immediately after binding
+            camera?.cameraControl?.enableTorch(false)
 
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
+
+    private fun toggleFlash() {
+        val flashimageicon = view?.findViewById<ImageView>(R.id.flashButton)
+        camera?.let { camera ->
+            if (camera.cameraInfo.hasFlashUnit()) {
+                isFlashOn = if (isFlashOn) {
+                    // Turn off the torch
+                    camera.cameraControl.enableTorch(false)
+                    Log.d("QRISCameraFragment", "Torch turned off")
+                    flashimageicon?.setImageResource(R.drawable.button_flash_whiteborder)
+                    flashimageicon?.announceForAccessibility("Lampu kamera mati")
+                    false
+                } else {
+                    // Turn on the torch
+                    camera.cameraControl.enableTorch(true)
+                    Log.d("QRISCameraFragment", "Torch turned on")
+                    flashimageicon?.setImageResource(R.drawable.button_flash_white)
+                    flashimageicon?.announceForAccessibility("Lampu kamera menyala")
+                    true
+                }
+            } else {
+                Toast.makeText(requireContext(), "Flash not available on this device", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    // scan from gallery
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, PICK_IMAGE_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val imageUri = data?.data
+            if (imageUri != null) {
+                scanImageFromUri(imageUri)
+            }
+        }
+    }
+
+    private fun scanImageFromUri(imageUri: Uri) {
+        try {
+            val inputImage = InputImage.fromFilePath(requireContext(), imageUri)
+            barcodeScanner.process(inputImage)
+                .addOnSuccessListener { barcodes ->
+                    processBarcodes(barcodes)
+                }
+                .addOnFailureListener { e ->
+                    Log.e("QRISCameraFragment", "Error scanning image from gallery", e)
+                    Toast.makeText(requireContext(), "Failed to scan the image", Toast.LENGTH_SHORT).show()
+                }
+        } catch (e: IOException) {
+            Log.e("QRISCameraFragment", "Error reading image from gallery", e)
+        }
+    }
+
+    private fun processBarcodes(barcodes: List<Barcode>) {
+        for (barcode in barcodes) {
+            barcode.rawValue?.let { qrCode ->
+                if (barcode.valueType == Barcode.TYPE_TEXT) {
+                    val idQris = qrCode
+                    Log.d("QRISCameraFragment", "QR Code: $idQris")
+                    findNavController().navigate(
+                        QRISCameraFragmentDirections.actionQRISCameraFragmentToQRISNominalInputFragment(
+                            idQris,
+                            "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"
+                        )
+                    )
+                    return
+                }
+            }
+        }
+    }
 
 
     @OptIn(ExperimentalGetImage::class)
@@ -229,7 +307,9 @@ class QRISCameraFragment : Fragment() {
         when (requestCode) {
             REQUEST_CAMERA_PERMISSION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    setupCamera()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        setupCamera()
+                    }, 1000)
                 } else {
                     Toast.makeText(requireContext(), "Izin kamera dibutuhkan", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(QRISCameraFragmentDirections.actionQRISCameraFragmentToHomeFragment())
@@ -241,6 +321,56 @@ class QRISCameraFragment : Fragment() {
 
     companion object {
         private const val REQUEST_CAMERA_PERMISSION = 10
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun showCustomToast(message: String){
+
+        //create linear layout
+        val customToastLayout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(16, 16, 16, 16)
+            background = ContextCompat.getDrawable(requireContext(), R.drawable.toast_background)
+            elevation = 10f
+        }
+
+        val toastIcon = ImageView(requireContext()).apply {
+            setImageResource(R.drawable.icon_toast)
+            setPadding(0, 0, 16, 0)
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                gravity = Gravity.CENTER_VERTICAL
+                setMargins(24, 0, 24, 0)
+            }
+        }
+
+        val typefaces = ResourcesCompat.getFont(requireContext(), R.font.nunitoregular)
+
+
+        //text view for toast message
+        val toastTextView = TextView(requireContext()).apply {
+            text = message
+            setTextColor(R.color.darkBlue)
+            textSize = 16f
+            typeface = typefaces
+
+        }
+
+        customToastLayout.addView(toastIcon)
+        customToastLayout.addView(toastTextView)
+
+        with(Toast(requireContext())){
+            duration = Toast.LENGTH_SHORT
+            view = customToastLayout
+            setGravity(Gravity.CENTER, 0,400)
+            show()
+        }
+
+        //accessibility
+        customToastLayout.announceForAccessibility(message)
+
     }
 
 }
