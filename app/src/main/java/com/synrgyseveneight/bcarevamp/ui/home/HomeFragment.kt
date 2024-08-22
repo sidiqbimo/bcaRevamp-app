@@ -33,6 +33,7 @@ import com.synrgyseveneight.bcarevamp.data.repository.MonthlyReportRepository
 import com.synrgyseveneight.bcarevamp.ui.common.HorizontalSpaceItemDecoration
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.AuthViewModelFactory
+import com.synrgyseveneight.bcarevamp.viewmodel.ErrorType
 import com.synrgyseveneight.bcarevamp.viewmodel.MonthlyReportViewModel
 import com.synrgyseveneight.bcarevamp.viewmodel.MonthlyReportViewModelFactory
 import kotlinx.coroutines.launch
@@ -253,7 +254,17 @@ class HomeFragment : Fragment() {
             }.show()
         }
 
-        logoutButton.setOnClickListener {
+        reportViewModel.navigationEvent.observe(viewLifecycleOwner, { errorType ->
+            when(errorType){
+                ErrorType.ERROR_404 -> findNavController().navigate(R.id.action_homeFragment_to_error404Fragment)
+                ErrorType.ERROR_500 -> findNavController().navigate(R.id.action_homeFragment_to_error500Fragment)
+                ErrorType.UNKNOWN_ERROR -> {
+                    Toast.makeText(requireContext(), "Unknown error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
+        logoutButton.setOnClickListener{
             val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_logout, null)
             val dialog = MaterialAlertDialogBuilder(requireContext())
                 .setView(dialogView)
@@ -273,6 +284,7 @@ class HomeFragment : Fragment() {
             }
             dialog.show()
         }
+
 
         reportViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             progressBarReport.visibility = if (isLoading) View.VISIBLE else View.GONE

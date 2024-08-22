@@ -33,11 +33,21 @@
 
     <string name="hello_blank_fragment">Halo</string>
 
+    <!-- Strings for Toast info -->
+    <string name="toast_info">Mohon maaf, layanan belum tersedia.</string>
+
 
     <!--  contentDescription -->
     <string name="des_logo_setara">Logo Aplikasi Setara</string>
     <string name="des_btn_pengajuan">Tombol Pengajuan Kartu</string>
     <string name="des_btn_halobca">Tombol Halo BCA</string>
     <string name="des_btn_wabca">Tombol Whatsapp BCA</string>
+    <string name="des_toast_icon">Icon Info</string>
+    <string name="des_toast_info">Mohon maaf, layanan belum tersedia</string>
+    <string name="title_error_404">Opps! Halaman Tidak Ditemukan</string>
+    <string name="desc_error404">Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan. Silahkan kembali ke Beranda atau coba gunakan fitur pencarian.</string>
+    <string name="kembali_ke_beranda">Kembali ke Beranda</string>
+    <string name="title_error500">Maaf, Terjadi Kesalahan Pada Server Kami :(</string>
+    <string name="desc_error500">Kami sedang berusaha memperbaikinya secepat mungkin. Silahkan kembali ke Beranda atau coba lagi nanti.</string>
 
 </resources>

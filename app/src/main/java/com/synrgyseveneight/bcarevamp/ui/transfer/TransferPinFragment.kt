@@ -125,7 +125,7 @@ class TransferPINFragment : Fragment() {
                         args.bankReceiver
                     )
                     findNavController().navigate(action)
-                } else {
+                } else{
                     val action = TransferPINFragmentDirections.actionTransferPINFragmentToTransferFailedFragment()
                     findNavController().navigate(action)
                 }
