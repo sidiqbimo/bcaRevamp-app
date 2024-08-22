@@ -20,6 +20,8 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import okhttp3.ResponseBody;
+import retrofit2.http.Streaming
 
 interface ApiService {
     // Endpoint untuk sign-in
@@ -68,4 +70,9 @@ interface ApiService {
         @Body requestBody: MutationRequest
     ): Response<MutationResponse>
 
+    @Streaming
+    @GET("api/v1/transactions/generate-all-mutation-report")
+    suspend fun downloadMutationReport(
+        @Header("Authorization") token: String
+    ): Response<ResponseBody>
 }

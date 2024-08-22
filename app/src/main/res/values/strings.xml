@@ -39,7 +39,7 @@
 
     <!--  contentDescription -->
     <string name="des_logo_setara">Logo Aplikasi Setara</string>
-    <string name="des_btn_pengajuan">Tombol Pengajuan Kartu</string>
+    <string name="des_btn_pengajuan">Tombol Pengajuan Kartu Kredit</string>
     <string name="des_btn_halobca">Tombol Halo BCA</string>
     <string name="des_btn_wabca">Tombol Whatsapp BCA</string>
     <string name="des_toast_icon">Icon Info</string>

@@ -550,6 +550,7 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        android:contentDescription="Tombol untuk pilih rentan bulan catatan keuangan"
                         android:paddingRight="19dp"/>
 
 
