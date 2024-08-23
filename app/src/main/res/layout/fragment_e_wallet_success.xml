@@ -209,12 +209,18 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:background="@android:color/darker_gray" />
-                    <TableRow>
 
+                    <!-- Nominal Transfer -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Nominal Transfer"
                             android:textColor="@color/black"
                             android:textSize="14sp"/>
@@ -226,13 +232,19 @@
                             android:text="Rp 0"
                             android:textSize="14sp"
                             android:textColor="#115DA9"/>
-                    </TableRow>
+                    </LinearLayout>
 
-                    <TableRow>
+                    <!-- Biaya Admin -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Biaya Admin"
                             android:textColor="@color/black"
                             android:textSize="14sp"/>
@@ -244,13 +256,19 @@
                             android:text="Rp 0"
                             android:textSize="14sp"
                             android:textColor="#115DA9"/>
-                    </TableRow>
+                    </LinearLayout>
 
-                    <TableRow>
+                    <!-- Catatan -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Catatan"
                             android:textColor="@color/black"
                             android:textSize="14sp"/>
@@ -262,17 +280,23 @@
                             android:text="-"
                             android:textSize="14sp"
                             android:textColor="#115DA9"/>
-                    </TableRow>
+                    </LinearLayout>
 
-                    <TableRow>
+                    <!-- TOTAL -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="TOTAL"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            android:layout_marginTop="8dp" />
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:id="@+id/tvTotalDetails"
@@ -280,10 +304,10 @@
                             android:layout_height="wrap_content"
                             android:text="Rp 0"
                             android:textSize="16sp"
-                            android:layout_marginTop="8dp"
                             android:textStyle="bold"
-                            android:textColor="#115DA9"/>
-                    </TableRow>
+                            android:textColor="#115DA9"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
 
                 </TableLayout>
 
