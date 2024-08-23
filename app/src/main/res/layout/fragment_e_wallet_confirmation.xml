@@ -207,15 +207,20 @@
                         android:layout_marginTop="16dp"
                         android:textColor="#115DA9"/>
 
-                    <TableRow>
+                    <!-- Nominal Top Up -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Nominal Top Up"
                             android:textColor="#858585"
                             android:textSize="14sp"
-                            android:layout_marginTop="16dp"
                             android:layout_marginLeft="10dp"/>
 
                         <TextView
@@ -223,21 +228,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rp 0"
-                            android:layout_marginTop="16dp"
                             android:textSize="14sp"
-                            android:layout_marginLeft="100dp"
                             android:textColor="#115DA9"/>
-                    </TableRow>
+                    </LinearLayout>
 
-                    <TableRow>
+                    <!-- Biaya Admin -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textColor="#858585"
+                            android:layout_weight="1"
                             android:text="Biaya Admin"
+                            android:textColor="#858585"
                             android:textSize="14sp"
-                            android:layout_marginTop="8dp"
                             android:layout_marginLeft="10dp"/>
 
                         <TextView
@@ -246,20 +254,23 @@
                             android:layout_height="wrap_content"
                             android:text="Rp 0"
                             android:textSize="14sp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="100dp"
                             android:textColor="#115DA9"/>
-                    </TableRow>
+                    </LinearLayout>
 
-                    <TableRow>
+                    <!-- Catatan -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textColor="#858585"
+                            android:layout_weight="1"
                             android:text="Catatan"
+                            android:textColor="#858585"
                             android:textSize="14sp"
-                            android:layout_marginTop="8dp"
                             android:layout_marginLeft="10dp"/>
 
                         <TextView
@@ -268,28 +279,32 @@
                             android:layout_height="wrap_content"
                             android:text="-"
                             android:textSize="14sp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="100dp"
                             android:textColor="#115DA9"/>
-                    </TableRow>
+                    </LinearLayout>
 
+                    <!-- Divider -->
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:background="@android:color/darker_gray" />
 
-                    <TableRow>
+                    <!-- Total -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Total"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginLeft="10dp"
-                            android:textColor="#115DA9"/>
+                            android:textColor="#115DA9"
+                            android:layout_marginLeft="10dp"/>
 
                         <TextView
                             android:id="@+id/tvTotalDetails"
@@ -297,11 +312,9 @@
                             android:layout_height="wrap_content"
                             android:text="Rp 0"
                             android:textSize="16sp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginLeft="100dp"
+                            android:textStyle="bold"
                             android:textColor="#115DA9"/>
-                    </TableRow>
-
+                    </LinearLayout>
                 </TableLayout>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

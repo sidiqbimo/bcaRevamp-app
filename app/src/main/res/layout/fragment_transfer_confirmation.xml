@@ -230,116 +230,126 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
 
-                <TableLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:text="Detail"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#115DA9"/>
+
+                <!-- Nominal Top Up -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="10dp">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Detail"
+                        android:layout_weight="1"
+                        android:text="Nominal Top Up"
+                        android:textColor="#858585"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvAmountDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp 0"
+                        android:textSize="14sp"
+                        android:textColor="#115DA9"/>
+                </LinearLayout>
+
+                <!-- Biaya Admin -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#858585"
+                        android:text="Biaya Admin"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvAdminFeeDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp 0"
+                        android:textSize="14sp"
+                        android:textColor="#115DA9"/>
+                </LinearLayout>
+
+                <!-- Catatan -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#858585"
+                        android:text="Catatan"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvMessageDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textSize="14sp"
+                        android:textColor="#115DA9"/>
+                </LinearLayout>
+
+                <!-- Separator -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/darker_gray" />
+
+                <!-- Total -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Total"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:layout_marginTop="16dp"
                         android:textColor="#115DA9"/>
 
-                    <TableRow>
+                    <TextView
+                        android:id="@+id/tvTotalDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp 0"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#115DA9"/>
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Nominal Top Up"
-                            android:textColor="#858585"
-                            android:textSize="14sp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginLeft="10dp"/>
-
-                        <TextView
-                            android:id="@+id/tvAmountDetails"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp 0"
-                            android:layout_marginTop="16dp"
-                            android:textSize="14sp"
-                            android:layout_marginLeft="100dp"
-                            android:textColor="#115DA9"/>
-                    </TableRow>
-
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#858585"
-                            android:text="Biaya Admin"
-                            android:textSize="14sp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="10dp"/>
-
-                        <TextView
-                            android:id="@+id/tvAdminFeeDetails"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp 0"
-                            android:textSize="14sp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="100dp"
-                            android:textColor="#115DA9"/>
-                    </TableRow>
-
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#858585"
-                            android:text="Catatan"
-                            android:textSize="14sp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="10dp"/>
-
-                        <TextView
-                            android:id="@+id/tvMessageDetails"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textSize="14sp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="100dp"
-                            android:textColor="#115DA9"/>
-                    </TableRow>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@android:color/darker_gray" />
-
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginLeft="10dp"
-                            android:textColor="#115DA9"/>
-
-                        <TextView
-                            android:id="@+id/tvTotalDetails"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp 0"
-                            android:textSize="16sp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginLeft="100dp"
-                            android:textColor="#115DA9"/>
-                    </TableRow>
-
-                </TableLayout>
             </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
