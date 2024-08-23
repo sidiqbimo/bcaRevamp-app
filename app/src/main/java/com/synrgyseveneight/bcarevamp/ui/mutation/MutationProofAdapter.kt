@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
 import com.synrgyseveneight.bcarevamp.data.model.MutationResponseData
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.Locale
 
 class MutationProofAdapter(private var mutationProofItems: List<MutationResponseData>) :
@@ -34,7 +35,7 @@ class MutationProofAdapter(private var mutationProofItems: List<MutationResponse
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mutationProofItems[position]
 
-        holder.textDate.text = item.formatted_date
+        holder.textDate.text = formatTanggal(item.formatted_date)
         holder.textReff.text = "No Reff : "+ item.reference_number
         holder.textType.text = item.type
         holder.textStatus.text = "Sukses"
@@ -59,5 +60,12 @@ class MutationProofAdapter(private var mutationProofItems: List<MutationResponse
     private fun formatBalance(balance: Double): String {
         val formatter = NumberFormat.getNumberInstance(Locale.GERMANY)
         return "Rp " + formatter.format(balance)
+    }
+
+    fun formatTanggal(tanggal: String): String {
+        val formatInput = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val formatOutput = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val date = formatInput.parse(tanggal)
+        return formatOutput.format(date)
     }
 }

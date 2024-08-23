@@ -91,10 +91,10 @@ class MutationFragment : Fragment() {
 
         if (pageHistoryActive) {
             recyclerView.adapter = historyAdapter
-            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, true)
+            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, imageNotFound, true)
         }else{
             recyclerView.adapter = proofAdapter
-            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, false)
+            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, imageNotFound, false)
         }
 
         viewModelAuth.userAccountNumber.observe(viewLifecycleOwner) {
@@ -107,6 +107,8 @@ class MutationFragment : Fragment() {
             val isEmpty = mutationList.isEmpty()
             recyclerView.visibility = if (isEmpty) View.GONE else View.VISIBLE
             imageNotFound.visibility = if (isEmpty) View.VISIBLE else View.GONE
+            buttonDownload.visibility = if (isEmpty) View.GONE else View.VISIBLE
+
         })
 
         viewModelMutation.error.observe(viewLifecycleOwner, Observer { errorMessage ->
@@ -143,13 +145,13 @@ class MutationFragment : Fragment() {
 
         btnSwitchHistory.setOnClickListener {
             pageHistoryActive = true
-            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, true)
+            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, imageNotFound, true)
             recyclerView.adapter = historyAdapter
         }
 
         btnSwitchProof.setOnClickListener {
             pageHistoryActive = false
-            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, false)
+            setSwitchButtonState(btnSwitchHistory, textSwitchHistory, btnSwitchProof, textSwitchProof, buttonDownload, imageNotFound, false)
             recyclerView.adapter = proofAdapter
         }
 
@@ -193,14 +195,21 @@ class MutationFragment : Fragment() {
         btnSwitchProof: ConstraintLayout,
         textSwitchProof: TextView,
         buttonDownload: MaterialButton,
+        imageView: ImageView,
         isHistoryActive: Boolean
+
     ) {
         if (isHistoryActive) {
             btnSwitchHistory.background = ContextCompat.getDrawable(requireContext(), R.drawable.switch_rounded_active)
             textSwitchHistory.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
             btnSwitchProof.background = null
             textSwitchProof.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            buttonDownload.visibility = View.VISIBLE
+            if(imageView.visibility == View.VISIBLE){
+                buttonDownload.visibility = View.GONE
+            }else{
+                buttonDownload.visibility = View.VISIBLE
+            }
+
         } else {
             btnSwitchProof.background = ContextCompat.getDrawable(requireContext(), R.drawable.switch_rounded_active)
             textSwitchProof.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
