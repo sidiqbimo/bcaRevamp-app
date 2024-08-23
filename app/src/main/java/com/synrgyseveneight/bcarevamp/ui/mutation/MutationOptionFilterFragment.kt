@@ -49,6 +49,7 @@ class MutationOptionFilterFragment : Fragment() {
         val btnTerapkan = view.findViewById<Button>(R.id.buttonTerapkan)
         val title_tab = view.findViewById<TextView>(R.id.title_tab)
         val transaction_option = view.findViewById<ConstraintLayout>(R.id.transaction_option)
+        val formatInput = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
         optionTransaction.visibility = View.GONE
         datePickerView.visibility = View.GONE
@@ -59,6 +60,18 @@ class MutationOptionFilterFragment : Fragment() {
             btnTerapkan.setOnClickListener {
                 if (dateSelected != null) {
                     if (dateRangeRadioGroup.checkedRadioButtonId == R.id.radio_date_picker) {
+                        if (buttonOptionDate1.text.toString() == "Tanggal Awal" ||
+                            buttonOptionDate2.text.toString() == "Tanggal Akhir") {
+                            Toast.makeText(requireContext(), "Harap isi kedua tanggal !", Toast.LENGTH_SHORT).show()
+                            return@setOnClickListener
+                        }
+                        val startDate = formatInput.parse(buttonOptionDate1.text.toString())
+                        val endDate = formatInput.parse(buttonOptionDate2.text.toString())
+
+                        if (startDate.after(endDate)) {
+                            Toast.makeText(requireContext(), "Tanggal awal tidak boleh lebih besar dari tanggal akhir !", Toast.LENGTH_SHORT).show()
+                            return@setOnClickListener
+                        }
                         dateStart = formatDateToYYYYMMDD(buttonOptionDate1.text.toString())
                         dateEnd = formatDateToYYYYMMDD(buttonOptionDate2.text.toString())
                         dateSelected = buttonOptionDate1.text.toString() + " - " + buttonOptionDate2.text.toString()
@@ -68,7 +81,7 @@ class MutationOptionFilterFragment : Fragment() {
                     findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(),
-                        "Pilih tanggal terlebih dahulu", Toast.LENGTH_SHORT).show()
+                        "Pilih tanggal terlebih dahulu !", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -79,16 +92,26 @@ class MutationOptionFilterFragment : Fragment() {
             btnTerapkan.setOnClickListener {
                 if (dateSelected != null) {
                     if (dateRangeRadioGroup.checkedRadioButtonId == R.id.radio_date_picker) {
-                        dateStart = formatDateToYYYYMMDD(buttonOptionDate1.text.toString())
-                        dateEnd = formatDateToYYYYMMDD(buttonOptionDate2.text.toString())
-                        dateSelected = buttonOptionDate1.text.toString() + " - " + buttonOptionDate2.text.toString()
+                        if (buttonOptionDate1.text.toString() == "Tanggal Awal" ||
+                            buttonOptionDate2.text.toString() == "Tanggal Akhir") {
+                            Toast.makeText(requireContext(), "Harap Pilih Tanggal Awal dan Akhir !", Toast.LENGTH_SHORT).show()
+                            return@setOnClickListener
+                        }
+
+                        val startDate = formatInput.parse(buttonOptionDate1.text.toString())
+                        val endDate = formatInput.parse(buttonOptionDate2.text.toString())
+
+                        if (startDate.after(endDate)) {
+                            Toast.makeText(requireContext(), "Tanggal awal tidak boleh lebih besar dari tanggal akhir !", Toast.LENGTH_SHORT).show()
+                            return@setOnClickListener
+                        }
                     }
                     val action = MutationOptionFilterFragmentDirections.
                     actionMutationOptionFilterFragmentToMutationFragment(dateSelected.toString(),dateStart.toString(),dateEnd.toString(),dataCategory.toString(),"screen2")
                     findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(),
-                        "Pilih tanggal terlebih dahulu", Toast.LENGTH_SHORT).show()
+                        "Pilih tanggal terlebih dahulu !", Toast.LENGTH_SHORT).show()
                 }
             }
         }

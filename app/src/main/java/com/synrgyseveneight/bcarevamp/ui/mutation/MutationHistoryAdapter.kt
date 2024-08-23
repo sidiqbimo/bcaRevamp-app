@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
 import com.synrgyseveneight.bcarevamp.data.model.MutationResponseData
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.Locale
 
 class MutationHistoryAdapter(private var mutationHistoryItems: List<MutationResponseData>) :
@@ -31,7 +32,7 @@ class MutationHistoryAdapter(private var mutationHistoryItems: List<MutationResp
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mutationHistoryItems[position]
         holder.textId.text = item.unique_code
-        holder.textTime.text = item.formatted_time
+        holder.textTime.text = item.formatted_time +" WIB"
         holder.textType.text = item.type
 
 
@@ -45,7 +46,7 @@ class MutationHistoryAdapter(private var mutationHistoryItems: List<MutationResp
 
         if (position == 0 || item.formatted_date != mutationHistoryItems[position - 1].formatted_date) {
             holder.textDate.visibility = View.VISIBLE
-            holder.textDate.text = item.formatted_date
+            holder.textDate.text = formatTanggal(item.formatted_date)
         } else {
             holder.textDate.visibility = View.GONE
         }
@@ -61,5 +62,12 @@ class MutationHistoryAdapter(private var mutationHistoryItems: List<MutationResp
     private fun formatBalance(balance: Double): String {
         val formatter = NumberFormat.getNumberInstance(Locale.GERMANY)
         return "Rp " + formatter.format(balance)
+    }
+
+    fun formatTanggal(tanggal: String): String {
+        val formatInput = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val formatOutput = SimpleDateFormat("dd MMMM yyyy", Locale("id"))
+        val date = formatInput.parse(tanggal)
+        return formatOutput.format(date)
     }
 }
