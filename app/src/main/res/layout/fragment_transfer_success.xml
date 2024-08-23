@@ -328,6 +328,7 @@
                             android:layout_weight="1"
                             android:text="TOTAL"
                             android:textSize="14sp"
+                            android:textStyle="bold"
                             android:textColor="@color/black" />
 
                         <TextView
