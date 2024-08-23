@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_homeFragment_to_error500Fragment"
             app:destination="@+id/erro500Fragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_mutationFragment"
+            app:destination="@id/mutationFragment" />
 
     </fragment>
 
@@ -735,11 +738,14 @@
                 android:defaultValue="screen1"/>
         </action>
     </fragment>
-
-
-
-
-
+    <fragment
+        android:id="@+id/notifikasiFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.comingsoon.NotifikasiFragment"
+        android:label="NotifikasiFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.synrgyseveneight.bcarevamp.ui.comingsoon.ProfileFragment"
+        android:label="ProfileFragment" />
 
 
 </navigation>

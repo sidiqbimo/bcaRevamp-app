@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.synrgyseveneight.bcarevamp.R
 
-class CoomingSoonFragment: Fragment() {
+class ComingSoonFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
