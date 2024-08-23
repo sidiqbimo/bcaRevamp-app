@@ -2,13 +2,16 @@ package com.synrgyseveneight.bcarevamp.ui.home
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
 
-class FavoriteTransactionAdapter(private val transactions: List<Transaction>) :
+class FavoriteTransactionAdapter(
+    private val transactions: List<Transaction>
+) :
     RecyclerView.Adapter<FavoriteTransactionAdapter.ViewHolder>() {
 
     data class Transaction(val iconResId: Int, val title: String, val subtitle: String, val accountName: String)

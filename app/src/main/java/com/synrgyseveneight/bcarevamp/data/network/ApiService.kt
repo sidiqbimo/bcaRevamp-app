@@ -21,6 +21,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import okhttp3.ResponseBody;
+import retrofit2.http.PUT
 import retrofit2.http.Streaming
 
 interface ApiService {
@@ -75,4 +76,14 @@ interface ApiService {
     suspend fun downloadMutationReport(
         @Header("Authorization") token: String
     ): Response<ResponseBody>
+
+    //endpoint untuk transaksi favorit
+    @PUT("api/v1/favorite-account")
+    suspend fun favoriteAccount(
+        @Query("idTersimpan") idTersimpan: String,
+        @Query("favorite") favorite: Boolean,
+        @Header("Authorization") token: String
+    ): Response<ResponseBody>
+
+
 }

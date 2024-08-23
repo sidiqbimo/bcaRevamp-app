@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
 
-class ContactListAdapter(private var contacts: List<Contact>) : RecyclerView.Adapter<ContactListAdapter.ContactViewHolder>() {
+class ContactListAdapter(
+    private var contacts: List<Contact>) :
+    RecyclerView.Adapter<ContactListAdapter.ContactViewHolder>() {
 
     private var filteredContacts: List<Contact> = contacts
 

@@ -119,7 +119,7 @@ class InfoMenuFragment : Fragment() {
                     }
 
                     // Update saldo
-                    viewModelAuth.userBalance.observe(this) { balance ->
+                    viewModelAuth.userBalance.observe(viewLifecycleOwner) { balance ->
                         Log.d("InfoFragment", "Balance updated: $balance")
                         balanceText.text = "Rp $balance"
 

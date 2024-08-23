@@ -94,6 +94,7 @@
         android:id="@+id/heart_button"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:contentDescription="tap untuk menambahkan transfer ke daftar favorit"
         app:srcCompat="@drawable/button_favheart"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"

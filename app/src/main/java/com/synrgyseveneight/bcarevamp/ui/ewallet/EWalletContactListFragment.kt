@@ -9,10 +9,14 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
+import com.synrgyseveneight.bcarevamp.data.model.User
+import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
+import kotlinx.coroutines.launch
 
 class EWalletContactListFragment : Fragment() {
 
@@ -50,6 +54,8 @@ class EWalletContactListFragment : Fragment() {
         favouriteContactAdapter = ContactListAdapter(favouriteContacts)
         favouriteRecyclerView.adapter = favouriteContactAdapter
 
+        val url = ""
+
         // Initialize RecyclerView for normal contacts
         val normalRecyclerView = view.findViewById<RecyclerView>(R.id.normalcontact_recyclerview_tf)
         normalRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -82,5 +88,32 @@ class EWalletContactListFragment : Fragment() {
         // Implement search filtering for both adapters
         favouriteContactAdapter.filter(query)
         normalContactAdapter.filter(query)
+    }
+
+    private fun toggleFavorite(contact: User){
+        //determine favorite status
+        val newFavoriteStatus = true
+        val token = ""
+
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.instance.favoriteAccount(
+                    idTersimpan = contact.account_number,
+                    favorite = newFavoriteStatus,
+                    token = token
+                )
+                if(response.isSuccessful){
+                    favouriteContactAdapter.notifyDataSetChanged()
+                    normalContactAdapter.notifyDataSetChanged()
+
+                }else{
+                    //handle api error
+                }
+            } catch (e: Exception){
+                //handle execptions like network error
+            }
+        }
+
+
     }
 }
