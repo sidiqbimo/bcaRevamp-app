@@ -118,7 +118,7 @@
             android:layout_height="349dp"
             android:layout_gravity="center"
             android:contentDescription="Success"
-            android:src="@drawable/belum_ada_transaksi"
+            android:src="@drawable/page_trans_not_found"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
