@@ -1,12 +1,10 @@
 package com.synrgyseveneight.bcarevamp.data.repository
 
-import android.util.Log
 import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
-import com.synrgyseveneight.bcarevamp.data.model.AuthRequest
-import com.synrgyseveneight.bcarevamp.data.model.AuthResponse
-import com.synrgyseveneight.bcarevamp.data.model.BalanceResponse
-import com.synrgyseveneight.bcarevamp.data.model.SearchAccountResponse
-import com.synrgyseveneight.bcarevamp.data.model.TransferResponse
+import com.synrgyseveneight.bcarevamp.data.model.auth.AuthRequest
+import com.synrgyseveneight.bcarevamp.data.model.auth.AuthResponse
+import com.synrgyseveneight.bcarevamp.data.model.balance.BalanceResponse
+import com.synrgyseveneight.bcarevamp.data.model.searchaccount.SearchAccountResponse
 import com.synrgyseveneight.bcarevamp.data.network.ApiService
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Call

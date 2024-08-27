@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.synrgyseveneight.bcarevamp.data.model.AuthRequest
-import com.synrgyseveneight.bcarevamp.data.model.AuthResponse
+import com.synrgyseveneight.bcarevamp.data.model.auth.AuthRequest
+import com.synrgyseveneight.bcarevamp.data.model.auth.AuthResponse
 import com.synrgyseveneight.bcarevamp.data.model.SingleLiveEvent
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import kotlinx.coroutines.launch

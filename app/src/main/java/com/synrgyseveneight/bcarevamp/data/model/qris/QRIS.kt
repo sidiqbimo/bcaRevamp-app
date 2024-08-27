@@ -1,4 +1,4 @@
-package com.synrgyseveneight.bcarevamp.data.model
+package com.synrgyseveneight.bcarevamp.data.model.qris
 
 data class SearchQrisResponse(
     val code: Int,

@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.synrgyseveneight.bcarevamp.data.model.QRISResponse
-import com.synrgyseveneight.bcarevamp.data.model.QRISTransferRequest
-import com.synrgyseveneight.bcarevamp.data.model.QrisData
+import com.synrgyseveneight.bcarevamp.data.model.qris.QRISResponse
+import com.synrgyseveneight.bcarevamp.data.model.qris.QRISTransferRequest
+import com.synrgyseveneight.bcarevamp.data.model.qris.QrisData
 import com.synrgyseveneight.bcarevamp.data.network.ApiService
 import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import kotlinx.coroutines.launch
