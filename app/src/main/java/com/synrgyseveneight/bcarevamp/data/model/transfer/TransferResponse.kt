@@ -1,4 +1,6 @@
-package com.synrgyseveneight.bcarevamp.data.model
+package com.synrgyseveneight.bcarevamp.data.model.transfer
+
+import com.synrgyseveneight.bcarevamp.data.model.auth.User
 
 data class TransferResponse(
     val code: Int,

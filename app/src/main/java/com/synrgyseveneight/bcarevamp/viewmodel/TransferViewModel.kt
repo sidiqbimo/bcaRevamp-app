@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.synrgyseveneight.bcarevamp.data.model.AccountData
+import com.synrgyseveneight.bcarevamp.data.model.searchaccount.AccountData
 import com.synrgyseveneight.bcarevamp.data.model.SingleLiveEvent
-import com.synrgyseveneight.bcarevamp.data.model.TransferRequest
-import com.synrgyseveneight.bcarevamp.data.model.TransferResponse
+import com.synrgyseveneight.bcarevamp.data.model.transfer.TransferRequest
+import com.synrgyseveneight.bcarevamp.data.model.transfer.TransferResponse
 import com.synrgyseveneight.bcarevamp.data.network.ApiService
 import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import kotlinx.coroutines.launch

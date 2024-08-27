@@ -1,4 +1,4 @@
-package com.synrgyseveneight.bcarevamp.data.model
+package com.synrgyseveneight.bcarevamp.data.model.transfer
 
 data class TransferRequest(
     val destinationAccountNumber: String,

@@ -1,4 +1,4 @@
-package com.synrgyseveneight.bcarevamp.data.model
+package com.synrgyseveneight.bcarevamp.data.model.mothlyreport
 
 data class MonthlyReportResponse(
     val code: Int,

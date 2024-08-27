@@ -1,4 +1,6 @@
-package com.synrgyseveneight.bcarevamp.data.model
+package com.synrgyseveneight.bcarevamp.data.model.qris
+
+import com.synrgyseveneight.bcarevamp.data.model.auth.User
 
 data class QRISResponse (
     val code: Int,

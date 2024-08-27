@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.synrgyseveneight.bcarevamp.R
 import com.synrgyseveneight.bcarevamp.data.datastore.AuthDataStore
-import com.synrgyseveneight.bcarevamp.data.model.MutationRequest
+import com.synrgyseveneight.bcarevamp.data.model.mutation.MutationRequest
 import com.synrgyseveneight.bcarevamp.data.network.RetrofitClient
 import com.synrgyseveneight.bcarevamp.data.repository.AuthRepository
 import com.synrgyseveneight.bcarevamp.data.repository.MutationRepository

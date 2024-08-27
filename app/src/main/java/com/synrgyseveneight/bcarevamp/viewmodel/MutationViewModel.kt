@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.synrgyseveneight.bcarevamp.data.model.MutationResponseData
-import com.synrgyseveneight.bcarevamp.data.model.MutationRequest
+import com.synrgyseveneight.bcarevamp.data.model.mutation.MutationResponseData
+import com.synrgyseveneight.bcarevamp.data.model.mutation.MutationRequest
 import com.synrgyseveneight.bcarevamp.data.repository.MutationRepository
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody

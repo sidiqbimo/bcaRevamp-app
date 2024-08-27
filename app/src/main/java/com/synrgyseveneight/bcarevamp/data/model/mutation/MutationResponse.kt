@@ -1,4 +1,4 @@
-package com.synrgyseveneight.bcarevamp.data.model
+package com.synrgyseveneight.bcarevamp.data.model.mutation
 
 data class MutationResponse(
     val code: Int,

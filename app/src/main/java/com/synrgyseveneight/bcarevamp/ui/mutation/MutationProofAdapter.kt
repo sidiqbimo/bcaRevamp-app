@@ -7,7 +7,7 @@ import android.widget.Space
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.synrgyseveneight.bcarevamp.R
-import com.synrgyseveneight.bcarevamp.data.model.MutationResponseData
+import com.synrgyseveneight.bcarevamp.data.model.mutation.MutationResponseData
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
