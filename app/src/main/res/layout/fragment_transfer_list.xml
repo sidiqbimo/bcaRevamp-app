@@ -150,6 +150,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:clipChildren="false"
+            android:clipToPadding="false"
             >
             <!--        Daftar Favorit -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -160,13 +163,16 @@
                 app:layout_constraintBottom_toTopOf="@id/container_normalcontact_tf"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 >
 
                 <TextView
                     android:id="@+id/title_favcontact_tf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daftar Favorit (Memuat...)"
+                    android:text="Daftar Favorit (2)"
                     style="@style/contactlist_title_nosaved"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -176,19 +182,24 @@
                     android:layout_marginTop="24dp"
                     />
 
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/favouritecontact_recyclerview_tf"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:background="@drawable/whitebackground_roundedrectangle"
                     app:layout_constraintTop_toBottomOf="@id/title_favcontact_tf"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:paddingHorizontal="24dp"
+
+                    android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="16dp"
-                    android:clipChildren="true"
-                    android:clipToPadding="true"
+                    android:layout_marginBottom="24dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:elevation="20dp"
                     />
+
 
 
 
@@ -203,13 +214,16 @@
                 app:layout_constraintTop_toBottomOf="@id/container_favouritecontact_tf"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 >
 
                 <TextView
                     android:id="@+id/title_nosavedcontact_tf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daftar Tersimpan (Memuat...)"
+                    android:text="Daftar Tersimpan (4)"
                     style="@style/contactlist_title_nosaved"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -231,7 +245,7 @@
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="24dp"
-                    android:clipChildren="true"
+                    android:clipChildren="false"
                     android:clipToPadding="false"
                     android:elevation="20dp"
                     />

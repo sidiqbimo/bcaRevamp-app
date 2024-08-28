@@ -1,12 +1,12 @@
 package com.synrgyseveneight.bcarevamp.ui.transfer
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +15,7 @@ import com.synrgyseveneight.bcarevamp.R
 class TransferListFragment : Fragment() {
 
     private lateinit var transferListAdapter: TransferListAdapter
+    private lateinit var favTransferListAdapter: TransferFavouriteListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,18 +32,14 @@ class TransferListFragment : Fragment() {
 
         // Sample data untuk kontak tersimpan NON-favorit
         val transferList = listOf(
-            TransferListAdapter.TransferList(R.drawable.icon_person, "Budi Arto", "Tahapan BCA", "1234567890"),
-            TransferListAdapter.TransferList(R.drawable.icon_person, "Andi Yassar", "Tahapan BCA", "1234567890"),
-            TransferListAdapter.TransferList(R.drawable.icon_person, "Caca Gempita", "Tahapan BCA", "1234567890"),
-            TransferListAdapter.TransferList(R.drawable.icon_person, "Dedi Kurniawan", "Tahapan", "1234567890"),
-            TransferListAdapter.TransferList(R.drawable.icon_person, "Eka Saputro", "Tahapan", "1234567890"),
-            TransferListAdapter.TransferList(R.drawable.icon_person, "Joni Bagaskara", "Tahapan", "1234567890"),
-            TransferListAdapter.TransferList(R.drawable.icon_person, "Kiki Saputra", "Tahapan", "1234567890"),
-            TransferListAdapter.TransferList(R.drawable.icon_person, "Lala Saputri", "Tahapan", "1234567890"),
             TransferListAdapter.TransferList(R.drawable.icon_person, "Mama BCA", "Tahapan", "1234567890"),
             TransferListAdapter.TransferList(R.drawable.icon_person, "Nana BCA", "Tahapan", "1234567890"),
             TransferListAdapter.TransferList(R.drawable.icon_person, "Oma BCA", "Tahapan", "1234567890"),
             TransferListAdapter.TransferList(R.drawable.icon_person, "Papa BCA", "Tahapan", "1234567890"),
+        )
+        val favTransferList = listOf(
+            TransferFavouriteListAdapter.TransferList(R.drawable.icon_person, "Danang Edward", "Tahapan", "1234567890"),
+            TransferFavouriteListAdapter.TransferList(R.drawable.icon_person, "Heru Darmawan", "Tahapan", "1234567890"),
         )
 
         // Initialize RecyclerView
@@ -51,6 +48,12 @@ class TransferListFragment : Fragment() {
             LinearLayoutManager.VERTICAL,false)
         transferListAdapter = TransferListAdapter(transferList)
         recyclerView.adapter = transferListAdapter
+
+        val recyclerViewFavourtied = view.findViewById<RecyclerView>(R.id.favouritecontact_recyclerview_tf)
+        recyclerViewFavourtied.layoutManager = LinearLayoutManager(context,
+            LinearLayoutManager.VERTICAL,false)
+        favTransferListAdapter = TransferFavouriteListAdapter(favTransferList)
+        recyclerViewFavourtied.adapter = favTransferListAdapter
 
         // Back button
         val backButton = view.findViewById<ImageView>(R.id.backButton)
